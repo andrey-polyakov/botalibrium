@@ -1,0 +1,13 @@
+nagios:
+  nagiosHost: "vacslp02mon"
+  password: "ilOv3hArdTr4nc3"
+  encryption: "XOR"
+  port: 5667
+  hostname: "dummy"
+  serviceName: "Foo"
+armanta:
+  topic_heartbeat: "topic/Heartbeat.apolyakov"
+  topic_heartbeat_status: "topic/Heartbeat.apolyakov"
+  topic_instruction: "topic/Instruction.apolyakov"
+  topic_entity_cache: "topic/cache.apolyakov"
+  topic_report_broadcast: "topic/ReportBroadcast.apolyakov"
