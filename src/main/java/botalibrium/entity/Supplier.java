@@ -26,4 +26,5 @@ public class Supplier extends BaseEntity {
     public void setName(String name) {
         this.name = name;
     }
+
 }

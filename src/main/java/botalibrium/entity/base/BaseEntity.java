@@ -5,17 +5,19 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 /**
- * Base class that carries base base and id.
+ * Base class that carries custom fields and id.
  */
 @Entity
 public class BaseEntity {
     @Id
     private ObjectId id = new ObjectId();
     @Embedded
-    private Map<String,String> customFields;
+    private List<CustomFieldGroup> customFields = new LinkedList<>();
 
     public BaseEntity() {
         //
@@ -29,11 +31,8 @@ public class BaseEntity {
         this.id = id;
     }
 
-    public Map<String, String> getCustomFields() {
+    public List<CustomFieldGroup> getCustomFieldGroups() {
         return customFields;
     }
 
-    public void setCustomFields(Map<String, String> customFields) {
-        this.customFields = customFields;
-    }
 }

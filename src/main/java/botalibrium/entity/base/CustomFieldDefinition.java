@@ -2,23 +2,24 @@ package botalibrium.entity.base;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import java.util.HashSet;
+import java.util.Set;
+
 /**
  * Created by apolyakov on 3/24/2017.
  */
 @Entity
 public class CustomFieldDefinition {
-
-    private String name;
     private String type;
+    /**
+     * Description for GUI
+     */
     private String description;
     private Boolean mandatory;
+    private Set<String> options = new HashSet<>();
 
     public CustomFieldDefinition() {
         //
-    }
-
-    public String getName() {
-        return name;
     }
 
     public String getDescription() {
@@ -27,10 +28,6 @@ public class CustomFieldDefinition {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getType() {
@@ -48,4 +45,9 @@ public class CustomFieldDefinition {
     public void setMandatory(Boolean mandatory) {
         this.mandatory = mandatory;
     }
+
+    public Set<String> getOptions() {
+        return options;
+    }
+
 }

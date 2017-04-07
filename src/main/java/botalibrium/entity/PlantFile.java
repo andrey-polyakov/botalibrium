@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
+import botalibrium.entity.embedded.Record;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
@@ -17,7 +18,7 @@ import botalibrium.entity.base.BaseEntity;
 @Entity("plantFiles")
 public class PlantFile extends BaseEntity {
 
-    private String tag;
+    private String tag = "Not assigned";
     @Reference
     private Taxon taxon;
     @Reference
@@ -85,4 +86,5 @@ public class PlantFile extends BaseEntity {
     public void setParent(PlantFile parent) {
         this.parent = parent;
     }
+
 }

@@ -48,4 +48,5 @@ public class PlantMaterial extends BaseEntity {
     public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
+
 }

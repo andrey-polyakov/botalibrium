@@ -1,43 +1,43 @@
 package botalibrium.entity.base;
 
-import org.mongodb.morphia.annotations.Embedded;
-import org.mongodb.morphia.annotations.Entity;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.*;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
-/**
- * Created by apolyakov on 3/24/2017.
- */
 @Entity("customProperties")
 public class CustomFieldGroupDefinition {
-
-    private String name;
+    @Id
+    private ObjectId id = new ObjectId();
+    private String description;
     @Embedded
-    private List<CustomFieldDefinition> properties;
-    private List<String> applicableEntities;
+    private Map<String, CustomFieldDefinition> customFieldDefinitions = new TreeMap<>();
+    private Set<String> applicableEntities = new TreeSet<>();
 
-
-    public List<CustomFieldDefinition> getProperties() {
-        return properties;
+    public  Map<String, CustomFieldDefinition> getCustomFieldDefinitions() {
+        return customFieldDefinitions;
     }
 
-    public void setProperties(List<CustomFieldDefinition> properties) {
-        this.properties = properties;
+    public String getDescription() {
+        return description;
     }
 
-    public String getName() {
-        return name;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<String> getApplicableEntities() {
+    public Set<String> getApplicableEntities() {
         return applicableEntities;
     }
 
-    public void setApplicableEntities(List<String> applicableEntities) {
-        this.applicableEntities = applicableEntities;
+    public ObjectId getId() {
+        return id;
+    }
+
+    public void setId(ObjectId id) {
+        this.id = id;
     }
 }
