@@ -5,6 +5,10 @@ spring:
       database: morphia
 
       uri: mongodb://localhost:27017
+  jackson:
+    serialization:
+      INDENT_OUTPUT: true
+      
 logging:
   level:
     root: info

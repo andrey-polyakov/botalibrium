@@ -1,5 +1,6 @@
 package botalibrium.entity.base;
 
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.util.HashSet;
@@ -8,6 +9,7 @@ import java.util.Set;
 /**
  * Created by apolyakov on 3/24/2017.
  */
+@Embedded
 @Entity
 public class CustomFieldDefinition {
     private String type;
@@ -15,7 +17,7 @@ public class CustomFieldDefinition {
      * Description for GUI
      */
     private String description;
-    private Boolean mandatory;
+    private Boolean mandatory = false;
     private Set<String> options = new HashSet<>();
 
     public CustomFieldDefinition() {
@@ -38,7 +40,7 @@ public class CustomFieldDefinition {
         this.type = type;
     }
 
-    public Boolean getMandatory() {
+    public Boolean isMandatory() {
         return mandatory;
     }
 

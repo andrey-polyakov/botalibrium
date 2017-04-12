@@ -4,37 +4,23 @@ import botalibrium.entity.PlantFile;
 import botalibrium.entity.PlantMaterial;
 import botalibrium.entity.Supplier;
 import botalibrium.entity.Taxon;
+import botalibrium.entity.base.BaseEntity;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
 import botalibrium.entity.embedded.Record;
 import botalibrium.service.RecordsService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.FileNotFoundException;
-import java.net.URL;
+import java.io.IOException;
 
 @SpringBootApplication
-public class Application {
-    private static final String[] REQUIRED_PROPERTIES_FILES = {"application.yaml"};
-
-    public static void main(String[] args) throws FileNotFoundException {
-        String classpath = System.getProperty("java.class.path");
-        System.out.println(classpath);
-        for (String fileName : REQUIRED_PROPERTIES_FILES) {
-            URL url = Application.class.getClassLoader().getResource(fileName);
-            if (url == null) {
-                throw new FileNotFoundException(fileName + " was not found in classpath");
-            }
-        }
-
-        new SpringApplication(Application.class).run(args);
-    }
+public class Context {
 
     @Autowired
     private Datastore datastore;
@@ -65,20 +51,17 @@ public class Application {
     }
 
     @Bean
-    public CommandLineRunner init(RecordsService service) {
+    public CommandLineRunner init(ObjectMapper mapper) {
         return (args) -> {
-            Supplier supplier = new Supplier("eBay");
-            PlantMaterial pmi = new PlantMaterial(supplier, "Seeds", (long) 100);
-            PlantFile ci = new PlantFile("TAG1", new Taxon("N.Foo"), pmi);
-            for (int ii = 0; ii < 2; ii++) {
-                ci.getRecords().add(new Record());
-            }
-            service.create(ci);
 
-            PlantMaterial pmi1 = new PlantMaterial(supplier, "Explant", (long) 20);
-            PlantFile ci1 = new PlantFile("TAG2", new Taxon("N.Bar"), pmi1);
+/*            BaseEntity reportConfig = null;
+            try {
+                reportConfig = mapper.readValue(report, ReportConfig.class);
+            } catch (IOException e) {
+                e.printStackTrace();
 
-            service.create(ci1);
+                return false;
+            }*/
 
         };
     }

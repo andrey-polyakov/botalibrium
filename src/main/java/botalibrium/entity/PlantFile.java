@@ -28,6 +28,7 @@ public class PlantFile extends BaseEntity {
     private Timestamp started = new Timestamp(new Date().getTime());
     @Reference
     private PlantFile parent;
+    private Integer count;
 
     public PlantFile() {
         //
@@ -87,4 +88,11 @@ public class PlantFile extends BaseEntity {
         this.parent = parent;
     }
 
+    public Integer getCount() {
+        return count;
+    }
+
+    public void setCount(Integer count) {
+        this.count = count;
+    }
 }

@@ -1,5 +1,7 @@
 package botalibrium.entity.base;
 
+import botalibrium.entity.serializers.ObjectIdSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.*;
 
@@ -11,6 +13,7 @@ import java.util.TreeSet;
 @Entity("customProperties")
 public class CustomFieldGroupDefinition {
     @Id
+    @JsonSerialize(using = ObjectIdSerializer.class)
     private ObjectId id = new ObjectId();
     private String description;
     @Embedded

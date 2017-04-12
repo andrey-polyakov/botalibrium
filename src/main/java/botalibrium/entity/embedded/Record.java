@@ -1,6 +1,6 @@
 package botalibrium.entity.embedded;
 
-import botalibrium.entity.base.BaseEntity;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.sql.Timestamp;
@@ -10,7 +10,8 @@ import java.util.Date;
  * Observation or treatment record.
  */
 @Entity
-public class Record extends BaseEntity {
+@Embedded
+public class Record {
 
     private Timestamp timestamp = new Timestamp(new Date().getTime());
     private String type = "Observation";

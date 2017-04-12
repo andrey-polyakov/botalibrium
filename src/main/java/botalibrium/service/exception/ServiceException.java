@@ -8,7 +8,7 @@ import java.util.Map;
  */
 public class ServiceException extends Exception {
 
-    private Map<String, Object> relevantData = new HashMap<>();
+    protected Map<String, Object> relevantData = new HashMap<>();
 
     public ServiceException(String s) {
         super(s);
@@ -19,4 +19,7 @@ public class ServiceException extends Exception {
         return this;
     }
 
+    public Map<String, Object> getRelevantData() {
+        return relevantData;
+    }
 }
