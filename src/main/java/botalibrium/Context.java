@@ -4,10 +4,9 @@ import botalibrium.entity.PlantFile;
 import botalibrium.entity.PlantMaterial;
 import botalibrium.entity.Supplier;
 import botalibrium.entity.Taxon;
-import botalibrium.entity.base.BaseEntity;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
-import botalibrium.entity.embedded.Record;
-import botalibrium.service.RecordsService;
+import botalibrium.service.CustomFieldsService;
+import botalibrium.service.exception.TaxaService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -17,7 +16,8 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
-import java.io.IOException;
+import java.io.File;
+import java.util.Collection;
 
 @SpringBootApplication
 public class Context {
@@ -51,18 +51,23 @@ public class Context {
     }
 
     @Bean
-    public CommandLineRunner init(ObjectMapper mapper) {
+    public CommandLineRunner init(ObjectMapper mapper, CustomFieldsService cfs, TaxaService ts) {
         return (args) -> {
-
-/*            BaseEntity reportConfig = null;
-            try {
-                reportConfig = mapper.readValue(report, ReportConfig.class);
-            } catch (IOException e) {
-                e.printStackTrace();
-
-                return false;
-            }*/
-
+            if (args.length != 1) {
+                return;
+            }
+            Collection<File> files = org.apache.commons.io.FileUtils.listFiles(new File(args[0]), new String[]{"txt"}, false);
+            for (File file : files) {
+                if (!file.isFile()) {
+                    continue;
+                }
+                if (file.getName().startsWith(CustomFieldGroupDefinition.class.getSimpleName())) {
+                    cfs.save(mapper.readValue(file, CustomFieldGroupDefinition.class));
+                }
+                if (file.getName().startsWith(Taxon.class.getSimpleName())) {
+                    ts.save(mapper.readValue(file, Taxon.class));
+                }
+            }
         };
     }
 }

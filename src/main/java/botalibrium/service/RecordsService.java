@@ -5,6 +5,7 @@ import botalibrium.entity.PlantMaterial;
 import botalibrium.entity.Supplier;
 import botalibrium.entity.Taxon;
 import botalibrium.service.exception.ServiceException;
+import botalibrium.service.exception.TaxaService;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,29 +14,25 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class RecordsService {
-
-    private BasicDAO<PlantMaterial, ObjectId> plantMaterials;
-    private BasicDAO<PlantFile, ObjectId> plantFiles;
-    private BasicDAO<Supplier, ObjectId> suppliers;
-    private BasicDAO<Taxon, ObjectId> taxa;
-
     @Autowired
-    public RecordsService(BasicDAO<PlantMaterial, ObjectId> plantMaterials, BasicDAO<PlantFile, ObjectId> plantFiles, BasicDAO<Supplier, ObjectId> suppliers, BasicDAO<Taxon, ObjectId> taxa) {
-        this.plantMaterials = plantMaterials;
-        this.plantFiles = plantFiles;
-        this.suppliers = suppliers;
-        this.taxa = taxa;
-    }
+    private BasicDAO<PlantMaterial, ObjectId> plantMaterials;
+    @Autowired
+    private BasicDAO<PlantFile, ObjectId> plantFiles;
+    @Autowired
+    private BasicDAO<Supplier, ObjectId> suppliers;
+    @Autowired
+    private TaxaService taxaService;
+
 
     public void create(PlantFile newFile) {
         if (newFile.getParent() == null || newFile.getParent().equals(newFile)) {
             new ServiceException("This item could not be its parent");//TODO Hierarchy check
         }
-        if (newFile.getTaxon() != null) {
-            create(newFile.getTaxon());
-        }
         if (newFile.getMaterial() != null) {
             create(newFile.getMaterial());
+        }
+        if (newFile.getTaxon() != null && newFile.getTaxon().getId() == null) {
+            taxaService.save(newFile.getTaxon());
         }
         plantFiles.save(newFile);
     }
@@ -51,8 +48,5 @@ public class RecordsService {
         suppliers.save(supplier);
     }
 
-    public void create(Taxon taxon) {
-        taxa.save(taxon);
-    }
 
 }

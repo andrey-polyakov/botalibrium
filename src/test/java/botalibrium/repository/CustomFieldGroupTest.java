@@ -31,7 +31,7 @@ public class CustomFieldGroupTest extends ApplicationTests {
 	private CustomFieldsServiceContract customFieldsService;
 
 
-	public static final String PLANT_FILE_CLASS = PlantFile.class.getCanonicalName();
+	public static final String PLANT_FILE_CLASS = PlantFile.class.getSimpleName();
 
 	@Test
 	public void successfulTest() throws ServiceException {

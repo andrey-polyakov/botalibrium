@@ -1,0 +1,11 @@
+description : "Fertilizer application record"
+customFieldDefinitions:
+  fertilizerType:
+    type: "String"
+    description: "Kind/method of fertilization"
+    mandatory: true
+    options: 
+    - "Foil"
+    - "Soil"
+applicableEntities:
+- "Record"

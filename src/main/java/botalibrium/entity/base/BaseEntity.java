@@ -18,7 +18,7 @@ import java.util.Map;
 public class BaseEntity {
     @Id
     @JsonSerialize(using = ObjectIdSerializer.class)
-    private ObjectId id = new ObjectId();
+    private ObjectId id;
     @Embedded
     private List<CustomFieldGroup> customFields = new LinkedList<>();
 

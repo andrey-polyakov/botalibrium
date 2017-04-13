@@ -21,10 +21,5 @@ public class JerseyConfig extends ResourceConfig {
 		return objectMapper;
 	}
 
-	@Bean
-	public ObjectMapper yamlObjectMapper() {
-		ObjectMapper yamlObjectMapper = new ObjectMapper(new YAMLFactory());
-		return yamlObjectMapper;
-	}
 
 }

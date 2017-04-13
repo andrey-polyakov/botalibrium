@@ -10,7 +10,7 @@ import botalibrium.service.exception.ValidationException;
  */
 public interface CustomFieldsServiceContract {
 
-    void create(CustomFieldGroupDefinition customFieldGroupDefinition) throws ValidationException;
+    void save(CustomFieldGroupDefinition customFieldGroupDefinition) throws ValidationException;
 
     void validate(CustomFieldGroup group, String entityClass) throws ServiceException;
 }

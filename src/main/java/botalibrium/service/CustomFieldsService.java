@@ -25,13 +25,17 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
     }
 
     @Override
-    public void create(CustomFieldGroupDefinition customFieldGroupDefinition) throws ValidationException {
+    public void save(CustomFieldGroupDefinition customFieldGroupDefinition) throws ValidationException {
+
         //TODO more checks
         if (customFieldGroupDefinition.getApplicableEntities().isEmpty()) {
             throw new ValidationException("Field Definition must be applicable to at least one entity");
         }
         if (customFieldGroupDefinition.getCustomFieldDefinitions().isEmpty()) {
             throw new ValidationException("At least one Field Definition is required for every group");
+        }
+        if (customFieldGroupDefinition.getId() == null) {
+            customFieldGroupDefinition.setId(new ObjectId());
         }
         customFields.save(customFieldGroupDefinition);
     }
