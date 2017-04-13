@@ -3,9 +3,18 @@ package botalibrium.entity;
 
 import botalibrium.entity.base.BaseEntity;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Field;
+import org.mongodb.morphia.annotations.Index;
+import org.mongodb.morphia.annotations.Indexes;
+
+import java.util.Set;
+import java.util.TreeSet;
+
 
 @Entity("taxa")
-public class Taxon extends BaseEntity {
+@Indexes({
+        @Index(fields = @Field("names"), unique = true),
+})public class Taxon extends BaseEntity {
 
     /**
      * The first species listed is always the mother (seed carrier)
@@ -13,22 +22,18 @@ public class Taxon extends BaseEntity {
      *
      * e.g. N. raffalesiana X burkei
      */
-    private String name;
+    private Set<String> names = new TreeSet<>();
 
     public Taxon() {
         //
     }
 
-    public Taxon(String name) {
-        this.name = name;
+    public Taxon(Set<String> s) {
+        this.names = s;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
+    public Set<String> getNames() {
+        return names;
     }
 
 }
