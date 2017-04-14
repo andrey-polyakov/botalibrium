@@ -15,6 +15,7 @@ public class Record {
 
     private Timestamp timestamp = new Timestamp(new Date().getTime());
     private String type = "Observation";
+    private String seriesName = "default";
 
     public Timestamp getTimestamp() {
         return timestamp;

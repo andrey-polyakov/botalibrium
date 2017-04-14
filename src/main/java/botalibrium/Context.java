@@ -7,6 +7,7 @@ import botalibrium.entity.Taxon;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
 import botalibrium.service.CustomFieldsService;
 import botalibrium.service.exception.TaxaService;
+import botalibrium.utilities.YamlImportUtility;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -51,23 +52,12 @@ public class Context {
     }
 
     @Bean
-    public CommandLineRunner init(ObjectMapper mapper, CustomFieldsService cfs, TaxaService ts) {
+    public CommandLineRunner init(YamlImportUtility importUtility) {
         return (args) -> {
             if (args.length != 1) {
-                return;
+                importUtility.importFromDirectory(args[0]);
             }
-            Collection<File> files = org.apache.commons.io.FileUtils.listFiles(new File(args[0]), new String[]{"txt"}, false);
-            for (File file : files) {
-                if (!file.isFile()) {
-                    continue;
-                }
-                if (file.getName().startsWith(CustomFieldGroupDefinition.class.getSimpleName())) {
-                    cfs.save(mapper.readValue(file, CustomFieldGroupDefinition.class));
-                }
-                if (file.getName().startsWith(Taxon.class.getSimpleName())) {
-                    ts.save(mapper.readValue(file, Taxon.class));
-                }
-            }
+
         };
     }
 }

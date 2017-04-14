@@ -72,7 +72,7 @@ public class CustomFieldGroupTest extends ApplicationTests {
         CustomFieldGroupDefinition newGroupDefinition = newCustomFieldGroupDefinition();
         CustomFieldGroup sfg = new CustomFieldGroup();
         sfg.setDefinition(newGroupDefinition);
-        sfg.getFields().putAll(fieldsMap);
+        sfg.getSelectionNodes().putAll(fieldsMap);
         customFieldsService.validate(sfg, PLANT_FILE_CLASS);
     }
 
@@ -86,14 +86,14 @@ public class CustomFieldGroupTest extends ApplicationTests {
         fieldDefinition.getOptions().add(EXISTING_OPTION);
         fieldDefinition.getOptions().add("No");
         fieldDefinition.setMandatory(false);
-        newGroupDefinition.getCustomFieldDefinitions().put(EXISTING_FIELD, fieldDefinition);
+        newGroupDefinition.getSelectionNodes().put(EXISTING_FIELD, fieldDefinition);
         CustomFieldDefinition fieldDefinition2 = new CustomFieldDefinition();
         fieldDefinition2.setDescription("Particular field note");
         fieldDefinition2.setType("String");
         fieldDefinition2.getOptions().add(EXISTING_OPTION);
         fieldDefinition2.getOptions().add("No");
         fieldDefinition2.setMandatory(true);
-        newGroupDefinition.getCustomFieldDefinitions().put(REQUIRED_FIELD, fieldDefinition2);
+        newGroupDefinition.getSelectionNodes().put(REQUIRED_FIELD, fieldDefinition2);
         return newGroupDefinition;
     }
 

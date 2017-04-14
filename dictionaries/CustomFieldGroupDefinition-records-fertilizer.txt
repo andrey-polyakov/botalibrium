@@ -7,5 +7,16 @@ customFieldDefinitions:
     options: 
     - "Foil"
     - "Soil"
+    - "In pitcher"
+
+
+  unitsCount:
+    type: "String"
+    description: "Quantity"
+    mandatory: false
+    options:
+    - "Foil"
+    - "Soil"
+    - "In pitcher"
 applicableEntities:
 - "Record"

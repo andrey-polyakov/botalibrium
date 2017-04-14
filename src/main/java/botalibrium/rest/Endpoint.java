@@ -1,12 +1,7 @@
 package botalibrium.rest;
 
-import botalibrium.entity.PlantFile;
-import botalibrium.entity.PlantMaterial;
-import botalibrium.entity.Supplier;
-import botalibrium.entity.Taxon;
 import botalibrium.entity.base.CustomFieldDefinition;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
-import botalibrium.entity.embedded.Record;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
@@ -14,8 +9,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Set;
-import java.util.TreeSet;
 
 /**
  * Created by apolyakov on 4/11/2017.
@@ -46,7 +39,7 @@ public class Endpoint {
         def.getOptions().add("ok");def.getOptions().add("not ok");
         def.setType("barbara");
         def.setMandatory(true);
-        ci.getCustomFieldDefinitions().put("field", def);
+        ci.getSelectionNodes().put("field", def);
         return Response.ok(ci, MediaType.APPLICATION_JSON).build();
     }
 }

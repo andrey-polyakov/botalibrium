@@ -1,22 +1,22 @@
 package botalibrium.entity.base;
 
 
+import botalibrium.entity.embedded.SelectionNode;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 
 @Embedded
 @Entity
 public class CustomFieldGroup {
     @Reference
     private CustomFieldGroupDefinition definition;
-    private Map<String, String> fields = new TreeMap<>();
+    private Set<SelectionNode> selectionNodes = new HashSet<>();
 
-    public Map<String, String> getFields() {
-        return fields;
+    public Set<SelectionNode> getSelectionNodes() {
+        return selectionNodes;
     }
 
     public CustomFieldGroupDefinition getDefinition() {
