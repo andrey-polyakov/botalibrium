@@ -1,8 +1,8 @@
 package botalibrium.service;
 
-import botalibrium.entity.base.CustomFieldDefinition;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
+import botalibrium.entity.embedded.RecordedVariable;
 import botalibrium.entity.embedded.SelectionNode;
 import botalibrium.service.contract.CustomFieldsServiceContract;
 import botalibrium.service.exception.ServiceException;
@@ -16,6 +16,9 @@ import java.util.*;
 
 @Component
 public class CustomFieldsService implements CustomFieldsServiceContract {
+
+    public static final String MISSING_REQUIRED_NODE = "Required node is missing, please fill that in";
+    public static final String MUTUALLY_EXCLUSIVE_NODES = "Only one option must be chosen";
 
     private final BasicDAO<CustomFieldGroupDefinition, ObjectId> customFields;
 
@@ -40,53 +43,130 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
         customFields.save(customFieldGroupDefinition);
     }
 
+    class Tuple {
+        private final Iterator<Map.Entry<String, SelectionNode>> definitionIterator;
+        private Map<String, SelectionNode> definition;
+        private Map<String, SelectionNode> object;
+
+        public Tuple(Map<String, SelectionNode> definition, Map<String, SelectionNode> object) {
+            this.definition = definition;
+            this.object = object;
+            definitionIterator = definition.entrySet().iterator();
+        }
+
+        public Iterator<Map.Entry<String, SelectionNode>> getDefinitionIterator() {
+            return definitionIterator;
+        }
+
+        public Map<String, SelectionNode> getDefinition() {
+            return definition;
+        }
+
+        public Map<String, SelectionNode> getObject() {
+            return object;
+        }
+    }
+
+    /**
+     * BFS validation of one tree against the other.
+     *
+     * @param group
+     * @param entityClass
+     * @throws ServiceException
+     */
     @Override
     public void validate(CustomFieldGroup group, String entityClass) throws ServiceException {
         if (!group.getDefinition().getApplicableEntities().contains(entityClass)) {
-            throw new ValidationException("Given Field Group is not compatible with given entity");
+            throw new ValidationException("Given Field Group is not compatible with given entity set");
         }
-        if (group.getSelectionNodes().isEmpty()) {
+        if (group.getSelectionNodes() == null || group.getSelectionNodes().isEmpty()) {
             throw new ValidationException("At least one field is required for every group");
         }
-        Set<SelectionNode> unrecognizedNodes = new HashSet<>(group.getSelectionNodes());
-        unrecognizedNodes.removeAll(group.getDefinition().getSelectionNodes());
-        if (!unrecognizedNodes.isEmpty()) {
-            throw new ValidationException("Some nodes are not present in Field Group and thus not allowed").
-                    set("UNRECOGNIZED_NODES", unrecognizedNodes);
-        }
-        Set<SelectionNode> definitionThisLevel = new HashSet<>(group.getDefinition().getSelectionNodes());
-        Set<SelectionNode> objectThisLevel = new HashSet<>(group.getSelectionNodes());
-        Set<SelectionNode> definitionNextLevel = new HashSet<>();
-        Set<SelectionNode> objectNextLevel = new HashSet<>();
-        while (!definitionThisLevel.isEmpty()) {
-            for (SelectionNode definitionNode : definitionThisLevel) {
-
-                validateNode(definitionNode, object);
-            }
-        }
-
-
-        for (Map.Entry<String, CustomFieldDefinition> entry : group.getDefinition().getSelectionNodes().entrySet()) {
-            if (entry.getValue().isMandatory() && !group.getSelectionNodes().containsKey(entry.getKey())) {
-                throw new ValidationException("Missing a mandatory field")
-                        .set("FIELD", entry.getKey());
-            }
-        }
-        for (Map.Entry<String, String> entry : group.getSelectionNodes().entrySet()) {
-            if (!group.getDefinition().getSelectionNodes().containsKey(entry.getKey())) {
-                throw new ValidationException("Field is not present in the group")
-                        .set("GROUP", group.getDefinition())
-                        .set("FIELD", entry.getKey());
-            }
-            CustomFieldDefinition cfd = group.getDefinition().getSelectionNodes().get(entry.getKey());
-            if (!cfd.getOptions().isEmpty()) {
-                if (!cfd.getOptions().contains(entry.getValue())) {
-                    throw new ValidationException("Field value must be from the set options provided")
-                            .set("GROUP", group.getDefinition())
-                            .set("FIELD", entry.getKey())
-                            .set("VALUE", entry.getValue());
+        Deque<Tuple> stack = new LinkedList<>();
+        stack.add(new Tuple(group.getDefinition().getSelectionNodes(), group.getSelectionNodes()));
+        while (!stack.isEmpty()) {
+            Tuple stackItem = stack.pop();
+            while (stackItem.getDefinitionIterator().hasNext()) {
+                Map.Entry<String, SelectionNode> definitionEntry = stackItem.getDefinitionIterator().next();
+                SelectionNode definitionNode = definitionEntry.getValue();
+                SelectionNode objectNode = stackItem.getObject().get(definitionEntry.getKey());
+                if (objectNode == null) {
+                    continue;
+                }
+                if (definitionNode.isNodeChoiceRequired() && (objectNode.getNodes() == null || objectNode.getNodes().isEmpty())) {
+                    throw new ValidationException(MISSING_REQUIRED_NODE).set("MISSING_NODE", definitionNode);
+                }
+                knownNodesCheck(definitionNode, objectNode);
+                knownVariablesCheck(definitionNode, objectNode);
+                if (definitionNode.isMutuallyExclusiveNodes() && objectNode.getNodes().size() > 1) {
+                    throw new ValidationException(MUTUALLY_EXCLUSIVE_NODES).set("DEFINITION_NODE", definitionNode);
+                }
+                if (!definitionNode.getNodes().isEmpty()) {
+                    stack.add(new Tuple(definitionNode.getNodes(), objectNode.getNodes()));
                 }
             }
         }
+    }
+
+    private void knownVariablesCheck(SelectionNode definitionNode, SelectionNode objectNode) throws ServiceException {
+        Set<String> unrecognizedVariables = new TreeSet<>(objectNode.getVariables().keySet());
+        unrecognizedVariables.removeAll(definitionNode.getVariables().keySet());
+        if (!unrecognizedVariables.isEmpty()) {
+            throw new ValidationException("There are unrecognized variables: " + print(unrecognizedVariables)).
+                    set("DEFINITION_NODE", definitionNode).
+                    set("OBJECT_NODE", objectNode);
+        }
+        for (Map.Entry<String, RecordedVariable> v : definitionNode.getVariables().entrySet()) {
+            RecordedVariable rv = objectNode.getVariables().get(v.getKey());
+            if (rv == null) {
+                if(v.getValue().isRequired()) {
+                    throw new ValidationException("Variable is missing").
+                            set("MISSING_VARIABLE", v.getKey()).
+                            set("DEFINITION_NODE", definitionNode).
+                            set("OBJECT_NODE", objectNode);
+                }
+            } else {
+                if (!v.getValue().getValues().isEmpty()) {
+                    if (rv.getValues().size() != 1) {
+                        throw new ValidationException("Only one value is expected").
+                                set("INVALID_VARIABLE", rv).
+                                set("DEFINITION_NODE", definitionNode).
+                                set("OBJECT_NODE", objectNode);
+                    }
+                    if (!v.getValue().getValues().containsAll(rv.getValues())) {
+                        throw new ValidationException("Unexpected variable value").
+                                set("EXPECTED_VALUES", v.getValue().getValues()).
+                                set("INVALID_VARIABLE", rv).
+                                set("DEFINITION_NODE", definitionNode).
+                                set("OBJECT_NODE", objectNode);
+                    }
+
+                }
+            }
+        }
+    }
+
+    private void knownNodesCheck(SelectionNode definitionNode, SelectionNode objectNode) throws ServiceException {
+        Set<String> unrecognizedNodes = new TreeSet<>(objectNode.getNodes().keySet());
+        unrecognizedNodes.removeAll(definitionNode.getNodes().keySet());
+        if (!unrecognizedNodes.isEmpty()) {
+            throw new ValidationException("There are unrecognized nodes: " + print(unrecognizedNodes)).
+                    set("DEFINITION_NODE", definitionNode).
+                    set("OBJECT_NODE", objectNode);
+        }
+        if (definitionNode.isNodeChoiceRequired() && objectNode.getNodes().isEmpty()) {
+            throw new ValidationException("Node choice required but no nodes chosen").
+                    set("DEFINITION_NODE", definitionNode).
+                    set("OBJECT_NODE", objectNode);
+        }
+    }
+
+    private String print(Set<String> unrecognizedNodes) {
+        StringBuilder string = new StringBuilder();
+        for (String node : unrecognizedNodes) {
+            string.append(node);
+            string.append(", ");
+        }
+        return string.toString();
     }
 }

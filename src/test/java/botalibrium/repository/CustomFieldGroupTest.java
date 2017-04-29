@@ -1,100 +1,120 @@
 package botalibrium.repository;
 
-import botalibrium.Context;
 import botalibrium.ApplicationTests;
-import botalibrium.entity.PlantFile;
-import botalibrium.entity.base.CustomFieldDefinition;
+import botalibrium.Context;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
+import botalibrium.entity.embedded.Record;
 import botalibrium.service.contract.CustomFieldsServiceContract;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.TreeMap;
+import java.io.IOException;
 
 @ContextConfiguration(classes = Context.class)
 public class CustomFieldGroupTest extends ApplicationTests {
 
-    public static final String EXISTING_FIELD = "Foo";
-    public static final String REQUIRED_FIELD = "Bar";
-
-    public static final String UNKNOWN_FIELD = "Does not exist";
-    public static final String EXISTING_OPTION = "Yes";
-    public static final String UNKNOWN_OPTION = "Maybe";
-
     @Autowired
 	private CustomFieldsServiceContract customFieldsService;
+    @Autowired
+    private ObjectMapper mapper;
 
+    private CustomFieldGroupDefinition definition1, definition2;
 
-	public static final String PLANT_FILE_CLASS = PlantFile.class.getSimpleName();
+    @Before
+    public void setup() throws IOException {
+        definition1 = loadCustomFieldGroupDefinition("/CustomFieldGroupDefinition/RecordOfFertilization.yaml");
+        definition2 = loadCustomFieldGroupDefinition("/CustomFieldGroupDefinition/RecordOfFertilization2.yaml");
+    }
 
-	@Test
-	public void successfulTest() throws ServiceException {
-        Map<String, String> fields = new TreeMap<>();
-        fields.put(REQUIRED_FIELD, EXISTING_OPTION);
-        testWithFieldValue(fields);
+    @Test(expected = ServiceException.class)
+    public void incompatibleEntityTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = new CustomFieldGroup();
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, String.class.getSimpleName());
+    }
+
+    @Test
+	public void successfulTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-1.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
 	}
 
-    @Test(expected = ValidationException.class)
-    public void unknownOptionTest() throws ServiceException {
-        Map<String, String> fields = new TreeMap<>();
-        fields.put(REQUIRED_FIELD, UNKNOWN_OPTION);
-        testWithFieldValue(fields);
+    @Test(expected = ServiceException.class)
+    public void missingNodeTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-2.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void noNodes2Test() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-noNodes.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void noNodesTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-0.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void secondNoNodesTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = new CustomFieldGroup();
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void unrecognizedNodesTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-3.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    @Test(expected = ServiceException.class)
+    public void moreThanOneNodeInMutuallyExclusiveCaseTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-4.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
     }
 
     @Test(expected = ValidationException.class)
-    public void noFieldsTest() throws ServiceException {
-        testWithFieldValue(Collections.emptyMap());
-	}
-
-    @Test(expected = ValidationException.class)
-    public void unknownFieldTest() throws ServiceException {
-	    Map<String, String> fields = new TreeMap<>();
-        fields.put(REQUIRED_FIELD, EXISTING_OPTION);
-        fields.put(UNKNOWN_FIELD, EXISTING_OPTION);
-        testWithFieldValue(fields);
+    public void missingVariablesTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-variables-1.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
     }
 
     @Test(expected = ValidationException.class)
-    public void missingRequiredFieldTest() throws ServiceException {
-        Map<String, String> fields = new TreeMap<>();
-        fields.put(EXISTING_FIELD, EXISTING_OPTION);
-        testWithFieldValue(fields);
-	}
-
-
-    private void testWithFieldValue(Map<String, String> fieldsMap) throws ServiceException {
-        CustomFieldGroupDefinition newGroupDefinition = newCustomFieldGroupDefinition();
-        CustomFieldGroup sfg = new CustomFieldGroup();
-        sfg.setDefinition(newGroupDefinition);
-        sfg.getSelectionNodes().putAll(fieldsMap);
-        customFieldsService.validate(sfg, PLANT_FILE_CLASS);
+    public void unrecognizedVariablesTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-variables-2.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
     }
 
-    private CustomFieldGroupDefinition newCustomFieldGroupDefinition() {
-        CustomFieldGroupDefinition newGroupDefinition = new CustomFieldGroupDefinition();
-        newGroupDefinition.getApplicableEntities().add(PLANT_FILE_CLASS);
-        newGroupDefinition.setDescription("A custom group of fields");
-        CustomFieldDefinition fieldDefinition = new CustomFieldDefinition();
-        fieldDefinition.setDescription("Not mandatory");
-        fieldDefinition.setType("String");
-        fieldDefinition.getOptions().add(EXISTING_OPTION);
-        fieldDefinition.getOptions().add("No");
-        fieldDefinition.setMandatory(false);
-        newGroupDefinition.getSelectionNodes().put(EXISTING_FIELD, fieldDefinition);
-        CustomFieldDefinition fieldDefinition2 = new CustomFieldDefinition();
-        fieldDefinition2.setDescription("Particular field note");
-        fieldDefinition2.setType("String");
-        fieldDefinition2.getOptions().add(EXISTING_OPTION);
-        fieldDefinition2.getOptions().add("No");
-        fieldDefinition2.setMandatory(true);
-        newGroupDefinition.getSelectionNodes().put(REQUIRED_FIELD, fieldDefinition2);
-        return newGroupDefinition;
+    @Test(expected = ValidationException.class)
+    public void invalidVariableValueTest() throws ServiceException, IOException {
+        CustomFieldGroup customFieldGroup = loadCustomFieldGroup("/CustomFieldGroup/RecordOfFertilization-wrong-value.yaml");
+        customFieldGroup.setDefinition(definition1);
+        customFieldsService.validate(customFieldGroup, Record.class.getSimpleName());
+    }
+
+    private CustomFieldGroupDefinition loadCustomFieldGroupDefinition(String name) throws IOException {
+        return mapper.readValue(this.getClass().getResource(name), CustomFieldGroupDefinition.class);
+    }
+
+    private CustomFieldGroup loadCustomFieldGroup(String name) throws IOException {
+        return mapper.readValue(this.getClass().getResource(name), CustomFieldGroup.class);
     }
 
 }

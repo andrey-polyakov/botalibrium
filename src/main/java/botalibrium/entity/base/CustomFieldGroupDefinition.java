@@ -7,7 +7,9 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 @Entity("customProperties")
@@ -16,10 +18,10 @@ public class CustomFieldGroupDefinition {
     @JsonSerialize(using = ObjectIdSerializer.class)
     private ObjectId id = new ObjectId();
     private String description;
-    private Set<SelectionNode> selectionNodes = new TreeSet<>();
     private Set<String> applicableEntities = new TreeSet<>();
+    private Map<String, SelectionNode> selectionNodes = new TreeMap<>();
 
-    public Set<SelectionNode> getSelectionNodes() {
+    public Map<String, SelectionNode> getSelectionNodes() {
         return selectionNodes;
     }
 

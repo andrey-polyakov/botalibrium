@@ -1,4 +1,4 @@
-package botalibrium.service.exception;
+package botalibrium.service;
 
 import botalibrium.entity.Taxon;
 import org.bson.types.ObjectId;

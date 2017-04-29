@@ -1,0 +1,10 @@
+selectionNodes:
+  fertilizerType:
+    variables:
+      note:
+       values:
+       - Comment goes here
+      chemical:
+       values:
+       - Osmocote
+    nodes:

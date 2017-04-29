@@ -39,7 +39,6 @@ public class Endpoint {
         def.getOptions().add("ok");def.getOptions().add("not ok");
         def.setType("barbara");
         def.setMandatory(true);
-        ci.getSelectionNodes().put("field", def);
         return Response.ok(ci, MediaType.APPLICATION_JSON).build();
     }
 }

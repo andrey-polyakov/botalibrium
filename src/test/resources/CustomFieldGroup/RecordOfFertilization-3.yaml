@@ -1,0 +1,19 @@
+selectionNodes:
+  fertilizerType:
+    variables:
+      note:
+       values:
+       - Comment goes here
+      chemical:
+       values:
+       - Osmocote
+    nodes:
+     "In pitcher":
+       variables:
+         unit:
+           values:
+           - pellets
+         quantity:
+           values:
+           - 5
+     "unrecognized":

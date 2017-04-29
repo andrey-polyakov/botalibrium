@@ -13,9 +13,9 @@ import java.util.*;
 public class CustomFieldGroup {
     @Reference
     private CustomFieldGroupDefinition definition;
-    private Set<SelectionNode> selectionNodes = new HashSet<>();
+    private Map<String, SelectionNode> selectionNodes = new HashMap<>();
 
-    public Set<SelectionNode> getSelectionNodes() {
+    public Map<String, SelectionNode> getSelectionNodes() {
         return selectionNodes;
     }
 

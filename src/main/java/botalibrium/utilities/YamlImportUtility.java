@@ -3,7 +3,7 @@ package botalibrium.utilities;
 import botalibrium.entity.Taxon;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
 import botalibrium.service.CustomFieldsService;
-import botalibrium.service.exception.TaxaService;
+import botalibrium.service.TaxaService;
 import botalibrium.service.exception.ValidationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;

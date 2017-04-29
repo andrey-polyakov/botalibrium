@@ -4,20 +4,21 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.util.Set;
+import java.util.TreeSet;
 
 @Entity
 @Embedded
 public class RecordedVariable implements Comparable<RecordedVariable> {
-    private String name;
-    private String value;
+    private String name = "Variable";
+    private Set<String> values = new TreeSet<>();
     private String type;
-    private Set<SelectionNode> options;
+    private SelectionNode parent;
+    private boolean required = false;
 
-    public RecordedVariable(String name, String value, String type, Set<SelectionNode> options) {
+    public RecordedVariable(String name, Set<String> values, String type) {
         this.name = name;
-        this.value = value;
+        this.values = values;
         this.type = type;
-        this.options = options;
     }
 
     public RecordedVariable() {
@@ -32,12 +33,8 @@ public class RecordedVariable implements Comparable<RecordedVariable> {
         this.name = name;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
+    public Set<String> getValues() {
+        return values;
     }
 
     public String getType() {
@@ -46,10 +43,6 @@ public class RecordedVariable implements Comparable<RecordedVariable> {
 
     public void setType(String type) {
         this.type = type;
-    }
-
-    public Set<SelectionNode> getOptions() {
-        return options;
     }
 
     @Override
@@ -70,5 +63,21 @@ public class RecordedVariable implements Comparable<RecordedVariable> {
     @Override
     public int compareTo(RecordedVariable recordedVariable) {
         return 0;
+    }
+
+    public SelectionNode getParent() {
+        return parent;
+    }
+
+    public void setParent(SelectionNode parent) {
+        this.parent = parent;
+    }
+
+    public boolean isRequired() {
+        return required;
+    }
+
+    public void setRequired(boolean required) {
+        this.required = required;
     }
 }

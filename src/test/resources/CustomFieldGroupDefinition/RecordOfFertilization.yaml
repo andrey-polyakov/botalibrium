@@ -1,0 +1,36 @@
+description : "Fertilizer application record"
+applicableEntities:
+- "Record"
+selectionNodes:
+  fertilizerType:
+    name: "Kind/method of fertilization"
+    mutuallyExclusiveNodes: true
+    nodeChoiceRequired: true
+    variables:
+      note:
+       name: "Note"
+       type: "String"
+      chemical:
+       name: "Fertilizer name"
+       type: "String"
+       required : true
+    nodes:
+     "In pitcher":
+       name : "In pitcher"
+       variables:
+         unit:
+           name: "Unit of measure"
+           type: "List"
+           required : true
+           values:
+           - pellets
+           - milliliter
+           - gram
+         quantity:
+           name: "Quantity"
+           type: "Number"
+           required : true
+     "Soil":
+       name : "Soil"
+     "Foliar":
+       name : "Foliar"
