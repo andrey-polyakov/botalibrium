@@ -8,10 +8,11 @@ import org.mongodb.morphia.annotations.Reference;
  * Represents original material (ex)plants were produced from.
  * This could be from seeds, cutting or tissue culture.
  */
-@Entity("plantMaterial")
+@Entity
 public class PlantMaterial extends BaseEntity {
+    private String supplier;
     @Reference
-    private Supplier supplier;
+    private Taxon taxon;
     private String type;
     private Long quantity;
 
@@ -19,17 +20,17 @@ public class PlantMaterial extends BaseEntity {
         //
     }
 
-    public PlantMaterial(Supplier supplier, String type, Long quantity) {
+    public PlantMaterial(String supplier, String type, Long quantity) {
         this.supplier = supplier;
         this.type = type;
         this.quantity = quantity;
     }
 
-    public Supplier getSupplier() {
+    public String getSupplier() {
         return supplier;
     }
 
-    public void setSupplier(Supplier supplier) {
+    public void setSupplier(String supplier) {
         this.supplier = supplier;
     }
 
@@ -49,4 +50,11 @@ public class PlantMaterial extends BaseEntity {
         this.quantity = quantity;
     }
 
+    public Taxon getTaxon() {
+        return taxon;
+    }
+
+    public void setTaxon(Taxon taxon) {
+        this.taxon = taxon;
+    }
 }

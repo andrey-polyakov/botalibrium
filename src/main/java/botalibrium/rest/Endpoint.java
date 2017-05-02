@@ -28,7 +28,7 @@ public class Endpoint {
         PlantMaterial pmi = new PlantMaterial(supplier, "Seeds", (long) 100);
         Set<String>names = new TreeSet<>();
         names.add("N.Foo");
-        PlantFile ci = new PlantFile("TAG1", new Taxon(names), pmi);
+        Container ci = new Container("TAG1", new Taxon(names), pmi);
         for (int ii = 0; ii < 2; ii++) {
             ci.getRecords().add(new Record());
         }*/

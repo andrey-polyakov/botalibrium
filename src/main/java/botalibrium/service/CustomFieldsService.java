@@ -29,8 +29,6 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
 
     @Override
     public void save(CustomFieldGroupDefinition customFieldGroupDefinition) throws ValidationException {
-
-        //TODO more checks
         if (customFieldGroupDefinition.getApplicableEntities().isEmpty()) {
             throw new ValidationException("Field Definition must be applicable to at least one entity");
         }
@@ -116,26 +114,26 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
                     set("DEFINITION_NODE", definitionNode).
                     set("OBJECT_NODE", objectNode);
         }
-        for (Map.Entry<String, RecordedVariable> v : definitionNode.getVariables().entrySet()) {
-            RecordedVariable rv = objectNode.getVariables().get(v.getKey());
+        for (Map.Entry<String, RecordedVariable> definitionVariable : definitionNode.getVariables().entrySet()) {
+            RecordedVariable rv = objectNode.getVariables().get(definitionVariable.getKey());
             if (rv == null) {
-                if(v.getValue().isRequired()) {
+                if(definitionVariable.getValue().isRequired()) {
                     throw new ValidationException("Variable is missing").
-                            set("MISSING_VARIABLE", v.getKey()).
+                            set("MISSING_VARIABLE", definitionVariable.getKey()).
                             set("DEFINITION_NODE", definitionNode).
                             set("OBJECT_NODE", objectNode);
                 }
             } else {
-                if (!v.getValue().getValues().isEmpty()) {
+                if (!definitionVariable.getValue().getValues().isEmpty()) {
                     if (rv.getValues().size() != 1) {
-                        throw new ValidationException("Only one value is expected").
+                        throw new ValidationException("Exactly one value is expected").
                                 set("INVALID_VARIABLE", rv).
                                 set("DEFINITION_NODE", definitionNode).
                                 set("OBJECT_NODE", objectNode);
                     }
-                    if (!v.getValue().getValues().containsAll(rv.getValues())) {
+                    if (!definitionVariable.getValue().getValues().containsAll(rv.getValues())) {
                         throw new ValidationException("Unexpected variable value").
-                                set("EXPECTED_VALUES", v.getValue().getValues()).
+                                set("EXPECTED_VALUES", definitionVariable.getValue().getValues()).
                                 set("INVALID_VARIABLE", rv).
                                 set("DEFINITION_NODE", definitionNode).
                                 set("OBJECT_NODE", objectNode);
