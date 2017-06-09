@@ -13,6 +13,6 @@ selectionNodes:
          unit:
            values:
            - wrongValueShouldBePellet
-         quantity:
+         count:
            values:
            - 5

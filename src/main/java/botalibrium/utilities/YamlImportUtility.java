@@ -1,9 +1,7 @@
 package botalibrium.utilities;
 
-import botalibrium.entity.Taxon;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
 import botalibrium.service.CustomFieldsService;
-import botalibrium.service.TaxaService;
 import botalibrium.service.exception.ValidationException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
@@ -24,8 +22,7 @@ public class YamlImportUtility {
     private ObjectMapper mapper;
     @Autowired
     private CustomFieldsService cfs;
-    @Autowired
-    private TaxaService ts;
+
 
 
     public void importFromDirectory(String directory) throws IOException, ValidationException {
@@ -36,9 +33,6 @@ public class YamlImportUtility {
             }
             if (file.getName().startsWith(CustomFieldGroupDefinition.class.getSimpleName())) {
                 cfs.save(mapper.readValue(file, CustomFieldGroupDefinition.class));
-            }
-            if (file.getName().startsWith(Taxon.class.getSimpleName())) {
-                ts.save(mapper.readValue(file, Taxon.class));
             }
             logger.info("Entity imported from file " + file);
         }

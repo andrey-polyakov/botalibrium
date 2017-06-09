@@ -10,6 +10,6 @@ selectionNodes:
     nodes:
       "In pitcher":
          variables:
-           quantity:
+           count:
              values:
              - 5

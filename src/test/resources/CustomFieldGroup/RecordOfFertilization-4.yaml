@@ -13,7 +13,7 @@ selectionNodes:
            unit:
              values:
              - pellets
-           quantity:
+           count:
              values:
              - 5
       "Soil":

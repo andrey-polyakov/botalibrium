@@ -22,4 +22,8 @@ public class ServiceException extends Exception {
     public Map<String, Object> getRelevantData() {
         return relevantData;
     }
+
+    public void setRelevantData(Map<String, Object> relevantData) {
+        this.relevantData = relevantData;
+    }
 }

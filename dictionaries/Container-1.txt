@@ -1,0 +1,22 @@
+{
+  "tag": "DEN1",
+  "material": {
+    "supplier": "Brad's greenhouse",
+    "type": "Seedling",
+    "count": 1,
+    "taxonDetails": {
+      "names": [
+        "Nepenthes Densiflora"
+      ]
+    }
+  },
+  "records": [
+    {
+      "timestamp": "02-01-2017 12:12:12",
+      "type": "Organizational",
+      "series": null,
+      "message": "Received and started"
+    }
+
+  ]
+}

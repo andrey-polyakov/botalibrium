@@ -75,10 +75,10 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
     @Override
     public void validate(CustomFieldGroup group, String entityClass) throws ServiceException {
         if (!group.getDefinition().getApplicableEntities().contains(entityClass)) {
-            throw new ValidationException("Given Field Group is not compatible with given entity set");
+            throw new ValidationException("Given Field Group is not compatible with given entity set").set("CLASS", entityClass);
         }
         if (group.getSelectionNodes() == null || group.getSelectionNodes().isEmpty()) {
-            throw new ValidationException("At least one field is required for every group");
+            throw new ValidationException("At least one field is required for every group").set("CLASS", entityClass);
         }
         Deque<Tuple> stack = new LinkedList<>();
         stack.add(new Tuple(group.getDefinition().getSelectionNodes(), group.getSelectionNodes()));
@@ -92,12 +92,12 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
                     continue;
                 }
                 if (definitionNode.isNodeChoiceRequired() && (objectNode.getNodes() == null || objectNode.getNodes().isEmpty())) {
-                    throw new ValidationException(MISSING_REQUIRED_NODE).set("MISSING_NODE", definitionNode);
+                    throw new ValidationException(MISSING_REQUIRED_NODE).set("MISSING_NODE", definitionNode).set("CLASS", entityClass);
                 }
                 knownNodesCheck(definitionNode, objectNode);
-                knownVariablesCheck(definitionNode, objectNode);
+                knownVariablesCheck(definitionNode, objectNode, entityClass);
                 if (definitionNode.isMutuallyExclusiveNodes() && objectNode.getNodes().size() > 1) {
-                    throw new ValidationException(MUTUALLY_EXCLUSIVE_NODES).set("DEFINITION_NODE", definitionNode);
+                    throw new ValidationException(MUTUALLY_EXCLUSIVE_NODES).set("DEFINITION_NODE", definitionNode).set("CLASS", entityClass);
                 }
                 if (!definitionNode.getNodes().isEmpty()) {
                     stack.add(new Tuple(definitionNode.getNodes(), objectNode.getNodes()));
@@ -106,13 +106,13 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
         }
     }
 
-    private void knownVariablesCheck(SelectionNode definitionNode, SelectionNode objectNode) throws ServiceException {
+    private void knownVariablesCheck(SelectionNode definitionNode, SelectionNode objectNode, String entityClass) throws ServiceException {
         Set<String> unrecognizedVariables = new TreeSet<>(objectNode.getVariables().keySet());
         unrecognizedVariables.removeAll(definitionNode.getVariables().keySet());
         if (!unrecognizedVariables.isEmpty()) {
             throw new ValidationException("There are unrecognized variables: " + print(unrecognizedVariables)).
                     set("DEFINITION_NODE", definitionNode).
-                    set("OBJECT_NODE", objectNode);
+                    set("OBJECT_NODE", objectNode).set("CLASS", entityClass);
         }
         for (Map.Entry<String, RecordedVariable> definitionVariable : definitionNode.getVariables().entrySet()) {
             RecordedVariable rv = objectNode.getVariables().get(definitionVariable.getKey());
@@ -121,7 +121,7 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
                     throw new ValidationException("Variable is missing").
                             set("MISSING_VARIABLE", definitionVariable.getKey()).
                             set("DEFINITION_NODE", definitionNode).
-                            set("OBJECT_NODE", objectNode);
+                            set("OBJECT_NODE", objectNode).set("CLASS", entityClass);
                 }
             } else {
                 if (!definitionVariable.getValue().getValues().isEmpty()) {
@@ -129,14 +129,14 @@ public class CustomFieldsService implements CustomFieldsServiceContract {
                         throw new ValidationException("Exactly one value is expected").
                                 set("INVALID_VARIABLE", rv).
                                 set("DEFINITION_NODE", definitionNode).
-                                set("OBJECT_NODE", objectNode);
+                                set("OBJECT_NODE", objectNode).set("CLASS", entityClass);
                     }
                     if (!definitionVariable.getValue().getValues().containsAll(rv.getValues())) {
                         throw new ValidationException("Unexpected variable value").
                                 set("EXPECTED_VALUES", definitionVariable.getValue().getValues()).
                                 set("INVALID_VARIABLE", rv).
                                 set("DEFINITION_NODE", definitionNode).
-                                set("OBJECT_NODE", objectNode);
+                                set("OBJECT_NODE", objectNode).set("CLASS", entityClass);
                     }
 
                 }

@@ -1,11 +1,11 @@
 package botalibrium.entity;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.Record;
+import botalibrium.entity.embedded.containers.Container;
 import org.mongodb.morphia.annotations.*;
 
 import botalibrium.entity.base.BaseEntity;
@@ -13,33 +13,39 @@ import botalibrium.entity.base.BaseEntity;
 /**
  * Created by apolyakov on 3/24/2017.
  */
-@Indexes(@Index(fields = { @Field("tag") }, options = @IndexOptions(unique = true)))
+@Indexes(@Index(fields = { @Field("tags") }, options = @IndexOptions(unique = true)))
 @Entity
-public class Container extends BaseEntity {
-    public static final String TAG_FIELD = "tag";
-    private String tag = "Not assigned";
-    @Reference
+public class Batch extends BaseEntity {
+    public static final String TAGS_FIELD = "tags";
+    private Set<String> tags = new HashSet<>();
+    @Embedded
     private PlantMaterial material;
+    @Embedded
+    private List<Container> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new LinkedList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
-    private Integer count;
+    private String taxon;
 
-    public Container() {
+    public Batch() {
         //
     }
 
-    public Container(String tag, PlantMaterial material) {
-        this.tag = tag;
-        this.material = material;
+    public String getTaxon() {
+        return taxon;
     }
 
-    public String getTag() {
-        return tag;
+    public void setTaxon(String taxon) {
+        this.taxon = taxon;
     }
 
-    public void setTag(String tag) {
-        this.tag = tag;
+
+    public Set<String> getTags() {
+        return tags;
+    }
+
+    public void setTags(Set<String> tags) {
+        this.tags = tags;
     }
 
     public PlantMaterial getMaterial() {
@@ -67,10 +73,14 @@ public class Container extends BaseEntity {
     }
 
     public Integer getCount() {
-        return count;
+        return 0;
     }
 
-    public void setCount(Integer count) {
-        this.count = count;
+    public List<Container> getContainers() {
+        return containers;
+    }
+
+    public void setContainers(List<Container> containers) {
+        this.containers = containers;
     }
 }

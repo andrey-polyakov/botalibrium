@@ -1,8 +1,8 @@
 package botalibrium;
 
-import botalibrium.entity.Container;
-import botalibrium.entity.PlantMaterial;
-import botalibrium.entity.Taxon;
+import botalibrium.entity.Batch;
+import botalibrium.entity.embedded.PlantMaterial;
+import botalibrium.entity.TaxonDetails;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
 import botalibrium.service.ContainersService;
 import botalibrium.utilities.YamlImportUtility;
@@ -13,8 +13,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.List;
 
 @SpringBootApplication
 public class Context {
@@ -28,13 +26,13 @@ public class Context {
     }
 
     @Bean
-    public BasicDAO<Container, ObjectId> plantFilesRepository() {
-        return new BasicDAO<>(Container.class, datastore);
+    public BasicDAO<Batch, ObjectId> plantFilesRepository() {
+        return new BasicDAO<>(Batch.class, datastore);
     }
 
     @Bean
-    public BasicDAO<Taxon, ObjectId> taxaRepository() {
-        return new BasicDAO<>(Taxon.class, datastore);
+    public BasicDAO<TaxonDetails, ObjectId> taxaRepository() {
+        return new BasicDAO<>(TaxonDetails.class, datastore);
     }
 
     @Bean
@@ -48,10 +46,6 @@ public class Context {
         return (args) -> {
             if (args.length == 1) {
                 importUtility.importFromDirectory(args[0]);
-            }
-            List<Container> tags = rs.search("TAG");
-            for (Container tag : tags) {
-                System.out.println(tag.getId() + " " + tag);
             }
         };
     }

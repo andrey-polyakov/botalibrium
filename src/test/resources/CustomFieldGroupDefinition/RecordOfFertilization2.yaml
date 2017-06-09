@@ -26,7 +26,7 @@ selectionNodes:
            - pellets
            - milliliter
            - gram
-         quantity:
+         count:
            name: "Quantity"
            type: "Number"
            required : true

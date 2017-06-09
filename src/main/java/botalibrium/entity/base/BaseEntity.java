@@ -1,6 +1,8 @@
 package botalibrium.entity.base;
 
+import botalibrium.entity.serializers.ObjectIdDeserializer;
 import botalibrium.entity.serializers.ObjectIdSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
@@ -18,6 +20,7 @@ import java.util.Map;
 public class BaseEntity {
     @Id
     @JsonSerialize(using = ObjectIdSerializer.class)
+    @JsonDeserialize(using = ObjectIdDeserializer.class)
     private ObjectId id;
     @Embedded
     private List<CustomFieldGroup> customFields = new LinkedList<>();
