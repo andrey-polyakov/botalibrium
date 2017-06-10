@@ -1,7 +1,7 @@
 package botalibrium.service;
 
+import botalibrium.dta.Page;
 import botalibrium.entity.Batch;
-import botalibrium.entity.embedded.containers.CommunityContainer;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.embedded.Record;
 import botalibrium.entity.embedded.containers.Container;
@@ -17,21 +17,22 @@ import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 @Component
 public class ContainersService {
     @Autowired
-    private BasicDAO<Batch, ObjectId> containers;
+    private BasicDAO<Batch, ObjectId> batches;
     @Autowired
     private CustomFieldsService customFieldsService;
 
 
-    public Key<Batch> save(Batch newFile) throws ServiceException {
-        for (CustomFieldGroup cfg : newFile.getCustomFieldGroups()) {
+    public Key<Batch> save(Batch batch) throws ServiceException {
+        for (CustomFieldGroup cfg : batch.getCustomFieldGroups()) {
             customFieldsService.validate(cfg, Batch.class.getSimpleName());
         }
-        for (Container pg : newFile.getContainers()) {
+        for (Container pg : batch.getContainers()) {
             for (CustomFieldGroup cfg : pg.getCustomFields()) {
                 customFieldsService.validate(cfg, Batch.class.getSimpleName());
             }
@@ -41,11 +42,11 @@ public class ContainersService {
                 }
             }
         }
-        return containers.save(newFile);
+        return batches.save(batch);
     }
 
     public void addRecord(ObjectId id, Record r) throws ServiceException {
-        Batch c = containers.get(id);
+        Batch c = batches.get(id);
         if (c == null) {
             throw new ServiceException("Record not found");
         }
@@ -56,43 +57,33 @@ public class ContainersService {
     }
 
     public void delete(Batch c) throws ServiceException {
-        containers.delete(c);
+        batches.delete(c);
     }
 
-    public List<Batch> basicSearch(String query, int page, int limit) throws ValidationException {
+    public Page basicSearch(String query, int page, int limit) throws ValidationException {
         int defaultLimit = 25;
         if (limit > 0) {
             defaultLimit = limit;
         }
-        Query<Batch> q = containers.createQuery();
+        Query<Batch> q = batches.createQuery();
         List<String> tags = new ArrayList<>();
         tags.add(query);
         if (query != null && !query.isEmpty()) {
             q.or(
                     q.criteria("material.taxon").containsIgnoreCase(query),
-                    q.criteria("tags").in(tags));
+                    q.criteria("containers.tag").containsIgnoreCase(query));
         }
-        return q.order().asList(new FindOptions().skip(page - 1).limit(defaultLimit));
+        List<Batch> list = q.order().asList(new FindOptions().skip(page - 1).limit(defaultLimit));
+        return new Page(list, page);
     }
 
     public Batch getContainer(ObjectId id) throws ServiceException {
-        Batch c = containers.get(id);
+        Batch c = batches.get(id);
         if (c == null) {
             throw new ServiceException("Record not found");
         }
         return c;
     }
 
-/*    public List<Batch> searchByTaxon(String text, int page, int limit) throws ValidationException {
-        int defaultLimit = 25;
-        List<TaxonDetails> taxa = taxaService.basicSearch(text, page, limit);
-        List<ObjectId> ids = new ArrayList<>(taxa.size());
-        for (TaxonDetails taxon : taxa) {
-            ids.add(taxon.getId());
-        }
-        return containers.createQuery().
-                field("material").
-                in(ids).order().asList(new FindOptions().skip(page - 1).limit(defaultLimit));
 
-    }*/
 }

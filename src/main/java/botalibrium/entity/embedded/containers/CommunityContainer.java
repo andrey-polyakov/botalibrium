@@ -3,15 +3,13 @@ package botalibrium.entity.embedded.containers;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-import java.util.Date;
-import java.util.SortedSet;
-import java.util.TreeSet;
+import java.util.*;
 
 @Entity
 @Embedded
 public class CommunityContainer extends Container {
 
-    protected SortedSet<CountLog> countLogs = new TreeSet();
+    protected List<CountLog> countLogs = new ArrayList<>();
 
     public static class CountLog implements Comparable<CountLog> {
         private int deadCount = 1;
@@ -27,6 +25,7 @@ public class CommunityContainer extends Container {
         }
 
         public CountLog() {
+            //
         }
 
         public int getDeadCount() {
@@ -72,20 +71,20 @@ public class CommunityContainer extends Container {
 
     }
 
-    public SortedSet<CountLog> getCountLogs() {
+    public List<CountLog> getCountLogs() {
         return countLogs;
     }
 
-    public void setCountLogs(SortedSet<CountLog> countLogs) {
+    public void setCountLogs(List<CountLog> countLogs) {
         this.countLogs = countLogs;
     }
 
     public int getDeathRate() {
-        return countLogs.last().getDeathRate();
+        return new TreeSet<CountLog>(countLogs).last().getDeathRate();
     }
 
     @Override
     public int getAliveCount() {
-        return countLogs.last().getCurrentCount();
+        return new TreeSet<CountLog>(countLogs).last().getCurrentCount();
     }
 }

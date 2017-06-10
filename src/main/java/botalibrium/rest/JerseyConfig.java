@@ -1,5 +1,6 @@
 package botalibrium.rest;
 
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
@@ -21,6 +22,7 @@ public class JerseyConfig extends ResourceConfig {
 	@Primary
 	public ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.setVisibility(mapper.getVisibilityChecker().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
 		mapper.setDateFormat(new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"));
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);

@@ -1,13 +1,12 @@
 package botalibrium.entity.embedded.containers;
 
-import org.mongodb.morphia.annotations.Property;
+import java.util.TreeSet;
 
 /**
  * Extends plant container with count od seeds sown.
  */
 public class SeedsCommunityContainer extends CommunityContainer {
 
-    @Property("sownSeedsCount")
     private int sownSeedsCount;
 
     public int getSownSeedsCount() {
@@ -19,6 +18,6 @@ public class SeedsCommunityContainer extends CommunityContainer {
     }
 
     public double getGerminationRate() {
-        return (countLogs.last().getDeadCount() + countLogs.last().getCurrentCount() + countLogs.last().getSoldCount()) / (sownSeedsCount / 100.0);
+        return (new TreeSet<CountLog>(countLogs).last().getDeadCount() + new TreeSet<CountLog>((countLogs)).last().getCurrentCount() + new TreeSet<CountLog>(countLogs).last().getSoldCount()) / (sownSeedsCount / 100.0);
     }
 }

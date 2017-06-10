@@ -13,15 +13,12 @@ import botalibrium.entity.base.BaseEntity;
 /**
  * Created by apolyakov on 3/24/2017.
  */
-@Indexes(@Index(fields = { @Field("tags") }, options = @IndexOptions(unique = true)))
 @Entity
 public class Batch extends BaseEntity {
-    public static final String TAGS_FIELD = "tags";
-    private Set<String> tags = new HashSet<>();
     @Embedded
     private PlantMaterial material;
     @Embedded
-    private List<Container> containers = new ArrayList<>();
+    private List<? extends Container> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new LinkedList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
@@ -37,15 +34,6 @@ public class Batch extends BaseEntity {
 
     public void setTaxon(String taxon) {
         this.taxon = taxon;
-    }
-
-
-    public Set<String> getTags() {
-        return tags;
-    }
-
-    public void setTags(Set<String> tags) {
-        this.tags = tags;
     }
 
     public PlantMaterial getMaterial() {
@@ -76,11 +64,11 @@ public class Batch extends BaseEntity {
         return 0;
     }
 
-    public List<Container> getContainers() {
+    public List<? extends Container> getContainers() {
         return containers;
     }
 
-    public void setContainers(List<Container> containers) {
+    public void setContainers(List<? extends Container> containers) {
         this.containers = containers;
     }
 }

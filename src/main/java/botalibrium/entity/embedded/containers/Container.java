@@ -2,6 +2,9 @@ package botalibrium.entity.embedded.containers;
 
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.embedded.Record;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -13,6 +16,13 @@ import java.util.List;
  */
 @Entity
 @Embedded
+@JsonIgnoreProperties(ignoreUnknown = true)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = CommunityContainer.class, name = "CommunityContainer"),
+
+        @JsonSubTypes.Type(value = SeedsCommunityContainer.class, name = "SeedsCommunityContainer") }
+)
 public class Container {
     protected String tag;
     protected String description = "";

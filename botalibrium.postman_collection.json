@@ -1,0 +1,176 @@
+{
+	"variables": [],
+	"info": {
+		"name": "botalibrium",
+		"_postman_id": "911e3e1c-4c38-e53a-6ae9-7ece4ff619f9",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Containers by taxon",
+			"request": {
+				"url": {
+					"raw": "http://127.0.0.1:8080/v1/batches/?text=SAN",
+					"protocol": "http",
+					"auth": {},
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"v1",
+						"batches",
+						""
+					],
+					"query": [
+						{
+							"key": "text",
+							"value": "SAN",
+							"equals": true,
+							"description": ""
+						}
+					],
+					"variable": []
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tag\": \"DEN1\",\r\n  \"material\": {\r\n    \"supplier\": \"Brad's greenhouse\",\r\n    \"type\": \"Seedling\",\r\n    \"count\": 1,\r\n    \"taxon\": {\r\n      \"names\": [\r\n        \"Nepenthes Densiflora\"\r\n      ]\r\n    }\r\n  },\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Organizational\",\r\n      \"series\": null,\r\n      \"message\": \"Received and started\"\r\n    }\r\n\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container",
+			"request": {
+				"url": "http://127.0.0.1:8080/containers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tags\": [\"DEN12d1\"],\r\n  \"material\": {\r\n    \"supplier\": \"Brad's greenhouse\",\r\n    \"type\": \"Seedling\",\r\n    \"taxon\": \"Nepenthes Densiflora\",\r\n    \"originalQuantity\": 1,\r\n    \"price\": 5000\r\n  },\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Organizational\",\r\n      \"series\": null,\r\n      \"message\": \"Received and started\"\r\n    }\r\n\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container 2",
+			"request": {
+				"url": "http://127.0.0.1:8080/containers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"tags\": [\"SAN1\"],\r\n  \"material\": {\r\n    \"supplier\": \"Brad's greenhouse\",\r\n    \"type\": \"Seedling\",\r\n    \"price\": 1,\r\n    \"taxon\": \"Nepenthes Sanguinea\",\r\n    \"originalQuantity\": 1\r\n  },\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Organizational\",\r\n      \"series\": null,\r\n      \"message\": \"Received and started\",\r\n      \"customFields\":[\r\n\t\t\t{\r\n\t\t\t\t\"selectionNodes\": null\r\n\t\t\t}\r\n    \t]\r\n    }\r\n\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container SAN1, SAN2",
+			"request": {
+				"url": "http://127.0.0.1:8080/containers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"material\": {\r\n    \"supplier\": \"Brad's greenhouse\",\r\n    \"type\": \"Seedling\",\r\n    \"price\": 1,\r\n    \"taxon\": \"Nepenthes Sanguinea\",\r\n    \"originalQuantity\": 1\r\n  },\r\n  \"containers\": [\r\n  \t{\r\n  \t\t\"tag\": \"SAN1\",\r\n  \t\t\"description\": \"\"\r\n  \t},\r\n  \t{\r\n  \t\t\"tag\": \"SAN2\",\r\n  \t\t\"description\": \"\",\r\n  \t\t  \"records\": [\r\n\t\t    {\r\n\t\t      \"timestamp\": \"02-01-2017 12:12:12\",\r\n\t\t      \"type\": \"Care\",\r\n\t\t      \"series\": null,\r\n\t\t      \"message\": \"100tds coffee fertilizer\"\r\n\t\t    }\r\n\t\t  ]\r\n  \t}\r\n  ],\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Organizational\",\r\n      \"series\": null,\r\n      \"message\": \"Received and started\",\r\n      \"customFields\":[\r\n\t\t\t{\r\n\t\t\t\t\"selectionNodes\": null\r\n\t\t\t}\r\n    \t]\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container SAN3",
+			"request": {
+				"url": "http://127.0.0.1:8080/containers",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"material\": {\r\n    \"supplier\": \"Brad's greenhouse\",\r\n    \"type\": \"Seedling\",\r\n    \"price\": 1,\r\n    \"taxon\": \"Nepenthes Sanguinea\",\r\n    \"originalQuantity\": 1\r\n  },\r\n  \"containers\": [\r\n  \t{\r\n  \t\t\"tag\": \"SAN3\",\r\n  \t\t\"description\": \"\"\r\n  \t}\r\n  ],\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Care\",\r\n      \"series\": null,\r\n      \"message\": \"100 tds fertilizer\",\r\n      \"customFields\":[\r\n\t\t\t{\r\n\t\t\t\t\"selectionNodes\": null\r\n\t\t\t}\r\n    \t]\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container SAN32",
+			"request": {
+				"url": "http://127.0.0.1:8080/batches",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"material\": {\r\n    \"supplier\": \"Thai guy\",\r\n    \"type\": \"Seedling\",\r\n    \"price\": 231,\r\n    \"taxon\": \"Nepenthes Sanguinea\",\r\n    \"originalQuantity\": 34\r\n  },\r\n  \"containers\": [\r\n  \t{\r\n  \t\t\"tag\": \"SAN32\",\r\n  \t\t\"description\": \"\"\r\n  \t}\r\n  ],\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Care\",\r\n      \"series\": null,\r\n      \"message\": \"100 tds fertilizer\",\r\n      \"customFields\":[\r\n\t\t\t{\r\n\t\t\t\t\"selectionNodes\": null\r\n\t\t\t}\r\n    \t]\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		},
+		{
+			"name": "Create Container with CountLogs",
+			"request": {
+				"url": "http://127.0.0.1:8080/v1/batches",
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"description": ""
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"material\": {\r\n    \"supplier\": \"Thai guy\",\r\n    \"type\": \"Seedling\",\r\n    \"price\": 231,\r\n    \"taxon\": \"Nepenthes Talangensis\",\r\n    \"originalQuantity\": 125\r\n  },\r\n  \"containers\": [\r\n  \t{\r\n  \t\t\"tag\": \"TAL1\",\r\n  \t\t\"description\": \"\",\r\n  \t\t\"countLogs\": [{\r\n  \t\t\t\"deadCount\": 0,\r\n  \t\t\t\"currentCount\": 10,\r\n  \t\t\t\"soldCount\": 1,\r\n  \t\t\t\"date\": \"02-01-2017 12:12:12\"\r\n  \t\t}],\r\n  \t\t\"@type\": \"CommunityContainer\"\r\n  \t}\r\n  ],\r\n  \"records\": [\r\n    {\r\n      \"timestamp\": \"02-01-2017 12:12:12\",\r\n      \"type\": \"Care\",\r\n      \"series\": null,\r\n      \"message\": \"100 tds fertilizer\",\r\n      \"customFields\":[\r\n\t\t\t{\r\n\t\t\t\t\"selectionNodes\": null\r\n\t\t\t}\r\n    \t]\r\n    }\r\n  ]\r\n}"
+				},
+				"description": ""
+			},
+			"response": []
+		}
+	]
+}
