@@ -1,7 +1,7 @@
 package botalibrium.entity.base;
 
 
-import botalibrium.entity.embedded.SelectionNode;
+import botalibrium.entity.embedded.records.SelectionNode;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;

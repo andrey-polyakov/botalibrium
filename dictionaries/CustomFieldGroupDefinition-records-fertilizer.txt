@@ -1,7 +1,7 @@
 description : "Fertilizer application record"
 customFieldDefinitions:
   fertilizerType:
-    type: "String"
+    materialType: "String"
     description: "Kind/method of fertilization"
     mandatory: true
     options: 
@@ -11,7 +11,7 @@ customFieldDefinitions:
 
 
   unitsCount:
-    type: "String"
+    materialType: "String"
     description: "Quantity"
     mandatory: false
     options:

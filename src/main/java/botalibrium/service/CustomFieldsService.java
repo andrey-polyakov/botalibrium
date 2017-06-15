@@ -2,8 +2,8 @@ package botalibrium.service;
 
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
-import botalibrium.entity.embedded.RecordedVariable;
-import botalibrium.entity.embedded.SelectionNode;
+import botalibrium.entity.embedded.records.RecordedVariable;
+import botalibrium.entity.embedded.records.SelectionNode;
 import botalibrium.service.contract.CustomFieldsServiceContract;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;

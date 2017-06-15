@@ -1,4 +1,4 @@
-package botalibrium.entity.embedded;
+package botalibrium.entity.embedded.records;
 
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;

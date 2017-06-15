@@ -4,7 +4,7 @@ import botalibrium.ApplicationTests;
 import botalibrium.Context;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
-import botalibrium.entity.embedded.Record;
+import botalibrium.entity.embedded.records.Record;
 import botalibrium.service.contract.CustomFieldsServiceContract;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;

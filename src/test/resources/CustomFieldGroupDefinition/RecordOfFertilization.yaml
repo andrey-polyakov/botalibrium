@@ -9,10 +9,10 @@ selectionNodes:
     variables:
       note:
        name: "Note"
-       type: "String"
+       materialType: "String"
       chemical:
        name: "Fertilizer name"
-       type: "String"
+       materialType: "String"
        required : true
     nodes:
      "In pitcher":
@@ -20,7 +20,7 @@ selectionNodes:
        variables:
          unit:
            name: "Unit of measure"
-           type: "List"
+           materialType: "List"
            required : true
            values:
            - pellets
@@ -28,7 +28,7 @@ selectionNodes:
            - gram
          count:
            name: "Quantity"
-           type: "Number"
+           materialType: "Number"
            required : true
      "Soil":
        name : "Soil"

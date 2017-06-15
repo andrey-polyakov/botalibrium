@@ -3,8 +3,8 @@ package botalibrium.rest;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.glassfish.jersey.server.ResourceConfig;
+import org.glassfish.jersey.server.ServerProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,10 @@ import java.text.SimpleDateFormat;
 public class JerseyConfig extends ResourceConfig {
 
 	public JerseyConfig() {
-		register(ContainersEndpoint.class);
+		register(BatchesEndpoint.class);
+		property(ServerProperties.BV_SEND_ERROR_IN_RESPONSE, true);
+		property(ServerProperties.BV_DISABLE_VALIDATE_ON_EXECUTABLE_OVERRIDE_CHECK, true);
+
 	}
 
 	@Bean
@@ -24,6 +27,7 @@ public class JerseyConfig extends ResourceConfig {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setVisibility(mapper.getVisibilityChecker().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+
 		mapper.setDateFormat(new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"));
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		return mapper;

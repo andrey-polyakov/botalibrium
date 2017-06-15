@@ -1,4 +1,4 @@
-package botalibrium.entity.embedded;
+package botalibrium.entity.embedded.records;
 
 import botalibrium.entity.base.CustomFieldGroup;
 import org.mongodb.morphia.annotations.Embedded;
@@ -7,7 +7,6 @@ import org.mongodb.morphia.annotations.Entity;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 /**

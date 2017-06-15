@@ -4,16 +4,20 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import botalibrium.entity.embedded.PlantMaterial;
-import botalibrium.entity.embedded.Record;
+import botalibrium.entity.embedded.records.Record;
 import botalibrium.entity.embedded.containers.Container;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.mongodb.morphia.annotations.*;
 
 import botalibrium.entity.base.BaseEntity;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by apolyakov on 3/24/2017.
  */
 @Entity
+@JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Batch extends BaseEntity {
     @Embedded
     private PlantMaterial material;
@@ -22,20 +26,12 @@ public class Batch extends BaseEntity {
     @Embedded
     private List<Record> records = new LinkedList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
-    private String taxon;
 
     public Batch() {
         //
     }
 
-    public String getTaxon() {
-        return taxon;
-    }
-
-    public void setTaxon(String taxon) {
-        this.taxon = taxon;
-    }
-
+    @NotNull(message = "PlantMaterial is compulsory")
     public PlantMaterial getMaterial() {
         return material;
     }
@@ -61,7 +57,11 @@ public class Batch extends BaseEntity {
     }
 
     public Integer getCount() {
-        return 0;
+        int count = 0;
+        for (Container container : containers) {
+            count += container.getAliveCount();
+        }
+        return count;
     }
 
     public List<? extends Container> getContainers() {

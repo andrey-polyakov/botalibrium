@@ -1,6 +1,6 @@
 package botalibrium.entity.base;
 
-import botalibrium.entity.embedded.SelectionNode;
+import botalibrium.entity.embedded.records.SelectionNode;
 import botalibrium.entity.serializers.ObjectIdSerializer;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import org.bson.types.ObjectId;

@@ -4,7 +4,7 @@ import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.TaxonDetails;
 import botalibrium.entity.base.CustomFieldGroupDefinition;
-import botalibrium.service.ContainersService;
+import botalibrium.service.BatchesService;
 import botalibrium.utilities.YamlImportUtility;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
@@ -42,7 +42,7 @@ public class Context {
 
 
     @Bean
-    public CommandLineRunner init(YamlImportUtility importUtility, ContainersService rs) {
+    public CommandLineRunner init(YamlImportUtility importUtility, BatchesService rs) {
         return (args) -> {
             if (args.length == 1) {
                 importUtility.importFromDirectory(args[0]);

@@ -1,7 +1,12 @@
 package botalibrium.entity.embedded;
 
+import botalibrium.entity.embedded.catalog.ProductionDifficulty;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+
+import java.util.Map;
 
 /**
  * Represents original material plants were produced from.
@@ -10,27 +15,21 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity
 @Embedded
 public class PlantMaterial {
-    enum ProductionDifficulty {
-        VERY_EASY,
-        EASY,
-        NORMAL,
-        HARD,
-        VERY_HARD
-    }
     private String taxon;
     private String supplier;
-    private String type;
+    private String materialType;
     private Long originalQuantity;
     private Long price;
     private ProductionDifficulty productionDifficulty = ProductionDifficulty.NORMAL;
+    private Map<ProductionDifficulty, Double> adjustedCoefficient;
 
     public PlantMaterial() {
         //
     }
 
-    public PlantMaterial(String supplier, String type, Long originalQuantity) {
+    public PlantMaterial(String supplier, String materialType, Long originalQuantity) {
         this.supplier = supplier;
-        this.type = type;
+        this.materialType = materialType;
         this.originalQuantity = originalQuantity;
     }
 
@@ -42,12 +41,14 @@ public class PlantMaterial {
         this.supplier = supplier;
     }
 
-    public String getType() {
-        return type;
+    @NotBlank(message = "MaterialType name blank")
+    @NotEmpty(message = "MaterialType name empty")
+    public String getMaterialType() {
+        return materialType;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setMaterialType(String materialType) {
+        this.materialType = materialType;
     }
 
     public Long getOriginalQuantity() {
@@ -58,7 +59,7 @@ public class PlantMaterial {
         this.originalQuantity = originalQuantity;
     }
 
-    public Long getPrice() {
+    public Long getBuyPrice() {
         return price;
     }
 
@@ -80,5 +81,17 @@ public class PlantMaterial {
 
     public void setTaxon(String taxon) {
         this.taxon = taxon;
+    }
+
+    public Long getPrice() {
+        return price;
+    }
+
+    public Map<ProductionDifficulty, Double> getAdjustedCoefficient() {
+        return adjustedCoefficient;
+    }
+
+    public void setAdjustedCoefficient(Map<ProductionDifficulty, Double> adjustedCoefficient) {
+        this.adjustedCoefficient = adjustedCoefficient;
     }
 }

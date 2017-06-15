@@ -1,7 +1,8 @@
 package botalibrium.entity.embedded.containers;
 
 import botalibrium.entity.base.CustomFieldGroup;
-import botalibrium.entity.embedded.Record;
+import botalibrium.entity.embedded.records.Record;
+import botalibrium.references.SizeChart;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
@@ -24,6 +25,7 @@ import java.util.List;
         @JsonSubTypes.Type(value = SeedsCommunityContainer.class, name = "SeedsCommunityContainer") }
 )
 public class Container {
+    protected SizeChart plantSize = SizeChart.NA;
     protected String tag;
     protected String description = "";
     @Embedded
@@ -65,5 +67,13 @@ public class Container {
 
     public void setTag(String tag) {
         this.tag = tag;
+    }
+
+    public SizeChart getPlantSize() {
+        return plantSize;
+    }
+
+    public void setPlantSize(SizeChart plantSize) {
+        this.plantSize = plantSize;
     }
 }
