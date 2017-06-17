@@ -14,10 +14,10 @@ import java.util.List;
  */
 @Entity
 @Embedded
-public class Record {
+public class Record implements Comparable<Record> {
 
     private Timestamp timestamp = new Timestamp(new Date().getTime());
-    private String type = "Observation";
+    private String type = "Care";
     private String series = "default";
     private String message = "";
     @Embedded
@@ -57,5 +57,13 @@ public class Record {
 
     public void setMessage(String message) {
         this.message = message;
+    }
+
+    @Override
+    public int compareTo(Record record) {
+        if (record == null || record.timestamp == null) {
+            return -1;
+        }
+        return record.timestamp.compareTo(timestamp);
     }
 }

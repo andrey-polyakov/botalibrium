@@ -1,9 +1,11 @@
 package botalibrium.rest;
 
 import botalibrium.dta.Page;
+import botalibrium.dta.input.BulkOperation;
+import botalibrium.dta.output.BulkOpertaionPreview;
 import botalibrium.dta.pricing.BatchPriceEstimation;
-import botalibrium.dta.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
+import botalibrium.dta.LinksWrapper;
 import botalibrium.service.BatchesService;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;
@@ -11,12 +13,10 @@ import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -26,8 +26,10 @@ import java.net.URISyntaxException;
 @Produces(MediaType.APPLICATION_JSON)
 @Validated
 @Component
-@Path("/v1/batches")
+@Path(BatchesEndpoint.BASE_URI)
 public class BatchesEndpoint {
+    public static final String BASE_URI = "/v1/batches";
+
     @Autowired
     private BatchesService cs;
 
@@ -37,9 +39,9 @@ public class BatchesEndpoint {
 
     @GET
     @Path("{id}")
-    public Response getContainer(@PathParam("id") ObjectId id) throws ServiceException {
+    public Response getContainer(@PathParam("id") ObjectId id, @Context UriInfo uriInfo) throws ServiceException {
         Batch c = cs.getContainer(id);
-        return Response.ok(c, MediaType.APPLICATION_JSON).build();
+        return Response.ok(new LinksWrapper(c, uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
     @GET
@@ -52,15 +54,23 @@ public class BatchesEndpoint {
     @GET
     public Response getPageByTagOrTaxon(@QueryParam("text") String text,
                                         @QueryParam("page") int page,
-                                        @QueryParam("limit") int limit) throws ValidationException {
-        Page contents = cs.basicSearch(text, page, limit);
+                                        @QueryParam("limit") int limit, @Context UriInfo uriInfo) throws ValidationException {
+        Page contents = cs.basicSearch(text, page, limit,uriInfo);
         return Response.ok(contents, MediaType.APPLICATION_JSON).build();
     }
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveContainer(@Valid Batch c) throws ServiceException, URISyntaxException {
-        return Response.created(new URI("/batches/" + cs.save(c).getId().toString())).build();
+    @Path("select")
+    public Response getPageByTag(BulkOperation operation) throws ValidationException, URISyntaxException {
+        BulkOpertaionPreview contents = cs.bulkSelect(operation);
+        return Response.ok(contents, MediaType.APPLICATION_JSON).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response saveContainer(@Valid Batch c, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(cs.save(c).getId().toString()).build()).build();
     }
 }
 

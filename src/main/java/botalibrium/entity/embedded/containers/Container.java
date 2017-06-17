@@ -32,6 +32,8 @@ public class Container {
     protected List<CustomFieldGroup> customFields = new LinkedList<>();
     @Embedded
     protected List<Record> records = new LinkedList<>();
+    @Embedded
+    protected List<String> media = new LinkedList<>();
 
     public String getDescription() {
         return description;
@@ -75,5 +77,13 @@ public class Container {
 
     public void setPlantSize(SizeChart plantSize) {
         this.plantSize = plantSize;
+    }
+
+    public List<String> getMedia() {
+        return media;
+    }
+
+    public void setMedia(List<String> media) {
+        this.media = media;
     }
 }

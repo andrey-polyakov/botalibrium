@@ -1,14 +1,17 @@
 package botalibrium.service;
 
 import botalibrium.dta.Page;
+import botalibrium.dta.input.BulkOperation;
+import botalibrium.dta.output.BulkOpertaionPreview;
 import botalibrium.dta.pricing.BatchPriceEstimation;
 import botalibrium.dta.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
+import botalibrium.entity.embedded.containers.CommunityContainer;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.entity.embedded.containers.Container;
+import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
-import botalibrium.service.exception.ValidationException;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
@@ -19,6 +22,9 @@ import org.springframework.stereotype.Component;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.*;
 
 import static java.lang.Math.round;
@@ -64,8 +70,8 @@ public class BatchesService {
         batches.delete(c);
     }
 
-    public Page basicSearch(String query, int page, int limit) throws ValidationException {
-        int defaultLimit = 25;
+    public Page basicSearch(String query, long page, long limit, UriInfo uriInfo) {
+        long defaultLimit = 25;
         if (limit > 0) {
             defaultLimit = limit;
         }
@@ -73,12 +79,11 @@ public class BatchesService {
         List<String> tags = new ArrayList<>();
         tags.add(query);
         if (query != null && !query.isEmpty()) {
-            q.or(
-                    q.criteria("material.taxon").containsIgnoreCase(query),
+            q.or(q.criteria("material.taxon").containsIgnoreCase(query),
                     q.criteria("containers.tag").containsIgnoreCase(query));
         }
-        List<Batch> list = q.order().asList(new FindOptions().skip(page - 1).limit(defaultLimit));
-        return new Page(list, page);
+        List<Batch> list = q.order().asList(new FindOptions().skip((int) (page * defaultLimit)).limit((int) defaultLimit));
+        return new Page(query, list, page, defaultLimit, q.count(), uriInfo);
     }
 
     public Batch getContainer(ObjectId id) throws ServiceException {
@@ -110,6 +115,47 @@ public class BatchesService {
             result.getContainers().put(container.getPlantSize(), estimates);
         }
         return result;
+    }
+
+    public BulkOpertaionPreview bulkSelect(BulkOperation operation) throws URISyntaxException {
+        Query<Batch> q = batches.createQuery();
+        q.criteria("containers.tag").in(operation.getTags());
+        List<Batch> list = q.order().asList();
+        BulkOpertaionPreview preview = new BulkOpertaionPreview();
+        Set<String> notFound = new HashSet<>(operation.getTags());
+        for (Batch batch : list) {
+            Record batchLastRecord = null;
+            if (!batch.getRecords().isEmpty()) {
+                batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
+            }
+            for (Container c : batch.getContainers()) {
+                if (operation.getTags().contains(c.getTag())) {
+                    notFound.remove(c.getTag());
+                    Record containerLastRecord = null;
+                    if (!c.getRecords().isEmpty()) {
+                        containerLastRecord = c.getRecords().get(c.getRecords().size() - 1);
+                    }
+                    BulkOpertaionPreview.PreviewItem pi = new BulkOpertaionPreview.PreviewItem();
+                    TreeSet<Record> records = new TreeSet<>();
+                    Record lastRecord = null;
+                    if (batchLastRecord != null) {
+                        records.add(batchLastRecord);
+                    }
+                    if (containerLastRecord != null) {
+                        records.add(containerLastRecord);
+                    }
+                    if (!records.isEmpty()) {
+                        pi.setLatestRecord(records.last());
+                    }
+                    pi.setTag(c.getTag());
+                    pi.setTaxon(batch.getMaterial().getTaxon());
+                    pi.getLinks().add(new URI(BatchesEndpoint.BASE_URI + "/" + batch.getId()).toString());
+                    preview.getItems().add(pi);
+                }
+            }
+        }
+        preview.setNotFoundItems(notFound);
+        return preview;
     }
 
     static class PayPalFeeCalculator {

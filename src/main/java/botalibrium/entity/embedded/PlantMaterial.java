@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
+import java.sql.Timestamp;
 import java.util.Map;
 
 /**
@@ -19,6 +20,7 @@ public class PlantMaterial {
     private String supplier;
     private String materialType;
     private Long originalQuantity;
+    private Timestamp collected;
     private Long price;
     private ProductionDifficulty productionDifficulty = ProductionDifficulty.NORMAL;
     private Map<ProductionDifficulty, Double> adjustedCoefficient;
@@ -93,5 +95,13 @@ public class PlantMaterial {
 
     public void setAdjustedCoefficient(Map<ProductionDifficulty, Double> adjustedCoefficient) {
         this.adjustedCoefficient = adjustedCoefficient;
+    }
+
+    public Timestamp getCollected() {
+        return collected;
+    }
+
+    public void setCollected(Timestamp collected) {
+        this.collected = collected;
     }
 }
