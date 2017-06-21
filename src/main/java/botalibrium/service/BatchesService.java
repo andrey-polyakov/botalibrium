@@ -2,14 +2,13 @@ package botalibrium.service;
 
 import botalibrium.dta.Page;
 import botalibrium.dta.input.BulkOperation;
-import botalibrium.dta.output.BulkOpertaionPreview;
+import botalibrium.dta.output.BulkOperationPreview;
 import botalibrium.dta.pricing.BatchPriceEstimation;
 import botalibrium.dta.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
-import botalibrium.entity.embedded.containers.CommunityContainer;
-import botalibrium.entity.embedded.records.Record;
 import botalibrium.entity.embedded.containers.Container;
+import botalibrium.entity.embedded.records.Record;
 import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
 import org.bson.types.ObjectId;
@@ -42,11 +41,15 @@ public class BatchesService {
         for (CustomFieldGroup cfg : batch.getCustomFieldGroups()) {
             customFieldsService.validate(cfg, Batch.class.getSimpleName());
         }
-        for (Container pg : batch.getContainers()) {
-            for (CustomFieldGroup cfg : pg.getCustomFields()) {
+        Set<String> batchTags = new TreeSet<>();
+        for (Container container : batch.getContainers()) {
+            if (!batchTags.add(container.getTag())) {
+                throw new ServiceException("Duplicate tags within batch are not allowed");
+            }
+            for (CustomFieldGroup cfg : container.getCustomFields()) {
                 customFieldsService.validate(cfg, Batch.class.getSimpleName());
             }
-            for (Record r : pg.getRecords()) {
+            for (Record r : container.getRecords()) {
                 for (CustomFieldGroup cfg : r.getCustomFields()) {
                     customFieldsService.validate(cfg, Batch.class.getSimpleName());
                 }
@@ -117,11 +120,11 @@ public class BatchesService {
         return result;
     }
 
-    public BulkOpertaionPreview bulkSelect(BulkOperation operation) throws URISyntaxException {
+    public BulkOperationPreview bulkSelect(BulkOperation operation) throws URISyntaxException {
         Query<Batch> q = batches.createQuery();
         q.criteria("containers.tag").in(operation.getTags());
         List<Batch> list = q.order().asList();
-        BulkOpertaionPreview preview = new BulkOpertaionPreview();
+        BulkOperationPreview preview = new BulkOperationPreview();
         Set<String> notFound = new HashSet<>(operation.getTags());
         for (Batch batch : list) {
             Record batchLastRecord = null;
@@ -129,29 +132,35 @@ public class BatchesService {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
             for (Container c : batch.getContainers()) {
-                if (operation.getTags().contains(c.getTag())) {
-                    notFound.remove(c.getTag());
-                    Record containerLastRecord = null;
-                    if (!c.getRecords().isEmpty()) {
-                        containerLastRecord = c.getRecords().get(c.getRecords().size() - 1);
-                    }
-                    BulkOpertaionPreview.PreviewItem pi = new BulkOpertaionPreview.PreviewItem();
-                    TreeSet<Record> records = new TreeSet<>();
-                    Record lastRecord = null;
-                    if (batchLastRecord != null) {
-                        records.add(batchLastRecord);
-                    }
-                    if (containerLastRecord != null) {
-                        records.add(containerLastRecord);
-                    }
-                    if (!records.isEmpty()) {
-                        pi.setLatestRecord(records.last());
-                    }
-                    pi.setTag(c.getTag());
-                    pi.setTaxon(batch.getMaterial().getTaxon());
-                    pi.getLinks().add(new URI(BatchesEndpoint.BASE_URI + "/" + batch.getId()).toString());
-                    preview.getItems().add(pi);
+                if (!operation.getTags().contains(c.getTag())) {
+                    continue;
                 }
+                notFound.remove(c.getTag());
+                Record containerLastRecord = null;
+                if (!c.getRecords().isEmpty()) {
+                    containerLastRecord = c.getRecords().get(c.getRecords().size() - 1);
+                }
+                BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
+                TreeSet<Record> records = new TreeSet<>();
+                if (batchLastRecord != null) {
+                    records.add(batchLastRecord);
+                }
+                if (containerLastRecord != null) {
+                    records.add(containerLastRecord);
+                }
+                if (!records.isEmpty()) {
+                    pi.setLatestRecord(records.last());
+                }
+                pi.setTag(c.getTag());
+                pi.setTaxon(batch.getMaterial().getTaxon());
+                pi.getLinks().add(new URI(BatchesEndpoint.BASE_URI + "/" + batch.getId()).toString());
+                preview.getContainers().add(pi);
+                if (operation.isPreview()) {
+                    c.getRecords().add(operation.getRecord());
+                }
+            }
+            if (operation.isPreview()) {
+                batches.save(batch);
             }
         }
         preview.setNotFoundItems(notFound);

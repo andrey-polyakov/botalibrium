@@ -2,7 +2,7 @@ package botalibrium.rest;
 
 import botalibrium.dta.Page;
 import botalibrium.dta.input.BulkOperation;
-import botalibrium.dta.output.BulkOpertaionPreview;
+import botalibrium.dta.output.BulkOperationPreview;
 import botalibrium.dta.pricing.BatchPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.dta.LinksWrapper;
@@ -17,12 +17,8 @@ import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.ws.rs.*;
 import javax.ws.rs.core.*;
-import java.net.URI;
 import java.net.URISyntaxException;
 
-/**
- * Created by apolyakov on 4/11/2017.
- */
 @Produces(MediaType.APPLICATION_JSON)
 @Validated
 @Component
@@ -61,9 +57,9 @@ public class BatchesEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("select")
-    public Response getPageByTag(BulkOperation operation) throws ValidationException, URISyntaxException {
-        BulkOpertaionPreview contents = cs.bulkSelect(operation);
+    @Path("records")
+    public Response bulkOperation(BulkOperation operation) throws ValidationException, URISyntaxException {
+        BulkOperationPreview contents = cs.bulkSelect(operation);
         return Response.ok(contents, MediaType.APPLICATION_JSON).build();
     }
 

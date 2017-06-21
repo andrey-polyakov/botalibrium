@@ -8,6 +8,8 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.utils.IndexDirection;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -26,6 +28,10 @@ import java.util.List;
 )
 public class Container {
     protected SizeChart plantSize = SizeChart.NA;
+    @Indexed(value= IndexDirection.ASC, name="user_login_indx",
+            background=false, unique=true,
+            dropDups=true, sparse = false,
+            expireAfterSeconds = -1 )
     protected String tag;
     protected String description = "";
     @Embedded

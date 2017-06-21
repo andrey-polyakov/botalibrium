@@ -36,4 +36,6 @@ public class BulkOperation {
     public void setRecord(Record record) {
         this.record = record;
     }
+
+
 }

@@ -66,7 +66,11 @@ public class CommunityContainer extends Container {
         }
 
         public int getDeathRate() {
-            return deadCount / (soldCount + currentCount) / 100;
+            int population = soldCount + currentCount;
+            if (population == 0) {
+                return 0;
+            }
+            return deadCount / (population) / 100;
         }
 
     }
@@ -80,11 +84,17 @@ public class CommunityContainer extends Container {
     }
 
     public int getDeathRate() {
+        if (countLogs.isEmpty()) {
+            return 0;
+        }
         return new TreeSet<CountLog>(countLogs).last().getDeathRate();
     }
 
     @Override
     public int getAliveCount() {
+        if (countLogs.isEmpty()) {
+            return 0;
+        }
         return new TreeSet<CountLog>(countLogs).last().getCurrentCount();
     }
 }

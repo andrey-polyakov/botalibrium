@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * Created by apolyakov on 6/16/2017.
  */
-public class BulkOpertaionPreview {
+public class BulkOperationPreview {
     public static class PreviewItem {
         private String tag;
         private String taxon;
@@ -43,14 +43,14 @@ public class BulkOpertaionPreview {
         }
     }
     private Set<String> notFoundItems;
-    private List<PreviewItem> items = new ArrayList<>();
+    private List<PreviewItem> containers = new ArrayList<>();
 
-    public List<PreviewItem> getItems() {
-        return items;
+    public List<PreviewItem> getContainers() {
+        return containers;
     }
 
-    public void setItems(List<PreviewItem> items) {
-        this.items = items;
+    public void setContainers(List<PreviewItem> containers) {
+        this.containers = containers;
     }
 
     public Set<String> getNotFoundItems() {
