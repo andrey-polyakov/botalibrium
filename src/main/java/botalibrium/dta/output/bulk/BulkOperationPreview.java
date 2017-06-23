@@ -68,6 +68,8 @@ public class BulkOperationPreview {
         }
     }
     private Set<String> notFoundItems;
+    private Set<String> nothingToDoItems;
+
     private List<PreviewItem> containers = new ArrayList<>();
 
     public List<PreviewItem> getContainers() {
@@ -84,5 +86,13 @@ public class BulkOperationPreview {
 
     public void setNotFoundItems(Set<String> notFoundItems) {
         this.notFoundItems = notFoundItems;
+    }
+
+    public Set<String> getNothingToDoItems() {
+        return nothingToDoItems;
+    }
+
+    public void setNothingToChangeItems(Set<String> nothingToDoItems) {
+        this.nothingToDoItems = nothingToDoItems;
     }
 }

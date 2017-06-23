@@ -177,6 +177,7 @@ public class BatchesService {
             }
         }
         preview.setNotFoundItems(notFound);
+        preview.setNothingToChangeItems(nothingToChange);
         return preview;
     }
 
