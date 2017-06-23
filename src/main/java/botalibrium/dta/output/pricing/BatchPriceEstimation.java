@@ -1,4 +1,4 @@
-package botalibrium.dta.pricing;
+package botalibrium.dta.output.pricing;
 
 import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.catalog.ProductionDifficulty;

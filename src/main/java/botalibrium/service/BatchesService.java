@@ -1,12 +1,13 @@
 package botalibrium.service;
 
-import botalibrium.dta.Page;
-import botalibrium.dta.input.BulkOperation;
-import botalibrium.dta.output.BulkOperationPreview;
-import botalibrium.dta.pricing.BatchPriceEstimation;
-import botalibrium.dta.pricing.SellPriceEstimation;
+import botalibrium.dta.input.bulk.InsertRecordsInBulk;
+import botalibrium.dta.output.Page;
+import botalibrium.dta.output.bulk.BulkOperationPreview;
+import botalibrium.dta.output.pricing.BatchPriceEstimation;
+import botalibrium.dta.output.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
+import botalibrium.entity.embedded.containers.CommunityContainer;
 import botalibrium.entity.embedded.containers.Container;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.rest.BatchesEndpoint;
@@ -120,20 +121,29 @@ public class BatchesService {
         return result;
     }
 
-    public BulkOperationPreview bulkSelect(BulkOperation operation) throws URISyntaxException {
+    public BulkOperationPreview bulkSelect(InsertRecordsInBulk operation) throws URISyntaxException {
         Query<Batch> q = batches.createQuery();
-        q.criteria("containers.tag").in(operation.getTags());
+        q.criteria("containers.tag").in(operation.getTagsToCountLog().keySet());
         List<Batch> list = q.order().asList();
         BulkOperationPreview preview = new BulkOperationPreview();
-        Set<String> notFound = new HashSet<>(operation.getTags());
+        Set<String> notFound = new HashSet<>(operation.getTagsToCountLog().keySet());
+        Set<String> nothingToChange = new HashSet<>(operation.getTagsToCountLog().keySet());
+
         for (Batch batch : list) {
             Record batchLastRecord = null;
             if (!batch.getRecords().isEmpty()) {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
             for (Container c : batch.getContainers()) {
-                if (!operation.getTags().contains(c.getTag())) {
+                if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
+                }
+                CommunityContainer.CountLog count = operation.getTagsToCountLog().get(c.getTag());
+                if (count != null && c instanceof CommunityContainer) {
+                    if (!operation.isPreview()) {
+                        ((CommunityContainer) c).getCountLogs().add(count);
+                    }
+                    nothingToChange.remove(c.getTag());
                 }
                 notFound.remove(c.getTag());
                 Record containerLastRecord = null;
@@ -144,9 +154,11 @@ public class BatchesService {
                 TreeSet<Record> records = new TreeSet<>();
                 if (batchLastRecord != null) {
                     records.add(batchLastRecord);
+                    nothingToChange.remove(c.getTag());
                 }
                 if (containerLastRecord != null) {
                     records.add(containerLastRecord);
+                    nothingToChange.remove(c.getTag());
                 }
                 if (!records.isEmpty()) {
                     pi.setLatestRecord(records.last());
@@ -154,12 +166,13 @@ public class BatchesService {
                 pi.setTag(c.getTag());
                 pi.setTaxon(batch.getMaterial().getTaxon());
                 pi.getLinks().add(new URI(BatchesEndpoint.BASE_URI + "/" + batch.getId()).toString());
+                pi.setMedia(c.getMedia());
                 preview.getContainers().add(pi);
-                if (operation.isPreview()) {
+                if (!operation.isPreview()) {
                     c.getRecords().add(operation.getRecord());
                 }
             }
-            if (operation.isPreview()) {
+            if (!operation.isPreview()) {
                 batches.save(batch);
             }
         }

@@ -12,10 +12,10 @@ public class CommunityContainer extends Container {
     protected List<CountLog> countLogs = new ArrayList<>();
 
     public static class CountLog implements Comparable<CountLog> {
-        private int deadCount = 1;
-        private int currentCount = 1;
-        private int soldCount = 1;
-        private Date date;
+        private int deadCount = 0;
+        private int currentCount = 0;
+        private int soldCount = 0;
+        private Date date = new Date();
 
         public CountLog(int deadCount, int currentCount, int soldCount, Date date) {
             this.deadCount = deadCount;

@@ -1,11 +1,11 @@
 package botalibrium.rest;
 
-import botalibrium.dta.Page;
-import botalibrium.dta.input.BulkOperation;
-import botalibrium.dta.output.BulkOperationPreview;
-import botalibrium.dta.pricing.BatchPriceEstimation;
+import botalibrium.dta.input.bulk.InsertRecordsInBulk;
+import botalibrium.dta.output.LinksWrapper;
+import botalibrium.dta.output.Page;
+import botalibrium.dta.output.bulk.BulkOperationPreview;
+import botalibrium.dta.output.pricing.BatchPriceEstimation;
 import botalibrium.entity.Batch;
-import botalibrium.dta.LinksWrapper;
 import botalibrium.service.BatchesService;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;
@@ -16,7 +16,10 @@ import org.springframework.validation.annotation.Validated;
 
 import javax.validation.Valid;
 import javax.ws.rs.*;
-import javax.ws.rs.core.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 import java.net.URISyntaxException;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -58,7 +61,7 @@ public class BatchesEndpoint {
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
     @Path("records")
-    public Response bulkOperation(BulkOperation operation) throws ValidationException, URISyntaxException {
+    public Response bulkRecordsInsert(InsertRecordsInBulk operation) throws ValidationException, URISyntaxException {
         BulkOperationPreview contents = cs.bulkSelect(operation);
         return Response.ok(contents, MediaType.APPLICATION_JSON).build();
     }

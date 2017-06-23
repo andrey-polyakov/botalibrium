@@ -1,5 +1,6 @@
-package botalibrium.dta.output;
+package botalibrium.dta.output.bulk;
 
+import botalibrium.entity.embedded.containers.CommunityContainer;
 import botalibrium.entity.embedded.records.Record;
 
 import java.util.*;
@@ -12,6 +13,10 @@ public class BulkOperationPreview {
         private String tag;
         private String taxon;
         private Record latestRecord;
+        private CommunityContainer.CountLog latestCountLog;
+
+        private Set<String> media = new HashSet<>();
+
         private List<String> links = new LinkedList<>();
 
         public String getTag() {
@@ -40,6 +45,26 @@ public class BulkOperationPreview {
 
         public List<String> getLinks() {
             return links;
+        }
+
+        public CommunityContainer.CountLog getLatestCountLog() {
+            return latestCountLog;
+        }
+
+        public void setLatestCountLog(CommunityContainer.CountLog latestCountLog) {
+            this.latestCountLog = latestCountLog;
+        }
+
+        public Set<String> getMedia() {
+            return media;
+        }
+
+        public void setMedia(Set<String> media) {
+            this.media = media;
+        }
+
+        public void setLinks(List<String> links) {
+            this.links = links;
         }
     }
     private Set<String> notFoundItems;

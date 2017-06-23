@@ -11,8 +11,10 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
 import org.mongodb.morphia.utils.IndexDirection;
 
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Individual container.
@@ -23,15 +25,14 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CommunityContainer.class, name = "CommunityContainer"),
-
         @JsonSubTypes.Type(value = SeedsCommunityContainer.class, name = "SeedsCommunityContainer") }
 )
 public class Container {
     protected SizeChart plantSize = SizeChart.NA;
-    @Indexed(value= IndexDirection.ASC, name="user_login_indx",
-            background=false, unique=true,
-            dropDups=true, sparse = false,
-            expireAfterSeconds = -1 )
+    @Indexed(value = IndexDirection.ASC, name = "user_login_indx",
+            background = false, unique = true,
+            dropDups = true,
+            expireAfterSeconds = -1)
     protected String tag;
     protected String description = "";
     @Embedded
@@ -39,7 +40,7 @@ public class Container {
     @Embedded
     protected List<Record> records = new LinkedList<>();
     @Embedded
-    protected List<String> media = new LinkedList<>();
+    private Set<String> media = new HashSet<>();
 
     public String getDescription() {
         return description;
@@ -85,11 +86,11 @@ public class Container {
         this.plantSize = plantSize;
     }
 
-    public List<String> getMedia() {
+    public Set<String> getMedia() {
         return media;
     }
 
-    public void setMedia(List<String> media) {
+    public void setMedia(Set<String> media) {
         this.media = media;
     }
 }

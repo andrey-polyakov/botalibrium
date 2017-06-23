@@ -3,7 +3,7 @@ package botalibrium.entity.embedded.containers;
 import java.util.TreeSet;
 
 /**
- * Extends plant container with count od seeds sown.
+ * Extends plant container with count of seeds sown.
  */
 public class SeedsCommunityContainer extends CommunityContainer {
 

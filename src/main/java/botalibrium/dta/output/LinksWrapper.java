@@ -1,4 +1,4 @@
-package botalibrium.dta;
+package botalibrium.dta.output;
 
 import botalibrium.entity.Batch;
 

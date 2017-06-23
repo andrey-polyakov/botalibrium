@@ -1,4 +1,4 @@
-package botalibrium.dta;
+package botalibrium.dta.output;
 
 /**
  * Created by apolyakov on 6/16/2017.

@@ -1,4 +1,4 @@
-package botalibrium.dta;
+package botalibrium.dta.output;
 
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
