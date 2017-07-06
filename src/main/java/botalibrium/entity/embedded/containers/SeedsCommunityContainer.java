@@ -1,13 +1,13 @@
 package botalibrium.entity.embedded.containers;
 
-import java.util.TreeSet;
-
 /**
  * Extends plant container with count of seeds sown.
  */
 public class SeedsCommunityContainer extends CommunityContainer {
 
     private int sownSeedsCount;
+
+    private String treatment;
 
     public int getSownSeedsCount() {
         return sownSeedsCount;
@@ -18,6 +18,14 @@ public class SeedsCommunityContainer extends CommunityContainer {
     }
 
     public double getGerminationRate() {
-        return (new TreeSet<CountLog>(countLogs).last().getDeadCount() + new TreeSet<CountLog>((countLogs)).last().getCurrentCount() + new TreeSet<CountLog>(countLogs).last().getSoldCount()) / (sownSeedsCount / 100.0);
+        return 0;
+    }
+
+    public String getTreatment() {
+        return treatment;
+    }
+
+    public void setTreatment(String treatment) {
+        this.treatment = treatment;
     }
 }

@@ -1,6 +1,8 @@
 package botalibrium.service;
 
 import botalibrium.dta.input.bulk.InsertRecordsInBulk;
+import botalibrium.dta.input.bulk.UnpopulatedBatch;
+import botalibrium.dta.input.bulk.UnpopulatedContainer;
 import botalibrium.dta.output.Page;
 import botalibrium.dta.output.bulk.BulkOperationPreview;
 import botalibrium.dta.output.pricing.BatchPriceEstimation;
@@ -9,7 +11,9 @@ import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.embedded.containers.CommunityContainer;
 import botalibrium.entity.embedded.containers.Container;
+import botalibrium.entity.embedded.containers.SeedsCommunityContainer;
 import botalibrium.entity.embedded.records.Record;
+import botalibrium.references.SizeChart;
 import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
 import org.bson.types.ObjectId;
@@ -179,6 +183,30 @@ public class BatchesService {
         preview.setNotFoundItems(notFound);
         preview.setNothingToChangeItems(nothingToChange);
         return preview;
+    }
+
+    public Key<Batch> newUnpopulatedBatch(UnpopulatedBatch unpopulatedBatch) throws ServiceException {
+        Batch newBatch = new Batch();
+        newBatch.setMaterial(unpopulatedBatch.getMaterial());
+        int counter = 0;
+        for (UnpopulatedContainer uc : unpopulatedBatch.getUnpopulatedContainers()) {
+            for (int ii = 0; ii < uc.getContainersCount(); ii++) {
+                Container c;
+                if (uc.getType().equals("SeedsCommunityContainer")) {
+                    c = new SeedsCommunityContainer();
+                } else if (uc.getType().equals("CommunityContainer")) {
+                    c = new CommunityContainer();
+                } else {
+                    c = new Container();
+                }
+                c.setDescription(uc.getDescription());
+                c.setMedia(uc.getMedia());
+                c.setTag(uc.getTag().replace("*", String.valueOf(counter++)));
+                c.setPlantSize(SizeChart.NA);
+                newBatch.getContainers().add(c);
+            }
+        }
+        return save(newBatch);
     }
 
     static class PayPalFeeCalculator {

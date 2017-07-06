@@ -22,7 +22,7 @@ public class Batch extends BaseEntity {
     @Embedded
     private PlantMaterial material;
     @Embedded
-    private List<? extends Container> containers = new ArrayList<>();
+    private List<Container> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new LinkedList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
@@ -64,11 +64,11 @@ public class Batch extends BaseEntity {
         return count;
     }
 
-    public List<? extends Container> getContainers() {
+    public List<Container> getContainers() {
         return containers;
     }
 
-    public void setContainers(List<? extends Container> containers) {
+    public void setContainers(List<Container> containers) {
         this.containers = containers;
     }
 }

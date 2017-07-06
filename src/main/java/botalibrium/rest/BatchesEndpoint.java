@@ -1,6 +1,7 @@
 package botalibrium.rest;
 
 import botalibrium.dta.input.bulk.InsertRecordsInBulk;
+import botalibrium.dta.input.bulk.UnpopulatedBatch;
 import botalibrium.dta.output.LinksWrapper;
 import botalibrium.dta.output.Page;
 import botalibrium.dta.output.bulk.BulkOperationPreview;
@@ -10,6 +11,7 @@ import botalibrium.service.BatchesService;
 import botalibrium.service.exception.ServiceException;
 import botalibrium.service.exception.ValidationException;
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.annotation.Validated;
@@ -68,7 +70,15 @@ public class BatchesEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveContainer(@Valid Batch c, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
+    @Path("unpopulated")
+    public Response newUnpopulatedBatch(UnpopulatedBatch unpopulatedBatch, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
+        Key<Batch> key = cs.newUnpopulatedBatch(unpopulatedBatch);
+        return Response.created(uriInfo.getAbsolutePathBuilder().path(key.getId().toString()).build()).build();
+    }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response saveBatch(@Valid Batch c, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
         return Response.created(uriInfo.getAbsolutePathBuilder().path(cs.save(c).getId().toString()).build()).build();
     }
 }
