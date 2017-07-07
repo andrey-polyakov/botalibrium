@@ -1,5 +1,6 @@
 package botalibrium.entity.embedded.containers;
 
+import botalibrium.dta.input.bulk.CountLogDto;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -9,18 +10,36 @@ import java.util.*;
 @Embedded
 public class CommunityContainer extends Container {
 
-    protected List<CountLog> countLogs = new ArrayList<>();
+    private LinkedList<CountLog> countLogs = new LinkedList<>();
+    private int initialCount = 0;
+    protected int calculatedDeadCount = 0;
+    protected int calculatedSoldOrTransplantedCount = 0;
+
+
+    public CommunityContainer(int initialCount) {
+        this.initialCount = initialCount;
+    }
+
+    public CommunityContainer() {
+        //
+    }
+
+    public static CountLog fromDto(CountLogDto count) {
+        CountLog countLog = new CountLog();
+        countLog.setDate(count.getDate());
+        countLog.setDied(count.getDied());
+        countLog.setSold(count.getSold());
+        return countLog;
+    }
 
     public static class CountLog implements Comparable<CountLog> {
-        private int deadCount = 0;
-        private int currentCount = 0;
-        private int soldCount = 0;
-        private Date date = new Date();
+        protected int died = 0;
+        protected int removedCount = 0;
+        protected Date date = new Date();
 
-        public CountLog(int deadCount, int currentCount, int soldCount, Date date) {
-            this.deadCount = deadCount;
-            this.currentCount = currentCount;
-            this.soldCount = soldCount;
+        public CountLog(int deadCount, int soldCount, Date date) {
+            this.died = deadCount;
+            this.removedCount = soldCount;
             this.date = date;
         }
 
@@ -28,28 +47,20 @@ public class CommunityContainer extends Container {
             //
         }
 
-        public int getDeadCount() {
-            return deadCount;
+        public int getDied() {
+            return died;
         }
 
-        public void setDeadCount(int deadCount) {
-            this.deadCount = deadCount;
+        public void setDied(int died) {
+            this.died = died;
         }
 
-        public int getCurrentCount() {
-            return currentCount;
+        public int getSold() {
+            return removedCount;
         }
 
-        public void setCurrentCount(int currentCount) {
-            this.currentCount = currentCount;
-        }
-
-        public int getSoldCount() {
-            return soldCount;
-        }
-
-        public void setSoldCount(int soldCount) {
-            this.soldCount = soldCount;
+        public void setSold(int sold) {
+            this.removedCount = sold;
         }
 
         public Date getDate() {
@@ -65,36 +76,43 @@ public class CommunityContainer extends Container {
             return date.compareTo(countLog.date);
         }
 
-        public int getDeathRate() {
-            int population = soldCount + currentCount;
-            if (population == 0) {
-                return 0;
-            }
-            return deadCount / (population) / 100;
+        public CountLogDto toDto() {
+            CountLogDto dto = new CountLogDto();
+            dto.setDate(date);
+            dto.setDied(died);
+            dto.setSold(removedCount);
+            return dto;
         }
-
     }
 
-    public List<CountLog> getCountLogs() {
+    public LinkedList<CountLog> getCountLogs() {
         return countLogs;
     }
 
-    public void setCountLogs(List<CountLog> countLogs) {
-        this.countLogs = countLogs;
+    public void addCountLog(CountLog log) {
+        if (initialCount < 1) {
+            throw new IllegalStateException("Invalid initial count: container is not populated");
+        }
+        countLogs.add(log);
+        calculatedDeadCount += log.died;
+        calculatedSoldOrTransplantedCount += log.removedCount;
     }
 
-    public int getDeathRate() {
-        if (countLogs.isEmpty()) {
-            return 0;
+    public double getDeathRate() {
+        return calculatedDeadCount / (initialCount / 100.0);
+    }
+
+    public void recalculateCounts() {
+        calculatedDeadCount = 0;
+        calculatedSoldOrTransplantedCount = 0;
+        for (CountLog log : countLogs) {
+            calculatedSoldOrTransplantedCount += log.removedCount;
+            calculatedDeadCount += log.died;
         }
-        return new TreeSet<CountLog>(countLogs).last().getDeathRate();
     }
 
     @Override
     public int getAliveCount() {
-        if (countLogs.isEmpty()) {
-            return 0;
-        }
-        return new TreeSet<CountLog>(countLogs).last().getCurrentCount();
+        return initialCount - calculatedDeadCount - calculatedSoldOrTransplantedCount;
     }
 }

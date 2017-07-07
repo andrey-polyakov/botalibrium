@@ -1,6 +1,6 @@
 package botalibrium.dta.output.bulk;
 
-import botalibrium.entity.embedded.containers.CommunityContainer;
+import botalibrium.dta.input.bulk.CountLogDto;
 import botalibrium.entity.embedded.records.Record;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class BulkOperationPreview {
         private String tag;
         private String taxon;
         private Record latestRecord;
-        private CommunityContainer.CountLog latestCountLog;
+        private CountLogDto latestCountLog;
 
         private Set<String> media = new HashSet<>();
 
@@ -47,11 +47,11 @@ public class BulkOperationPreview {
             return links;
         }
 
-        public CommunityContainer.CountLog getLatestCountLog() {
+        public CountLogDto getLatestCountLog() {
             return latestCountLog;
         }
 
-        public void setLatestCountLog(CommunityContainer.CountLog latestCountLog) {
+        public void setLatestCountLog(CountLogDto latestCountLog) {
             this.latestCountLog = latestCountLog;
         }
 
@@ -68,6 +68,7 @@ public class BulkOperationPreview {
         }
     }
     private Set<String> notFoundItems;
+    private Set<String> problematicItems;
     private Set<String> nothingToDoItems;
 
     private List<PreviewItem> containers = new ArrayList<>();
@@ -93,6 +94,18 @@ public class BulkOperationPreview {
     }
 
     public void setNothingToChangeItems(Set<String> nothingToDoItems) {
+        this.nothingToDoItems = nothingToDoItems;
+    }
+
+    public Set<String> getProblematicItems() {
+        return problematicItems;
+    }
+
+    public void setProblematicItems(Set<String> problematicItems) {
+        this.problematicItems = problematicItems;
+    }
+
+    public void setNothingToDoItems(Set<String> nothingToDoItems) {
         this.nothingToDoItems = nothingToDoItems;
     }
 }

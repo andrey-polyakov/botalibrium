@@ -34,7 +34,7 @@ public class YamlImportUtility {
             if (file.getName().startsWith(CustomFieldGroupDefinition.class.getSimpleName())) {
                 cfs.save(mapper.readValue(file, CustomFieldGroupDefinition.class));
             }
-            logger.info("Entity imported from file " + file);
+            logger.info("Entity imported fromDto file " + file);
         }
     }
 

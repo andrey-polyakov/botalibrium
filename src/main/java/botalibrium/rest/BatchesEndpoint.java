@@ -22,6 +22,7 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 import java.net.URISyntaxException;
 
 @Produces(MediaType.APPLICATION_JSON)
@@ -73,7 +74,7 @@ public class BatchesEndpoint {
     @Path("unpopulated")
     public Response newUnpopulatedBatch(UnpopulatedBatch unpopulatedBatch, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
         Key<Batch> key = cs.newUnpopulatedBatch(unpopulatedBatch);
-        return Response.created(uriInfo.getAbsolutePathBuilder().path(key.getId().toString()).build()).build();
+        return Response.created(new URI(BatchesEndpoint.BASE_URI + "/" + key.getId())).build();
     }
 
     @POST

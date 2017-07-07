@@ -9,7 +9,7 @@ import java.util.List;
  * Page abstraction for convenience.
  */
 public class Page {
-
+    //https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WWAXDojyuUk
     private long pageNumber = 0;
     private int itemsCount = 0;
     private int totalPages = 1;

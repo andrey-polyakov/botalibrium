@@ -1,5 +1,6 @@
 package botalibrium.service;
 
+import botalibrium.dta.input.bulk.CountLogDto;
 import botalibrium.dta.input.bulk.InsertRecordsInBulk;
 import botalibrium.dta.input.bulk.UnpopulatedBatch;
 import botalibrium.dta.input.bulk.UnpopulatedContainer;
@@ -109,18 +110,19 @@ public class BatchesService {
         }
         BatchPriceEstimation result = new BatchPriceEstimation(batch);
         for (Container container : batch.getContainers()) {
-            long overridenProfit = netProfit;
+            long overriddenProfit = netProfit;
             if (netProfit == 0) {
-                overridenProfit = round(container.getPlantSize().getGenericPrice() * batch.getMaterial().getProductionDifficulty().getCoefficient());
+                overriddenProfit = round(container.getPlantSize().getGenericPrice() * batch.getMaterial().getProductionDifficulty().getCoefficient());
+            }
+            if (batch.getCount() == 0) {
+                continue;
             }
             long expense = batch.getMaterial().getBuyPrice() / batch.getCount();
             Map<String, Double> rates = new TreeMap<>();
             rates.put("USD/CAD", 1.32661183);
             rates.put("EUR/CAD", 1.48521491);
-            PayPalFeeCalculator calc = new PayPalFeeCalculator(overridenProfit, shippingCost, expense, rates);
-            List<SellPriceEstimation> estimates = new ArrayList<>();
-            estimates.add(calc.estimatePriceCAD());
-            result.getContainers().put(container.getPlantSize(), estimates);
+            PayPalFeeCalculator calc = new PayPalFeeCalculator(overriddenProfit, shippingCost, expense, rates);
+            result.getContainers().put(container.getPlantSize(), calc.estimatePriceCAD());
         }
         return result;
     }
@@ -139,22 +141,33 @@ public class BatchesService {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
             for (Container c : batch.getContainers()) {
+                BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
                 if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
                 }
-                CommunityContainer.CountLog count = operation.getTagsToCountLog().get(c.getTag());
-                if (count != null && c instanceof CommunityContainer) {
-                    if (!operation.isPreview()) {
-                        ((CommunityContainer) c).getCountLogs().add(count);
+                CountLogDto count = operation.getTagsToCountLog().get(c.getTag());
+                if (c instanceof CommunityContainer) {
+                    if (!operation.isPreview() && count != null) {
+                        ((CommunityContainer) c).addCountLog(CommunityContainer.fromDto(count));
                     }
-                    nothingToChange.remove(c.getTag());
+                    if (!((CommunityContainer) c).getCountLogs().isEmpty()) {
+                        pi.setLatestCountLog(((CommunityContainer) c).getCountLogs().getLast().toDto());
+                    }
                 }
+                if (c instanceof SeedsCommunityContainer) {
+                    if (!operation.isPreview() && count != null) {
+                        ((SeedsCommunityContainer) c).addCountLog(SeedsCommunityContainer.fromDto(count));
+                    }
+                    if (!((SeedsCommunityContainer) c).getCountLogs().isEmpty()) {
+                        pi.setLatestCountLog(((SeedsCommunityContainer) c).getCountLogs().getLast().toDto());
+                    }
+                }
+                nothingToChange.remove(c.getTag());
                 notFound.remove(c.getTag());
                 Record containerLastRecord = null;
                 if (!c.getRecords().isEmpty()) {
                     containerLastRecord = c.getRecords().get(c.getRecords().size() - 1);
                 }
-                BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
                 TreeSet<Record> records = new TreeSet<>();
                 if (batchLastRecord != null) {
                     records.add(batchLastRecord);
@@ -172,8 +185,8 @@ public class BatchesService {
                 pi.getLinks().add(new URI(BatchesEndpoint.BASE_URI + "/" + batch.getId()).toString());
                 pi.setMedia(c.getMedia());
                 preview.getContainers().add(pi);
-                if (!operation.isPreview()) {
-                    c.getRecords().add(operation.getRecord());
+                if (!operation.isPreview() && operation.getRecordToBeInserted() != null) {
+                    c.getRecords().add(operation.getRecordToBeInserted());
                 }
             }
             if (!operation.isPreview()) {

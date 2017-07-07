@@ -1,6 +1,7 @@
 package botalibrium.rest;
 
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -30,6 +31,8 @@ public class JerseyConfig extends ResourceConfig {
 
 		mapper.setDateFormat(new SimpleDateFormat("MM-dd-yyyy HH:mm:ss"));
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
+
 		return mapper;
 	}
 

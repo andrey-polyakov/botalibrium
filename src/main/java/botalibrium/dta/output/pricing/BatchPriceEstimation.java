@@ -15,7 +15,7 @@ public class BatchPriceEstimation {
     private String taxon;
     private ProductionDifficulty productionDifficulty;
     private double adjustedCoefficient;
-    private Map<SizeChart, List<SellPriceEstimation>> containers = new HashMap<>();
+    private Map<SizeChart, SellPriceEstimation> containers = new HashMap<>();
 
     public BatchPriceEstimation(Batch b) {
         this.taxon = b.getMaterial().getTaxon();
@@ -27,7 +27,7 @@ public class BatchPriceEstimation {
         //
     }
 
-    public Map<SizeChart, List<SellPriceEstimation>> getContainers() {
+    public Map<SizeChart, SellPriceEstimation> getContainers() {
         return containers;
     }
 
@@ -55,7 +55,7 @@ public class BatchPriceEstimation {
         this.adjustedCoefficient = adjustedCoefficient;
     }
 
-    public void setContainers(Map<SizeChart, List<SellPriceEstimation>> containers) {
+    public void setContainers(Map<SizeChart, SellPriceEstimation> containers) {
         this.containers = containers;
     }
 }

@@ -11,8 +11,17 @@ public class SellPriceEstimation {
     private long itemPrice = 0;
     private long usAdjustment = 0;
     private long euroAdjustment = 0;
+    private String error;
 
     private Map<String, Long> costs = new TreeMap<>();
+
+    public SellPriceEstimation(String s) {
+        error = s;
+    }
+
+    public SellPriceEstimation() {
+        //
+    }
 
     public long getNetProfit() {
         return netProfit;
@@ -52,5 +61,13 @@ public class SellPriceEstimation {
 
     public void setEuroAdjustment(long euroAdjustment) {
         this.euroAdjustment = euroAdjustment;
+    }
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
     }
 }

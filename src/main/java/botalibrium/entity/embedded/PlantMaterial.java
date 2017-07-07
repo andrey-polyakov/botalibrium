@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 import java.util.Map;
 
 /**
- * Represents original material plants were produced from.
- * This could be from seeds, cuttings or tissue cultured explants.
+ * Represents original material plants were produced fromDto.
+ * This could be fromDto seeds, cuttings or tissue cultured explants.
  */
 @Entity
 @Embedded

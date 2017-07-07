@@ -1,4 +1,4 @@
-description : "Fertilizer application record"
+description : "Fertilizer application recordToBeInserted"
 customFieldDefinitions:
   fertilizerType:
     materialType: "String"

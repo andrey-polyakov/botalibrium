@@ -27,7 +27,7 @@ public class ValidationAPIUnitTest {
         assertEquals(1, violations.size());
 
         Set<ConstraintViolation<PlantMaterial>> violations2 = validator.validate(new PlantMaterial());
-        assertEquals(1, violations2.size());
+        assertEquals(2, violations2.size());
     }
 
     @Test
