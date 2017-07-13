@@ -10,7 +10,7 @@ import java.util.LinkedList;
  * Extends plant container with count of seeds sown.
  */
 @Data
-public class SeedsCommunityContainer extends Container {
+public class SeedsCommunityContainer extends PlantsContainer {
 
     private int sownSeedsCount = 0;
     private int germinatedCount = 0;
@@ -33,16 +33,15 @@ public class SeedsCommunityContainer extends Container {
     }
 
     @Data
-    public static class CountLog extends CommunityContainer.CountLog implements Comparable<CommunityContainer.CountLog> {
+    public static class CountLog extends PlantsContainer.CountLog implements Comparable<PlantsContainer.CountLog> {
         private int germinated = 0;
 
-        public CountLog(int died, int sold, Date date, int germinated) {
-            super(died, sold, date);
-            this.germinated = germinated;
+        public int getGerminated() {
+            return germinated;
         }
 
-        public CountLog() {
-            //
+        public void setGerminated(int germinated) {
+            this.germinated = germinated;
         }
 
         @Override
@@ -73,6 +72,9 @@ public class SeedsCommunityContainer extends Container {
     }
 
     public double getGerminationRate() {
+        if (sownSeedsCount == 0) {
+            return 0;
+        }
         return germinatedCount / (sownSeedsCount / 100.0);
     }
 

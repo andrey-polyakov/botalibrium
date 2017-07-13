@@ -10,8 +10,7 @@ import botalibrium.dta.output.pricing.BatchPriceEstimation;
 import botalibrium.dta.output.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
-import botalibrium.entity.embedded.containers.CommunityContainer;
-import botalibrium.entity.embedded.containers.Container;
+import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsCommunityContainer;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.references.SizeChart;
@@ -48,7 +47,7 @@ public class BatchesService {
             customFieldsService.validate(cfg, Batch.class.getSimpleName());
         }
         Set<String> batchTags = new TreeSet<>();
-        for (Container container : batch.getContainers()) {
+        for (PlantsContainer container : batch.getContainers()) {
             if (!batchTags.add(container.getTag())) {
                 throw new ServiceException("Duplicate tags within batch are not allowed");
             }
@@ -109,7 +108,7 @@ public class BatchesService {
             throw new ServiceException("Record not found");
         }
         BatchPriceEstimation result = new BatchPriceEstimation(batch);
-        for (Container container : batch.getContainers()) {
+        for (PlantsContainer container : batch.getContainers()) {
             long overriddenProfit = netProfit;
             if (netProfit == 0) {
                 overriddenProfit = round(container.getPlantSize().getGenericPrice() * batch.getMaterial().getProductionDifficulty().getCoefficient());
@@ -140,18 +139,18 @@ public class BatchesService {
             if (!batch.getRecords().isEmpty()) {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
-            for (Container c : batch.getContainers()) {
+            for (PlantsContainer c : batch.getContainers()) {
                 BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
                 if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
                 }
                 CountLogDto count = operation.getTagsToCountLog().get(c.getTag());
-                if (c instanceof CommunityContainer) {
+                if (c instanceof PlantsContainer) {
                     if (!operation.isPreview() && count != null) {
-                        ((CommunityContainer) c).addCountLog(CommunityContainer.fromDto(count));
+                        ((PlantsContainer) c).addCountLog(PlantsContainer.fromDto(count));
                     }
-                    if (!((CommunityContainer) c).getCountLogs().isEmpty()) {
-                        pi.setLatestCountLog(((CommunityContainer) c).getCountLogs().getLast().toDto());
+                    if (!((PlantsContainer) c).getCountLogs().isEmpty()) {
+                        pi.setLatestCountLog(((PlantsContainer) c).getCountLogs().getLast().toDto());
                     }
                 }
                 if (c instanceof SeedsCommunityContainer) {
@@ -207,8 +206,8 @@ public class BatchesService {
                 Container c;
                 if (uc.getType().equals("SeedsCommunityContainer")) {
                     c = new SeedsCommunityContainer();
-                } else if (uc.getType().equals("CommunityContainer")) {
-                    c = new CommunityContainer();
+                } else if (uc.getType().equals("PlantsContainer")) {
+                    c = new PlantsContainer();
                 } else {
                     c = new Container();
                 }
