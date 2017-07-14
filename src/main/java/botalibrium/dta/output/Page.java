@@ -1,5 +1,7 @@
 package botalibrium.dta.output;
 
+import lombok.Data;
+
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import java.util.LinkedList;
@@ -8,6 +10,7 @@ import java.util.List;
 /**
  * Page abstraction for convenience.
  */
+@Data
 public class Page {
     //https://www.snyxius.com/blog/21-best-practices-designing-launching-restful-api/#.WWAXDojyuUk
     private long pageNumber = 0;
@@ -46,51 +49,4 @@ public class Page {
         navigation.add(builder.toString());
     }
 
-    public long getPageNumber() {
-        return pageNumber;
-    }
-
-    public int getItemsCount() {
-        return itemsCount;
-    }
-
-    public List<?> getItems() {
-        return items;
-    }
-
-    public void setPageNumber(int pageNumber) {
-        this.pageNumber = pageNumber;
-    }
-
-    public void setItemsCount(int itemsCount) {
-        this.itemsCount = itemsCount;
-    }
-
-    public int getTotalPages() {
-        return totalPages;
-    }
-
-    public void setTotalPages(int totalPages) {
-        this.totalPages = totalPages;
-    }
-
-    public void setItems(List<?> items) {
-        this.items = items;
-    }
-
-    public List<String> getNavigation() {
-        return navigation;
-    }
-
-    public void setNavigation(List<String> navigation) {
-        this.navigation = navigation;
-    }
-
-    public String getQuery() {
-        return query;
-    }
-
-    public void setQuery(String query) {
-        this.query = query;
-    }
 }

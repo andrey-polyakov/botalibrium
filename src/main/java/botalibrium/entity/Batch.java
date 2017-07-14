@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.*;
 
 import botalibrium.entity.embedded.PlantMaterial;
+import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.records.Record;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
@@ -22,7 +23,7 @@ public class Batch extends BaseEntity {
     @Embedded
     private PlantMaterial material;
     @Embedded
-    private List<PlantsContainer> containers = new ArrayList<>();
+    private List<EmptyContainer> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new LinkedList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
@@ -64,17 +65,17 @@ public class Batch extends BaseEntity {
 
     public Integer getCount() {
         int count = 0;
-        for (PlantsContainer container : containers) {
-            count += container.getAliveCount();
+        for (EmptyContainer container : containers) {
+            count += container.getPopulation();
         }
         return count;
     }
 
-    public List<PlantsContainer> getContainers() {
+    public List<EmptyContainer> getContainers() {
         return containers;
     }
 
-    public void setContainers(List<PlantsContainer> containers) {
+    public void setContainers(List<EmptyContainer> containers) {
         this.containers = containers;
     }
 }

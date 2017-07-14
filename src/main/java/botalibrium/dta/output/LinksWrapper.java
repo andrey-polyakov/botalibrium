@@ -1,6 +1,7 @@
 package botalibrium.dta.output;
 
 import botalibrium.entity.Batch;
+import lombok.Data;
 
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
@@ -10,6 +11,7 @@ import java.util.List;
 /**
  * Created by apolyakov on 6/16/2017.
  */
+@Data
 public class LinksWrapper {
 
     private Batch batch;

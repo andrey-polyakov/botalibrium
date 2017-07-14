@@ -1,6 +1,6 @@
 package botalibrium.dta.output.bulk;
 
-import botalibrium.dta.input.bulk.CountLogDto;
+import botalibrium.dta.input.bulk.PopulationLogDto;
 import botalibrium.entity.embedded.records.Record;
 
 import java.util.*;
@@ -13,7 +13,7 @@ public class BulkOperationPreview {
         private String tag;
         private String taxon;
         private Record latestRecord;
-        private CountLogDto latestCountLog;
+        private PopulationLogDto latestCountLog;
 
         private Set<String> media = new HashSet<>();
 
@@ -47,11 +47,11 @@ public class BulkOperationPreview {
             return links;
         }
 
-        public CountLogDto getLatestCountLog() {
+        public PopulationLogDto getLatestCountLog() {
             return latestCountLog;
         }
 
-        public void setLatestCountLog(CountLogDto latestCountLog) {
+        public void setLatestCountLog(PopulationLogDto latestCountLog) {
             this.latestCountLog = latestCountLog;
         }
 

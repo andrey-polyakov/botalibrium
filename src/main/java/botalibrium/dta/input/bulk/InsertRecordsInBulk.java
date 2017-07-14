@@ -11,7 +11,7 @@ import java.util.Map;
  */
 @Data
 public class InsertRecordsInBulk {
-    private Map<String, CountLogDto> tagsToCountLog = new HashMap<>();
+    private Map<String, PopulationLogDto> tagsToCountLog = new HashMap<>();
     private boolean preview = true;
     private Record recordToBeInserted;
 
