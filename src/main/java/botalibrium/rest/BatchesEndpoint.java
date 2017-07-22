@@ -46,6 +46,13 @@ public class BatchesEndpoint {
         return Response.ok(new LinksWrapper(c, uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
+    @PUT
+    @Path("{id}")
+    public Response replaceContainer(@PathParam("id") ObjectId id, Batch batch, @Context UriInfo uriInfo) throws ServiceException {
+        cs.update(id, batch);
+        return Response.ok(new LinksWrapper(batch, uriInfo), MediaType.APPLICATION_JSON).build();
+    }
+
     @GET
     @Path("{id}/price")
     public Response estimateSellPrice(@PathParam("id") ObjectId id, @QueryParam("profit") long profit, @QueryParam("shipping") long shipping) throws ServiceException {

@@ -14,7 +14,6 @@ import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsContainer;
 import botalibrium.entity.embedded.records.Record;
-import botalibrium.references.SizeChart;
 import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
 import org.bson.types.ObjectId;
@@ -22,6 +21,7 @@ import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -42,6 +42,19 @@ public class BatchesService {
     @Autowired
     private CustomFieldsService customFieldsService;
 
+
+    public Batch update(ObjectId id, Batch batch) throws ServiceException {
+        Query<Batch> updateQuery = batches.getDatastore().createQuery(Batch.class).field("_id").equal(id);
+        UpdateOperations<Batch> ops = batches.getDatastore().createUpdateOperations(Batch.class).set("containers", batch.getContainers());
+        batches.update(updateQuery, ops);
+
+        ops = batches.getDatastore().createUpdateOperations(Batch.class).set("material", batch.getMaterial());
+        batches.update(updateQuery, ops);
+
+        ops = batches.getDatastore().createUpdateOperations(Batch.class).set("records", batch.getRecords());
+        batches.update(updateQuery, ops);
+        return getContainer(id);
+    }
 
     public Key<Batch> save(Batch batch) throws ServiceException {
         for (CustomFieldGroup cfg : batch.getCustomFieldGroups()) {

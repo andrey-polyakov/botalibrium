@@ -25,7 +25,7 @@ import java.util.*;
         @JsonSubTypes.Type(value = SeedsContainer.class, name = "SeedsContainer") }
 )
 public class EmptyContainer {
-    @Indexed(value = IndexDirection.ASC, name = "user_login_indx", unique = true, dropDups = true)
+    @Indexed(value = IndexDirection.ASC, name = "tag_index", unique = true, dropDups = true)
     protected String tag;
     protected String description = "";
     @Embedded
