@@ -41,7 +41,7 @@ public class BatchesEndpoint {
 
     @GET
     @Path("{id}")
-    public Response getContainer(@PathParam("id") ObjectId id, @Context UriInfo uriInfo) throws ServiceException {
+    public Response getContainer(@PathParam("id") ObjectId id, @Context UriInfo uriInfo, @QueryParam("onlyData") boolean showOnlyData) throws ServiceException {
         Batch c = cs.getContainer(id);
         return Response.ok(new LinksWrapper(c, uriInfo), MediaType.APPLICATION_JSON).build();
     }

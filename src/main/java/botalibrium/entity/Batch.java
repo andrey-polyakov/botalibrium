@@ -25,7 +25,7 @@ public class Batch extends BaseEntity {
     @Embedded
     private List<EmptyContainer> containers = new ArrayList<>();
     @Embedded
-    private List<Record> records = new LinkedList<>();
+    private List<Record> records = new ArrayList<>();
     private Timestamp started = new Timestamp(new Date().getTime());
 
     public Batch() {
