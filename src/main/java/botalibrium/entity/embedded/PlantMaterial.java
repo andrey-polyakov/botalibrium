@@ -10,8 +10,8 @@ import java.sql.Timestamp;
 import java.util.Map;
 
 /**
- * Represents original material plants were produced fromDto.
- * This could be fromDto seeds, cuttings or tissue cultured explants.
+ * Represents original material plants were produced toEntity.
+ * This could be seeds, cuttings or tissue cultured explants.
  */
 @Entity
 @Embedded
@@ -21,7 +21,7 @@ public class PlantMaterial {
     private String materialType;
     private Long originalQuantity;
     private Timestamp collected;
-    private Long price;
+    private Long buyPrice;
     private ProductionDifficulty productionDifficulty = ProductionDifficulty.NORMAL;
     private Map<ProductionDifficulty, Double> adjustedCoefficient;
 
@@ -62,11 +62,11 @@ public class PlantMaterial {
     }
 
     public Long getBuyPrice() {
-        return price;
+        return buyPrice;
     }
 
-    public void setPrice(Long price) {
-        this.price = price;
+    public void setBuyPrice(Long buyPrice) {
+        this.buyPrice = buyPrice;
     }
 
     public ProductionDifficulty getProductionDifficulty() {
@@ -83,10 +83,6 @@ public class PlantMaterial {
 
     public void setTaxon(String taxon) {
         this.taxon = taxon;
-    }
-
-    public Long getPrice() {
-        return price;
     }
 
     public Map<ProductionDifficulty, Double> getAdjustedCoefficient() {

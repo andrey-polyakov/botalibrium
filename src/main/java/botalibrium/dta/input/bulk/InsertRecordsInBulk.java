@@ -1,5 +1,6 @@
 package botalibrium.dta.input.bulk;
 
+import botalibrium.dta.output.BatchDto;
 import botalibrium.entity.embedded.records.Record;
 import lombok.Data;
 
@@ -11,7 +12,7 @@ import java.util.Map;
  */
 @Data
 public class InsertRecordsInBulk {
-    private Map<String, PopulationLogDto> tagsToCountLog = new HashMap<>();
+    private Map<String, BatchDto.PopulationLogDto> tagsToCountLog = new HashMap<>();
     private boolean preview = true;
     private Record recordToBeInserted;
 

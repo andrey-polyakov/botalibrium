@@ -1,9 +1,9 @@
 package botalibrium.service;
 
-import botalibrium.dta.input.bulk.PopulationLogDto;
 import botalibrium.dta.input.bulk.InsertRecordsInBulk;
 import botalibrium.dta.input.bulk.UnpopulatedBatch;
 import botalibrium.dta.input.bulk.UnpopulatedContainer;
+import botalibrium.dta.output.BatchDto;
 import botalibrium.dta.output.Page;
 import botalibrium.dta.output.bulk.BulkOperationPreview;
 import botalibrium.dta.output.pricing.BatchPriceEstimation;
@@ -158,10 +158,10 @@ public class BatchesService {
                 if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
                 }
-                PopulationLogDto count = operation.getTagsToCountLog().get(c.getTag());
+                BatchDto.PopulationLogDto count = operation.getTagsToCountLog().get(c.getTag());
                 if (c instanceof PlantsContainer) {
                     if (!operation.isPreview() && count != null) {
-                        ((PlantsContainer) c).addCountLog(PlantsContainer.fromDto(count));
+                        ((PlantsContainer) c).addCountLog(count.toEntity());
                     }
                     if (!((PlantsContainer) c).getPopulationLogs().isEmpty()) {
                         pi.setLatestCountLog(((PlantsContainer) c).getPopulationLogs().getLast().toDto());

@@ -1,12 +1,12 @@
 package botalibrium.dta.output;
 
-import botalibrium.entity.Batch;
 import lombok.Data;
 
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
-import java.util.LinkedList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by apolyakov on 6/16/2017.
@@ -14,18 +14,19 @@ import java.util.List;
 @Data
 public class LinksWrapper {
 
-    private Batch batch;
+    private BatchDto batch;
 
-    private List<String> links = new LinkedList<>();
+    private Map<String, String> links = new HashMap<>();
 
-    public LinksWrapper(Batch batch, UriInfo uriInfo) {
+    public LinksWrapper(BatchDto batch, UriInfo uriInfo) {
         this.batch = batch;
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
+        links.put("self", builder.toString());
         builder.path("/price");
-        links.add(builder.toString());
+        links.put("price", builder.toString());
     }
 
-    public List<String> getLinks() {
+    public Map<String, String> getLinks() {
         return links;
     }
 }

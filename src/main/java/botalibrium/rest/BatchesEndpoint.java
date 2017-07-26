@@ -2,6 +2,7 @@ package botalibrium.rest;
 
 import botalibrium.dta.input.bulk.InsertRecordsInBulk;
 import botalibrium.dta.input.bulk.UnpopulatedBatch;
+import botalibrium.dta.output.BatchDto;
 import botalibrium.dta.output.LinksWrapper;
 import botalibrium.dta.output.Page;
 import botalibrium.dta.output.bulk.BulkOperationPreview;
@@ -32,6 +33,8 @@ import java.net.URISyntaxException;
 public class BatchesEndpoint {
     public static final String BASE_URI = "/v1/batches";
 
+//todo expand embedded
+
     @Autowired
     private BatchesService cs;
 
@@ -43,14 +46,14 @@ public class BatchesEndpoint {
     @Path("{id}")
     public Response getContainer(@PathParam("id") ObjectId id, @Context UriInfo uriInfo, @QueryParam("onlyData") boolean showOnlyData) throws ServiceException {
         Batch c = cs.getContainer(id);
-        return Response.ok(new LinksWrapper(c, uriInfo), MediaType.APPLICATION_JSON).build();
+        return Response.ok(new LinksWrapper(new BatchDto(c, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
     @Path("{id}")
-    public Response replaceContainer(@PathParam("id") ObjectId id, Batch batch, @Context UriInfo uriInfo) throws ServiceException {
-        cs.update(id, batch);
-        return Response.ok(new LinksWrapper(batch, uriInfo), MediaType.APPLICATION_JSON).build();
+    public Response replaceContainer(@PathParam("id") ObjectId id, Batch batch, @Context UriInfo uriInfo, @QueryParam("onlyData") boolean showOnlyData) throws ServiceException {
+        Batch batchUpdated = cs.update(id, batch);
+        return Response.ok(new LinksWrapper(new BatchDto(batchUpdated, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
     @GET
@@ -86,7 +89,8 @@ public class BatchesEndpoint {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response saveBatch(@Valid Batch c, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
+    public Response saveBatch(@Valid BatchDto batchDto, @Context UriInfo uriInfo) throws ServiceException, URISyntaxException {
+        Batch c = batchDto.toEntity();
         return Response.created(uriInfo.getAbsolutePathBuilder().path(cs.save(c).getId().toString()).build()).build();
     }
 }

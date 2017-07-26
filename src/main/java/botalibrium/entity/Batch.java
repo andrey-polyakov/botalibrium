@@ -38,7 +38,6 @@ public class Batch extends BaseEntity {
     change state to destroyd*/
 
 
-    @NotNull(message = "PlantMaterial is compulsory")
     public PlantMaterial getMaterial() {
         return material;
     }
@@ -78,4 +77,5 @@ public class Batch extends BaseEntity {
     public void setContainers(List<EmptyContainer> containers) {
         this.containers = containers;
     }
+
 }

@@ -1,0 +1,47 @@
+{
+  "material": {
+    "taxon": "Cymbidium Ensifolium",
+    "supplier": "eBay/kumpol_p (kumpol2004@yahoo.com)",
+    "materialType": "Seeds",
+    "originalQuantity": 125,
+    "collected": "02-16-2017 12:12:12",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 0
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "qCYM0",
+      "description": "",
+      "records": [],
+      "media": [
+        "25 g/l Sugar",
+        "0.05 mg/l L-1 TDZ",
+        "1/3 MS",
+        "TDZ",
+        "7 g/l Agar"
+      ],
+      "plantSize": "NA",
+      "populationLogs": [],
+      "sown": 100
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "qCYM1",
+      "description": "",
+      "records": [],
+      "media": [
+        "25 g/l Sugar",
+        "0.05 mg/l L-1 TDZ",
+        "1/3 MS",
+        "TDZ",
+        "7 g/l Agar"
+      ],
+      "plantSize": "NA",
+      "populationLogs": [],
+      "sown": 0
+    }
+  ],
+  "records": [],
+  "started": "07-26-2017 16:13:59"
+}

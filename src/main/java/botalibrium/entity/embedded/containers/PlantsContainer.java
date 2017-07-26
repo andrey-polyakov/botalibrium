@@ -1,15 +1,12 @@
 package botalibrium.entity.embedded.containers;
 
-import botalibrium.dta.input.bulk.PopulationLogDto;
-import botalibrium.references.SizeChart;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import botalibrium.dta.output.BatchDto;
 import lombok.Data;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-import java.util.*;
+import java.util.LinkedList;
 
 @Data
 @Entity
@@ -17,13 +14,6 @@ import java.util.*;
 public class PlantsContainer extends EmptyContainer {
     private LinkedList<PopulationLog> populationLogs = new LinkedList<>();
     protected int population = 0;
-
-    public static PopulationLog fromDto(PopulationLogDto count) {
-        PopulationLog plantsCountLog = new PopulationLog();
-        plantsCountLog.setDate(count.getDate());
-        plantsCountLog.setDied(count.getDied());
-        return plantsCountLog;
-    }
 
     public void addCountLog(PopulationLog log) {
         if (population < 1) {
@@ -47,8 +37,40 @@ public class PlantsContainer extends EmptyContainer {
         }
     }
 
+    @Override
     public int getPopulation() {
         return population;
+    }
+
+    public BatchDto.PlantsContainerDto toDto(boolean showOnlyData) {
+        if (!showOnlyData) {
+            return toCompleteDto();
+        }
+        BatchDto.PlantsContainerDto dto = new BatchDto.PlantsContainerDto();
+        populateDtoFields(dto);
+        return dto;
+    }
+
+    public BatchDto.PlantsContainerDto toCompleteDto() {
+        BatchDto.PlantsContainerDto dto = new BatchDto.PlantsContainerDto();
+        populateDtoFields(dto);
+        dto.getCalculated().put("removed", removed);
+        dto.getCalculated().put("died", died);
+        dto.getCalculated().put("deathRate", getDeathRate());
+        dto.getCalculated().put("population", getPopulation());
+        return dto;
+    }
+
+    private void populateDtoFields(BatchDto.PlantsContainerDto dto) {
+        dto.setRecords(records);
+        dto.setDescription(description);
+        dto.setTag(tag);
+        dto.setMedia(media);
+        dto.setPlantSize(plantSize);
+        dto.setRecords(records);
+        for (PopulationLog populationLog : populationLogs) {
+            dto.getPopulationLogs().add(populationLog.toDto());
+        }
     }
 
 }

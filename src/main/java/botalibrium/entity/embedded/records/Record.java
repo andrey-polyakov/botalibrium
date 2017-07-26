@@ -1,5 +1,6 @@
 package botalibrium.entity.embedded.records;
 
+import botalibrium.dta.output.BatchDto;
 import botalibrium.entity.base.CustomFieldGroup;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;

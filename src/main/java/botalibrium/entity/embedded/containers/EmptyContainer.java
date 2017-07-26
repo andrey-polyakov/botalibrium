@@ -1,12 +1,9 @@
 package botalibrium.entity.embedded.containers;
 
 
-import botalibrium.dta.input.bulk.PopulationLogDto;
+import botalibrium.dta.output.BatchDto;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.references.SizeChart;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
@@ -18,12 +15,6 @@ import java.util.*;
 @Data
 @Entity
 @Embedded
-@JsonIgnoreProperties(ignoreUnknown = true)
-@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
-@JsonSubTypes({
-        @JsonSubTypes.Type(value = PlantsContainer.class, name = "PlantsContainer"),
-        @JsonSubTypes.Type(value = SeedsContainer.class, name = "SeedsContainer") }
-)
 public class EmptyContainer {
     @Indexed(value = IndexDirection.ASC, name = "tag_index", unique = true, dropDups = true)
     protected String tag;
@@ -31,7 +22,7 @@ public class EmptyContainer {
     @Embedded
     protected List<Record> records = new LinkedList<>();
     @Embedded
-    private Set<String> media = new HashSet<>();
+    protected Set<String> media = new HashSet<>();
     protected SizeChart plantSize = SizeChart.NA;
     protected int removed = 0;
     protected int died = 0;
@@ -44,19 +35,39 @@ public class EmptyContainer {
     public static class PopulationLog implements Comparable<PopulationLog> {
         protected int died = 0;
         protected int removed = 0;
-        private Date date = new Date();
+        protected Date date = new Date();
 
         @Override
         public int compareTo(PopulationLog plantsCountLog) {
             return date.compareTo(plantsCountLog.date);
         }
 
-        public PopulationLogDto toDto() {
-            PopulationLogDto dto = new PopulationLogDto();
-            dto.setDate(date);
+        public BatchDto.PopulationLogDto toDto() {
+            BatchDto.PopulationLogDto dto = new BatchDto.PopulationLogDto();
+            dto.setTimestamp(date);
             dto.setDied(died);
             dto.setRemoved(removed);
             return dto;
         }
     }
+
+    public BatchDto.EmptyContainerDto toDto(boolean showOnlyData) {
+        BatchDto.EmptyContainerDto dto = new BatchDto.EmptyContainerDto();
+        populateDtoFields(dto);
+        return dto;
+    }
+
+    public BatchDto.EmptyContainerDto toCompleteDto() {
+        return toDto(true);
+    }
+
+    protected void populateDtoFields(BatchDto.EmptyContainerDto dto) {
+        dto.setRecords(records);
+        dto.setDescription(description);
+        dto.setTag(tag);
+        dto.setMedia(media);
+        dto.setPlantSize(plantSize);
+        dto.setRecords(records);
+    }
+
 }
