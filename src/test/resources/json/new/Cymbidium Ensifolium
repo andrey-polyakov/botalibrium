@@ -11,9 +11,17 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "qCYM0",
+      "tag": "CYM0",
       "description": "",
-      "records": [],
+      "records": [
+        {
+          "timestamp": "02-17-2017 12:12:12",
+          "type": "Care",
+          "series": "default",
+          "message": "Started",
+          "customFields": []
+        }
+      ],
       "media": [
         "25 g/l Sugar",
         "0.05 mg/l L-1 TDZ",
@@ -27,7 +35,7 @@
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "qCYM1",
+      "tag": "CYM1",
       "description": "",
       "records": [],
       "media": [

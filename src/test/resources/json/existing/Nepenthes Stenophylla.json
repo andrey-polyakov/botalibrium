@@ -1,0 +1,48 @@
+{
+  "material": {
+    "taxon": "Nepenthes Stenophylla",
+    "supplier": "Brad's greenhouse",
+    "materialType": "Plant",
+    "originalQuantity": 1,
+    "collected": null,
+    "productionDifficulty": "HARD",
+    "buyPrice": 0
+  },
+  "containers": [
+    {
+      "@type": "PlantContainerDto",
+      "tag": "STE0",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-24-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Foliar, 1-1-1 Orchid fertilizer, 180tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "07-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 130 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum mixed with bark"
+      ],
+      "plantSize": "S",
+      "populationLogs": []
+    }
+  ],
+  "records": [],
+  "started": "03-24-2017 12:12:12"
+}
