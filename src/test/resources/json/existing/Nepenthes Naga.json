@@ -1,0 +1,41 @@
+{
+  "material": {
+    "taxon": "Nepenthes Naga",
+    "supplier": "eBay/edw.industries",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "productionDifficulty": "HARD",
+    "collected": "10-08-2016 12:12:12",
+    "buyPrice": 1002
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "NAG1",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    }
+  ],
+  "records": [],
+  "started": "30-09-2016 12:12:12"
+}

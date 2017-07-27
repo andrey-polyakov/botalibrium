@@ -1,0 +1,42 @@
+{
+  "material": {
+    "taxon": "Nepenthes Dubia",
+    "supplier": "eBay",
+    "materialType": "Seeds",
+    "originalQuantity": 1,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 0
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "DUB0",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "07-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 130 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "18-05-2017 12:12:12",
+          "died": 0,
+          "removed": 0,
+          "germinated": 1
+        }
+      ]
+    }
+  ],
+  "records": [],
+  "started": "09-03-2017 12:12:12"
+}
