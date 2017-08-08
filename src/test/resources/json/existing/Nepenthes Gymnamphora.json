@@ -1,0 +1,54 @@
+{
+  "material": {
+    "taxon": "Nepenthes Gymnamphora ",
+    "supplier": "Brad's greenhouse",
+    "materialType": "Seed grown plant",
+    "originalQuantity": 1,
+    "productionDifficulty": "HARD",
+    "buyPrice": 4700
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "GYM1",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "Mar 26, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        },
+        {
+          "timestamp": "29 Mar, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Dropped two Osmocote pellets"
+        },
+        {
+          "timestamp": "9 Apr, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Dropped one Osmocote pellets"
+        },
+        {
+          "timestamp": "Apr 29, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 150 tds"
+        },
+        {
+          "timestamp": "Apr 29, 2017 12:12:12",
+          "type": "Repotting",
+          "series": "default",
+          "message": "Short roots, added some fresh Spahgnum"
+        }
+      ],
+      "media": [
+        "Sphagnum", "Orchid Bark", "Perlite"
+      ],
+      "plantSize": "L"
+    }
+  ],
+  "started": "Aug 6, 2016 12:12:12"
+}

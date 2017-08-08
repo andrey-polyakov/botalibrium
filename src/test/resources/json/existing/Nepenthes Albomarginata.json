@@ -1,0 +1,234 @@
+{
+  "material": {
+    "taxon": "Nepenthes Albomarginata",
+    "supplier": "eBay/edw.industries",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "productionDifficulty": "HARD",
+    "collected": "10-08-2016 12:12:12",
+    "buyPrice": 1002
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A1",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        },
+        {
+          "timestamp": "AUG-7-2017 12:12:12",
+          "type": "Repotting",
+          "series": "default",
+          "message": "Added more soil to the bottom of the container. Roots did not penetrate much due to big husk."
+        }
+      ],
+      "media": [
+        "Sphagnum", "Coconut husk"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A2",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A3",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A4",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "AUG-7-2017 12:12:12",
+          "type": "Red flag",
+          "series": "Observation",
+          "message": "Grew some mold at the top."
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A5",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A6",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A7",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A8",
+      "description": "",
+      "records": [
+        {
+          "timestamp": "03-25-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        },
+        {
+          "timestamp": "04-30-2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds",
+          "customFields": []
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "population": 5
+    }
+  ],
+  "records": [],
+  "started": "30-09-2016 12:12:12"
+}
