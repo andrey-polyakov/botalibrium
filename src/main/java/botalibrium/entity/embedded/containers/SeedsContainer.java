@@ -49,15 +49,15 @@ public class SeedsContainer extends EmptyContainer {
     }
 
     @Override
-    public int getPopulation() {
+    public int getInitialPopulation() {
         return germinated - died - removed;
     }
 
     public double getDeathRate() {
-        if (getPopulation() == 0) {
+        if (getInitialPopulation() == 0) {
             return 0;
         }
-        return died / (getPopulation() / 100.0);
+        return died / (getInitialPopulation() / 100.0);
     }
 
     public double getGerminationRate() {
@@ -94,7 +94,7 @@ public class SeedsContainer extends EmptyContainer {
         dto.getCalculated().put("died", died);
         dto.getCalculated().put("germinationRate", getGerminationRate());
         dto.getCalculated().put("deathRate", getDeathRate());
-        dto.getCalculated().put("population", getPopulation());
+        dto.getCalculated().put("initialPopulation", getInitialPopulation());
         return dto;
     }
 

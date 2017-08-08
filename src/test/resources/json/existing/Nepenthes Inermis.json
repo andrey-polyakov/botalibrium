@@ -1,6 +1,6 @@
 {
   "material": {
-    "taxon": "Nepenthes Naga",
+    "taxon": "Nepenthes Inermis",
     "supplier": "eBay/edw.industries",
     "materialType": "Seeds",
     "originalQuantity": 100,
@@ -32,7 +32,7 @@
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "S",
+      "plantSize": "XS",
       "initialPopulation": 5,
       "populationLogs": [
         {
@@ -43,5 +43,5 @@
     }
   ],
   "records": [],
-  "started": "30-09-2016 12:12:12"
+  "started": "29-09-2016 12:12:12"
 }

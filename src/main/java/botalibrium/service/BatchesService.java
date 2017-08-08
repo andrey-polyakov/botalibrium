@@ -53,6 +53,9 @@ public class BatchesService {
 
         ops = batches.getDatastore().createUpdateOperations(Batch.class).set("records", batch.getRecords());
         batches.update(updateQuery, ops);
+
+        ops = batches.getDatastore().createUpdateOperations(Batch.class).set("started", batch.getStarted());
+        batches.update(updateQuery, ops);
         return getContainer(id);
     }
 

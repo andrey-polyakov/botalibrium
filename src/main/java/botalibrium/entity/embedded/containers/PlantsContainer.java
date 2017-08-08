@@ -13,10 +13,10 @@ import java.util.LinkedList;
 @Embedded
 public class PlantsContainer extends EmptyContainer {
     private LinkedList<PopulationLog> populationLogs = new LinkedList<>();
-    protected int population = 0;
+    protected int initialPopulation = 0;
 
     public void addCountLog(PopulationLog log) {
-        if (population < 1) {
+        if (initialPopulation < 1) {
             throw new IllegalStateException("Invalid initial count: container is not populated");
         }// TODO May be more checks here
         populationLogs.add(log);
@@ -25,7 +25,7 @@ public class PlantsContainer extends EmptyContainer {
     }
 
     public double getDeathRate() {
-        return died / (population / 100.0);
+        return died / (initialPopulation / 100.0);
     }
 
     public void recalculateCounts() {
@@ -38,8 +38,8 @@ public class PlantsContainer extends EmptyContainer {
     }
 
     @Override
-    public int getPopulation() {
-        return population;
+    public int getInitialPopulation() {
+        return initialPopulation;
     }
 
     public BatchDto.PlantsContainerDto toDto(boolean showOnlyData) {
@@ -57,7 +57,7 @@ public class PlantsContainer extends EmptyContainer {
         dto.getCalculated().put("removed", removed);
         dto.getCalculated().put("died", died);
         dto.getCalculated().put("deathRate", getDeathRate());
-        dto.getCalculated().put("population", getPopulation());
+        dto.getCalculated().put("initialPopulation", this.getInitialPopulation());
         return dto;
     }
 

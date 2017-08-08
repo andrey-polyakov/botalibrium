@@ -27,7 +27,7 @@ public class EmptyContainer {
     protected int removed = 0;
     protected int died = 0;
 
-    public int getPopulation() {
+    public int getInitialPopulation() {
         return 0;
     }
 

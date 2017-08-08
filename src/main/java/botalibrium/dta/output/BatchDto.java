@@ -105,7 +105,7 @@ public class BatchDto {
     public static class PlantsContainerDto extends EmptyContainerDto{
         private Map<String, Object> calculated = new HashMap<>();
         private List<PopulationLogDto> populationLogs = new ArrayList<>();
-        protected int population = 0;
+        protected int initialPopulation = 0;
     }
 
     @Data

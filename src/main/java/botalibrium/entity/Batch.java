@@ -5,14 +5,11 @@ import java.util.*;
 
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
-import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.records.Record;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import org.mongodb.morphia.annotations.*;
 
 import botalibrium.entity.base.BaseEntity;
-
-import javax.validation.constraints.NotNull;
 
 /**
  * Created by apolyakov on 3/24/2017.
@@ -65,7 +62,7 @@ public class Batch extends BaseEntity {
     public Integer getCount() {
         int count = 0;
         for (EmptyContainer container : containers) {
-            count += container.getPopulation();
+            count += container.getInitialPopulation();
         }
         return count;
     }
