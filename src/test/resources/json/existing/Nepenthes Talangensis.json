@@ -40,7 +40,7 @@
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "population": 1
+      "initialPopulation": 1
     }
   ],
   "records": [],

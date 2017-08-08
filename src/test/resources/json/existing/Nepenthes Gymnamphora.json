@@ -12,6 +12,7 @@
       "@type": "PlantsContainerDto",
       "tag": "GYM1",
       "description": "",
+      "initialPopulation": 1
       "records": [
         {
           "timestamp": "Mar 26, 2017 12:12:12",
@@ -41,14 +42,14 @@
           "timestamp": "Apr 29, 2017 12:12:12",
           "type": "Repotting",
           "series": "default",
-          "message": "Short roots, added some fresh Spahgnum"
+          "message": "Short roots, added some fresh Sphagnum"
         }
       ],
       "media": [
         "Sphagnum", "Orchid Bark", "Perlite"
       ],
       "plantSize": "L"
-    }
+    },
   ],
   "started": "Aug 6, 2016 12:12:12"
 }

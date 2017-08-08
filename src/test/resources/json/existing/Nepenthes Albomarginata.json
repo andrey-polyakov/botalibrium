@@ -4,7 +4,7 @@
     "supplier": "eBay/edw.industries",
     "materialType": "Seeds",
     "originalQuantity": 100,
-    "productionDifficulty": "HARD",
+    "productionDifficulty": "EASY",
     "collected": "10-08-2016 12:12:12",
     "buyPrice": 1002
   },
@@ -12,23 +12,28 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "A1",
-      "description": "",
+      "description": "Ok",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
+          "timestamp": "Mar 26, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
           "message": "Coffee, 100 tds"
         },
         {
-          "timestamp": "AUG-7-2017 12:12:12",
+          "timestamp": "Apr 29, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        },
+        {
+          "timestamp": "May 22, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        },
+        {
+          "timestamp": "Aug 7, 2017 12:12:12",
           "type": "Repotting",
           "series": "default",
           "message": "Added more soil to the bottom of the container. Roots did not penetrate much due to big husk."
@@ -37,8 +42,14 @@
       "media": [
         "Sphagnum", "Coconut husk"
       ],
-      "plantSize": "XS",
-      "population": 5
+      "plantSize": "S",
+      "initialPopulation": 6,
+      "populationLogs": [
+        {
+          "timestamp": "Aug 7, 2017 12:12:12",
+          "removed": 1
+        }
+      ]
     },
     {
       "@type": "PlantsContainerDto",
