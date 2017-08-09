@@ -1,0 +1,44 @@
+{
+  "material": {
+    "taxon": "Nepenthes Jamban x ?",
+    "supplier": "eBay/albermarlesounds",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1203
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "JAM1",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "30 Apr, 2017 12:12:12",
+          "germinated": 15,
+          "died": 2
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "25 Mar, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 100 tds"
+    },
+    {
+      "timestamp": "30 Apr, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 100 tds"
+    }
+  ],
+  "started": "15 Jul, 2016 12:12:12"
+}

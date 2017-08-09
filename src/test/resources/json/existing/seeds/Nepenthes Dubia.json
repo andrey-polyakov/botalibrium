@@ -12,16 +12,6 @@
     {
       "@type": "SeedsContainerDto",
       "tag": "DUB0",
-      "description": "",
-      "records": [
-        {
-          "timestamp": "07-25-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 130 tds",
-          "customFields": []
-        }
-      ],
       "media": [
         "Sphagnum"
       ],
@@ -29,7 +19,7 @@
       "sown": 100,
       "populationLogs": [
         {
-          "timestamp": "18-05-2017 12:12:12",
+          "timestamp": "18 May, 2017 12:12:12",
           "died": 0,
           "removed": 0,
           "germinated": 1
@@ -37,6 +27,14 @@
       ]
     }
   ],
-  "records": [],
-  "started": "03-09-2017 12:12:12"
+  "records": [
+    {
+      "timestamp": "07-25-2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 130 tds",
+      "customFields": []
+    }
+  ],
+  "started": "3 Sep, 2017 12:12:12"
 }

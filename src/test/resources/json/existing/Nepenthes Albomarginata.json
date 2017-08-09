@@ -5,7 +5,7 @@
     "materialType": "Seeds",
     "originalQuantity": 100,
     "productionDifficulty": "EASY",
-    "collected": "10-08-2016 12:12:12",
+    "collected": "10 Jul, 2016 12:12:12",
     "buyPrice": 1002
   },
   "containers": [
@@ -15,25 +15,19 @@
       "description": "Ok",
       "records": [
         {
-          "timestamp": "Mar 26, 2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
           "message": "Coffee, 100 tds"
         },
         {
-          "timestamp": "Apr 29, 2017 12:12:12",
+          "timestamp": "22 May, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
           "message": "Coffee, 100 tds"
         },
         {
-          "timestamp": "May 22, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        },
-        {
-          "timestamp": "Aug 7, 2017 12:12:12",
+          "timestamp": "7 Aug, 2017 12:12:12",
           "type": "Repotting",
           "series": "default",
           "message": "Added more soil to the bottom of the container. Roots did not penetrate much due to big husk."
@@ -46,7 +40,7 @@
       "initialPopulation": 6,
       "populationLogs": [
         {
-          "timestamp": "Aug 7, 2017 12:12:12",
+          "timestamp": "7 Aug, 2017 12:12:12",
           "removed": 1
         }
       ]
@@ -54,192 +48,173 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "A2",
-      "description": "",
+      "description": "TO DO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "XS",
-      "population": 5
+      "plantSize": "S",
+      "initialPopulation": 5
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A3",
-      "description": "",
+      "description": "TO DO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "30 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 200 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "XS",
-      "population": 5
+      "plantSize": "S",
+      "initialPopulation": 9
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A4",
-      "description": "",
+      "description": "TO DO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "AUG-7-2017 12:12:12",
-          "type": "Red flag",
-          "series": "Observation",
-          "message": "Grew some mold at the top."
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "XS",
-      "population": 5
+      "plantSize": "S",
+      "initialPopulation": 8
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A5",
-      "description": "",
+      "description": "TO DO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "population": 5
+      "initialPopulation": 7,
+      "populationLogs": [
+        {
+          "timestamp": "1 Jul, 2017 12:12:12",
+          "removed": 1
+        }
+      ]
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A6",
-      "description": "",
+      "description": "TO DO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "population": 5
+      "initialPopulation": 5
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A7",
-      "description": "",
+      "description": "TODO",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
-        },
-        {
-          "timestamp": "04-30-2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "XS",
-      "population": 5
+      "plantSize": "M",
+      "initialPopulation": 3
     },
     {
       "@type": "PlantsContainerDto",
       "tag": "A8",
-      "description": "",
+      "description": "TO DO ALB12",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 150 tds"
         },
         {
-          "timestamp": "04-30-2017 12:12:12",
+          "timestamp": "11 May, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Foliar, 1-1-1 Orchid fertilizer, 180tds"
         }
       ],
       "media": [
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "population": 5
+      "initialPopulation": 8
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "A9",
+      "description": "OK A5-C",
+      "records": [
+        {
+          "timestamp": "29 Apr, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        }
+      ],
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "M",
+      "initialPopulation": 2
     }
   ],
-  "records": [],
-  "started": "30-09-2016 12:12:12"
+  "records": [
+    {
+      "timestamp": "26 Mar, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 100 tds"
+    },
+    {
+      "timestamp": "22 May, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 100 tds"
+    }
+  ],
+  "started": "30 Sep, 2016 12:12:12"
 }

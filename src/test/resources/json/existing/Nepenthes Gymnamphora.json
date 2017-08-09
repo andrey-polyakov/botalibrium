@@ -11,11 +11,10 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "GYM1",
-      "description": "",
-      "initialPopulation": 1
+      "initialPopulation": 1,
       "records": [
         {
-          "timestamp": "Mar 26, 2017 12:12:12",
+          "timestamp": "26 Mar, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
           "message": "Coffee, 100 tds"
@@ -33,13 +32,13 @@
           "message": "Dropped one Osmocote pellets"
         },
         {
-          "timestamp": "Apr 29, 2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
           "message": "Coffee, 150 tds"
         },
         {
-          "timestamp": "Apr 29, 2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Repotting",
           "series": "default",
           "message": "Short roots, added some fresh Sphagnum"
@@ -51,5 +50,5 @@
       "plantSize": "L"
     },
   ],
-  "started": "Aug 6, 2016 12:12:12"
+  "started": "6 Aug, 2016 12:12:12"
 }

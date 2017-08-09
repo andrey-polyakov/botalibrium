@@ -29,7 +29,7 @@ public class JerseyConfig extends ResourceConfig {
 		mapper.setVisibility(mapper.getVisibilityChecker().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
 		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
 
-		mapper.setDateFormat(new SimpleDateFormat("MMM dd, yyyy HH:mm:ss"));
+		mapper.setDateFormat(new SimpleDateFormat("dd MMM, yyyy HH:mm:ss"));
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 

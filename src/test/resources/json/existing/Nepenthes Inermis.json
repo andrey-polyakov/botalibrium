@@ -3,7 +3,7 @@
     "taxon": "Nepenthes Inermis",
     "supplier": "eBay/edw.industries",
     "materialType": "Seeds",
-    "originalQuantity": 100,
+    "originalQuantity": 70,
     "productionDifficulty": "HARD",
     "collected": "10-08-2016 12:12:12",
     "buyPrice": 1002
@@ -15,18 +15,16 @@
       "description": "",
       "records": [
         {
-          "timestamp": "03-25-2017 12:12:12",
+          "timestamp": "25 Mar, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         },
         {
-          "timestamp": "04-30-2017 12:12:12",
+          "timestamp": "29 Apr, 2017 12:12:12",
           "type": "Fertilizer",
           "series": "default",
-          "message": "Coffee, 100 tds",
-          "customFields": []
+          "message": "Coffee, 100 tds"
         }
       ],
       "media": [
