@@ -186,7 +186,7 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "A9",
-      "description": "OK A5-C",
+      "description": "OK A5-C goo roots",
       "records": [
         {
           "timestamp": "29 Apr, 2017 12:12:12",
@@ -196,10 +196,10 @@
         }
       ],
       "media": [
-        "Sphagnum"
+        "Sphagnum", "Bark", "Coconut husk"
       ],
       "plantSize": "M",
-      "initialPopulation": 2
+      "initialPopulation": 9
     }
   ],
   "records": [

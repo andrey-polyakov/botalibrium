@@ -102,10 +102,25 @@ public class BatchDto {
     }
 
     @Data
-    public static class PlantsContainerDto extends EmptyContainerDto{
+    public static class PlantsContainerDto extends EmptyContainerDto {
         private Map<String, Object> calculated = new HashMap<>();
         private List<PopulationLogDto> populationLogs = new ArrayList<>();
         protected int initialPopulation = 0;
+
+        @Override
+        public EmptyContainer toEntity() {
+            PlantsContainer ec = new PlantsContainer();
+            ec.setDescription(description);
+            ec.setMedia(media);
+            ec.setTag(tag);
+            ec.setPlantSize(plantSize);
+            ec.setRecords(records);
+            ec.setInitialPopulation(initialPopulation);
+            for (PopulationLogDto populationLog : populationLogs) {
+                ec.getPopulationLogs().add(populationLog.toEntity());
+            }
+            return ec;
+        }
     }
 
     @Data
