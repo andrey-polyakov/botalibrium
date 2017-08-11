@@ -61,7 +61,17 @@
         "Sphagnum"
       ],
       "plantSize": "S",
-      "initialPopulation": 5
+      "initialPopulation": 7,
+      "populationLogs": [
+        {
+          "timestamp": "9 Apr, 2017 12:12:12",
+          "died": 1
+        },
+        {
+          "timestamp": "1 May, 2017 12:12:12",
+          "died": 1
+        }
+      ]
     },
     {
       "@type": "PlantsContainerDto",
@@ -97,7 +107,7 @@
         "Sphagnum"
       ],
       "plantSize": "S",
-      "initialPopulation": 8
+      "initialPopulation": 7
     },
     {
       "@type": "PlantsContainerDto",
@@ -115,11 +125,11 @@
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "initialPopulation": 7,
+      "initialPopulation": 8,
       "populationLogs": [
         {
-          "timestamp": "1 Jul, 2017 12:12:12",
-          "removed": 1
+          "timestamp": "11 Jul, 2017 12:12:12",
+          "died": 1
         }
       ]
     },
@@ -138,8 +148,14 @@
       "media": [
         "Sphagnum"
       ],
+      "populationLogs": [
+        {
+          "timestamp": "1 May, 2017 12:12:12",
+          "removed": 1
+        }
+      ]
       "plantSize": "XS",
-      "initialPopulation": 5
+      "initialPopulation": 7
     },
     {
       "@type": "PlantsContainerDto",
@@ -199,7 +215,7 @@
         "Sphagnum", "Bark", "Coconut husk"
       ],
       "plantSize": "M",
-      "initialPopulation": 9
+      "initialPopulation": 2
     }
   ],
   "records": [
