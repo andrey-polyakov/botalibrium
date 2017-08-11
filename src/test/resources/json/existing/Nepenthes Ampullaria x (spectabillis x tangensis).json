@@ -1,0 +1,30 @@
+{
+  "material": {
+    "taxon": "Nepenthes Ampullaria x (spectabillis x tangensis)",
+    "supplier": "Brad's greenhouse",
+    "materialType": "Plant",
+    "originalQuantity": 1,
+    "productionDifficulty": "MEDIUM",
+    "buyPrice": 3100
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "AST1",
+      "initialPopulation": 1,
+      "media": [
+        "Sphagnum", "Orchid Bark", "Perlite"
+      ],
+      "plantSize": "L",
+      "records": [
+        {
+          "timestamp": "7 Aug, 2017 12:12:12",
+          "type": "Observation",
+          "series": "default",
+          "message": "Burnt leaves"
+        }
+      ]
+    },
+  ],
+  "started": "19 Jun, 2016 12:12:12"
+}

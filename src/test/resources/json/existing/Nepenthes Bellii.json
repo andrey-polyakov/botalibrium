@@ -1,0 +1,48 @@
+{
+  "material": {
+    "taxon": "Nepenthes Bellii",
+    "supplier": "eBay/weirdplantsshop",
+    "materialType": "Tissue culture",
+    "originalQuantity": 5,
+    "productionDifficulty": "EASY",
+    "buyPrice": 3635
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "AST1",
+      "initialPopulation": 1,
+      "media": [
+        "Sphagnum", "Orchid Bark", "Perlite"
+      ],
+      "plantSize": "S",
+      "records": [
+        {
+          "timestamp": "27 Mar, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "#4 is getting diluted 1-1-1 Orchid fertilizer on leaves"
+        },
+        {
+          "timestamp": "30 Mar, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        },
+        {
+          "timestamp": "4 May, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "#4 is getting diluted 1-1-1 Orchid fertilizer on leaves"
+        },
+        {
+          "timestamp": "22 May, 2017 12:12:12",
+          "type": "Fertilizer",
+          "series": "default",
+          "message": "Coffee, 100 tds"
+        }
+      ]
+    },
+  ],
+  "started": "30 Jul, 2016 12:12:12"
+}
