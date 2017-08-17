@@ -1,0 +1,32 @@
+{
+  "material": {
+    "taxon": "Nepenthes viking x unknown",
+    "supplier": "eBay/natta-chang",
+    "materialType": "Seeds",
+    "originalQuantity": 1,
+    "collected": "1 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1016
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VXX*",
+      "pretreatment": "",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

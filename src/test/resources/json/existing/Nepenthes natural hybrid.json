@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Nepenthes unknown natural hybrid",
+    "supplier": "eBay/edw.industries",
+    "materialType": "Seeds",
+    "originalQuantity": 60,
+    "collected": "10 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1348
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "UNH",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

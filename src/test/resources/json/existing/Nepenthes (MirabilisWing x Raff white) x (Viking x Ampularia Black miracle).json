@@ -1,0 +1,90 @@
+{
+  "material": {
+    "taxon": "Nepenthes (MirabilisWing x Raff white) x (Viking x Ampularia Black miracle)",
+    "supplier": "eBay/natta-chang",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 0
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "MIRRAF-VIKAMP-01",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "18 May, 2017 12:12:12",
+          "died": 0,
+          "removed": 0,
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "MIRRAF-VIKAMP-02",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "18 May, 2017 12:12:12",
+          "died": 0,
+          "removed": 0,
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "MIRRAF-VIKAMP-03",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "18 May, 2017 12:12:12",
+          "died": 0,
+          "removed": 0,
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "MIRRAF-VIKAMP-04",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "sown": 100,
+      "populationLogs": [
+        {
+          "timestamp": "18 May, 2017 12:12:12",
+          "died": 0,
+          "removed": 0,
+          "germinated": 1
+        }
+      ]
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "Soaked in 20% sugar"
+    }
+  ],
+  "started": "3 Sep, 2017 12:12:12"
+}

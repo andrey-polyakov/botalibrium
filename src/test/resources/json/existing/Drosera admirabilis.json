@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Drosera admirabilis",
+    "supplier": "eBay/cpfan01",
+    "materialType": "Seeds",
+    "originalQuantity": 30,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 351
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "ADM",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

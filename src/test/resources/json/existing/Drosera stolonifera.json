@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Drosera stolonifera",
+    "supplier": "eBay/seeds4change_ny",
+    "materialType": "Seeds",
+    "originalQuantity": 10,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1714
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "STO",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Nepenthes (thorelii x veitchii bario) x veitchii pink",
+    "supplier": "eBay/edw.industries",
+    "materialType": "Seeds",
+    "originalQuantity": 1,
+    "collected": "10 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1524
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRA",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

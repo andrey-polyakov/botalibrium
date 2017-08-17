@@ -1,0 +1,25 @@
+{
+  "material": {
+    "taxon": "Heliamphora minor",
+    "supplier": "eBay/weirdplantsshop",
+    "materialType": "Tissue culture",
+    "originalQuantity": 1,
+    "productionDifficulty": "EASY",
+    "buyPrice": 3684
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "DIA1",
+      "initialPopulation": 1,
+      "media": [
+        "Gel"
+      ],
+      "plantSize": "S",
+      "calendar": [
+
+      ]
+    }
+  ],
+  "started": "30 Jul, 2016 12:12:12"
+}

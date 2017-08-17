@@ -1,0 +1,22 @@
+{
+  "material": {
+    "taxon": "Nepenthes vieillardii",
+    "supplier": "eBay/weirdplantsshop",
+    "materialType": "Tissue culture",
+    "originalQuantity": 1,
+    "productionDifficulty": "EASY",
+    "buyPrice": 3684
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "AST1",
+      "initialPopulation": 1,
+      "media": [
+        "Gel"
+      ],
+      "plantSize": "S"
+    }
+  ],
+  "started": "30 Jul, 2016 12:12:12"
+}

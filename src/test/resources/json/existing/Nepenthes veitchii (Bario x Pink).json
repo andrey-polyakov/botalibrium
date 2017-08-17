@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Nepenthes veitchii (Bario x Pink)",
+    "supplier": "eBay/xir007",
+    "materialType": "Seeds",
+    "originalQuantity": 200,
+    "collected": "17 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 2159
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VBP*",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}

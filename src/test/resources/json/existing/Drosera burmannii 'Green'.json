@@ -1,0 +1,31 @@
+{
+  "material": {
+    "taxon": "Drosera burmannii 'Green'",
+    "supplier": "eBay/littlegreenmonsters",
+    "materialType": "Seeds",
+    "originalQuantity": 25,
+    "collected": null,
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 400
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "BUG",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "N/A",
+      "sown": 0
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "xx Xxx, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": ""
+    }
+  ],
+  "started": null
+}
