@@ -23,6 +23,8 @@ public class EmptyContainer {
     @Embedded
     protected List<Record> records = new LinkedList<>();
     @Embedded
+    protected Set<String> labels = new HashSet<>();
+    @Embedded
     protected Set<String> media = new HashSet<>();
     protected SizeChart plantSize = SizeChart.NA;
     protected String description = "";
@@ -35,6 +37,13 @@ public class EmptyContainer {
     }
 
     public void recalculateCounts() {
+    }
+
+    public double getDeathRate() {
+        if (getPopulation() == 0) {
+            return 0.0;
+        }
+        return (double) died / getPopulation();
     }
 
     @Data
@@ -94,13 +103,13 @@ public class EmptyContainer {
     }
 
     protected void populateDtoFields(BatchDto.EmptyContainerDto dto) {
-        dto.setRecords(records);
         dto.setDescription(description);
-        dto.setTag(tag);
-        dto.setMedia(media);
         dto.setPlantSize(plantSize);
-        dto.setRecords(records);
         dto.setSchedule(schedule);
+        dto.setRecords(records);
+        dto.setLabels(labels);
+        dto.setMedia(media);
+        dto.setTag(tag);
     }
 
 }

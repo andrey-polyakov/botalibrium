@@ -51,6 +51,9 @@ public class BatchesService {
         ops = batches.getDatastore().createUpdateOperations(Batch.class).set("material", batch.getMaterial());
         batches.update(updateQuery, ops);
 
+        ops = batches.getDatastore().createUpdateOperations(Batch.class).set("labels", batch.getLabels());
+        batches.update(updateQuery, ops);
+
         ops = batches.getDatastore().createUpdateOperations(Batch.class).set("records", batch.getRecords());
         batches.update(updateQuery, ops);
 

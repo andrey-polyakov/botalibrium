@@ -1,6 +1,8 @@
 package botalibrium.entity;
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.*;
 
 import botalibrium.dta.output.BatchDto;
@@ -8,6 +10,7 @@ import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.records.Record;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import lombok.Data;
 import org.mongodb.morphia.annotations.*;
 
 import botalibrium.entity.base.BaseEntity;
@@ -15,66 +18,68 @@ import botalibrium.entity.base.BaseEntity;
 /**
  * Created by apolyakov on 3/24/2017.
  */
+@Data
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Batch extends BaseEntity {
-    @Embedded
-    private PlantMaterial material;
+    private Timestamp started = new Timestamp(new Date().getTime());
     @Embedded
     private List<EmptyContainer> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new ArrayList<>();
-    private Timestamp started = new Timestamp(new Date().getTime());
+    @Embedded
+    private Set<String> labels = new HashSet<>();
+    @Embedded
+    private PlantMaterial material;
 
     public Batch() {
         //
     }
 
-/*    PUT
-    contaminated flag
-    change count to populate
-    change state to destroyd*/
-
-    public BatchDto toCompleteDto(Batch c, boolean showOnlyData) {
+    public BatchDto toDto(Batch c, boolean showOnlyData) {
         BatchDto dto = new BatchDto();
         dto.setMaterial(c.getMaterial());
         long totalPopulation = 0;
+        double totalDeath = 0;
         for (EmptyContainer container : c.getContainers()) {
             totalPopulation += container.getPopulation();
+            totalDeath += container.getDied();
             dto.getContainers().add(container.toDto(showOnlyData));
         }
-        dto.setRecords(c.getRecords());
         dto.setStarted(started = c.getStarted());
+        dto.setRecords(c.getRecords());
+        dto.setLabels(labels);
         dto.getCalculated().put("population", totalPopulation);
+        dto.getCalculated().put("deathRate", totalDeath / totalPopulation);
         dto.getCalculated().put("forSale", 0);
         dto.getCalculated().put("estimatedProfit", 0.0);
-
+        LocalDate firstDate = started.toLocalDateTime().toLocalDate();
+        LocalDate secondDate = LocalDate.now();
+        Period period = Period.between(firstDate, secondDate);
+        int days = period.getDays();
+        int months = period.getMonths();
+        int years = period.getYears();
+        StringBuilder keptFor = new StringBuilder();
+        if (years > 0) {
+            keptFor.append(years);
+            keptFor.append(" years");
+        }
+        if (months > 0) {
+            if (years > 0) {
+                keptFor.append(", ");
+            }
+            keptFor.append(months);
+            keptFor.append(" months");
+        }
+        if (days > 0) {
+            if (months > 0 || years > 0) {
+                keptFor.append(" and ");
+            }
+            keptFor.append(days);
+            keptFor.append(" days");
+        }
+        dto.getCalculated().put("keptFor", keptFor.toString());
         return dto;
-    }
-
-
-    public PlantMaterial getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(PlantMaterial material) {
-        this.material = material;
-    }
-
-    public List<Record> getRecords() {
-        return records;
-    }
-
-    public void setRecords(List<Record> records) {
-        this.records = records;
-    }
-
-    public Timestamp getStarted() {
-        return started;
-    }
-
-    public void setStarted(Timestamp started) {
-        this.started = started;
     }
 
     public Integer getCount() {
@@ -83,14 +88,6 @@ public class Batch extends BaseEntity {
             count += container.getPopulation();
         }
         return count;
-    }
-
-    public List<EmptyContainer> getContainers() {
-        return containers;
-    }
-
-    public void setContainers(List<EmptyContainer> containers) {
-        this.containers = containers;
     }
 
 }

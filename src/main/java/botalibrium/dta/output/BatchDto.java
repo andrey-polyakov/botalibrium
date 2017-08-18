@@ -21,6 +21,7 @@ public class BatchDto {
     private List<EmptyContainerDto> containers = new ArrayList<>();
     private Map<String, Object> calculated = new HashMap<>();
     private List<Record> records = new ArrayList<>();
+    private Set<String> labels = new HashSet<>();
     @NotNull(message = "PlantMaterial is compulsory")
     private PlantMaterial material;
     private Timestamp started;
@@ -34,6 +35,7 @@ public class BatchDto {
         batch.setMaterial(material);
         batch.setRecords(records);
         batch.setStarted(started);
+        batch.setLabels(labels);
         for (EmptyContainerDto container : containers) {
             EmptyContainer entityContainer = container.toEntity();
             entityContainer.recalculateCounts();
@@ -52,6 +54,7 @@ public class BatchDto {
     public static class EmptyContainerDto {
         protected List<EmptyContainer.ScheduleItem> schedule;
         protected List<Record> records = new ArrayList<>();
+        protected Set<String> labels = new HashSet<>();
         protected Set<String> media = new HashSet<>();
         protected SizeChart plantSize = SizeChart.NA;
         protected String description;
@@ -63,6 +66,7 @@ public class BatchDto {
             ec.setPlantSize(plantSize);
             ec.setSchedule(schedule);
             ec.setRecords(records);
+            ec.setLabels(labels);
             ec.setMedia(media);
             ec.setTag(tag);
             return ec;

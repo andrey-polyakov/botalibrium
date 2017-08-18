@@ -21,8 +21,16 @@ public class PlantsContainer extends EmptyContainer {
         died += log.died;
     }
 
-    public double getDeathRate() {
-        return died / ((added - removed) / 100.0);
+    @Override
+    public void recalculateCounts() {
+        removed = 0;
+        added = 0;
+        died = 0;
+        for (PlantsContainer.PopulationLog log : populationLogs) {
+            removed += log.removed;
+            added += log.added;
+            died += log.died;
+        }
     }
 
     public BatchDto.PlantsContainerDto toDto(boolean showOnlyData) {
@@ -37,7 +45,7 @@ public class PlantsContainer extends EmptyContainer {
     public BatchDto.PlantsContainerDto toCompleteDto() {
         BatchDto.PlantsContainerDto dto = new BatchDto.PlantsContainerDto();
         populateDtoFields(dto);
-        dto.getCalculated().put("population", added + removed - died);
+        dto.getCalculated().put("population", added - removed - died);
         dto.getCalculated().put("removed", removed);
         dto.getCalculated().put("added", added);
         dto.getCalculated().put("died", died);

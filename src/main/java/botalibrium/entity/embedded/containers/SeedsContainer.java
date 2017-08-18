@@ -26,7 +26,7 @@ public class SeedsContainer extends EmptyContainer {
 
     @Override
     public int getPopulation() {
-        return getPopulation() + germinated;
+        return super.getPopulation() + germinated;
     }
 
     public void addCountLog(SeedlingsPopulationLog log) {
@@ -56,18 +56,11 @@ public class SeedsContainer extends EmptyContainer {
         }
     }
 
-    public double getDeathRate() {
-        if (added == 0) {
-            return 0;
-        }
-        return died / (added / 100.0);
-    }
-
     public double getGerminationRate() {
         if (sown == 0) {
             return 0;
         }
-        return germinated / (sown / 100.0);
+        return (double) germinated / sown;
     }
 
     @Override

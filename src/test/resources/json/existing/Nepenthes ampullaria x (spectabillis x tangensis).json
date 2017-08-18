@@ -1,6 +1,6 @@
 {
   "material": {
-    "taxon": "Nepenthes Ampullaria x (spectabillis x tangensis)",
+    "taxon": "Nepenthes ampullaria x (spectabillis x tangensis)",
     "supplier": "Brad's greenhouse",
     "materialType": "Plant",
     "originalQuantity": 1,
@@ -24,7 +24,7 @@
           "message": "Burnt leaves"
         }
       ]
-    },
+    }
   ],
   "started": "19 Jun, 2016 12:12:12"
 }
