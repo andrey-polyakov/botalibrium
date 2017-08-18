@@ -18,7 +18,7 @@ import java.util.List;
 @Data
 public class Record implements Comparable<Record> {
 
-    private Timestamp timestamp = new Timestamp(new Date().getTime());
+    private Timestamp date = new Timestamp(new Date().getTime());
     private String type = "Care";
     private String series = "default";
     private String message = "";
@@ -27,9 +27,9 @@ public class Record implements Comparable<Record> {
 
     @Override
     public int compareTo(Record record) {
-        if (record == null || record.timestamp == null) {
+        if (record == null || record.date == null) {
             return -1;
         }
-        return record.timestamp.compareTo(timestamp);
+        return record.date.compareTo(date);
     }
 }

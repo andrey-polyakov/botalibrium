@@ -3,6 +3,7 @@ package botalibrium.entity;
 import java.sql.Timestamp;
 import java.util.*;
 
+import botalibrium.dta.output.BatchDto;
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.records.Record;
@@ -34,6 +35,23 @@ public class Batch extends BaseEntity {
     change count to populate
     change state to destroyd*/
 
+    public BatchDto toCompleteDto(Batch c, boolean showOnlyData) {
+        BatchDto dto = new BatchDto();
+        dto.setMaterial(c.getMaterial());
+        long totalPopulation = 0;
+        for (EmptyContainer container : c.getContainers()) {
+            totalPopulation += container.getPopulation();
+            dto.getContainers().add(container.toDto(showOnlyData));
+        }
+        dto.setRecords(c.getRecords());
+        dto.setStarted(started = c.getStarted());
+        dto.getCalculated().put("population", totalPopulation);
+        dto.getCalculated().put("forSale", 0);
+        dto.getCalculated().put("estimatedProfit", 0.0);
+
+        return dto;
+    }
+
 
     public PlantMaterial getMaterial() {
         return material;
@@ -62,7 +80,7 @@ public class Batch extends BaseEntity {
     public Integer getCount() {
         int count = 0;
         for (EmptyContainer container : containers) {
-            count += container.getInitialPopulation();
+            count += container.getPopulation();
         }
         return count;
     }

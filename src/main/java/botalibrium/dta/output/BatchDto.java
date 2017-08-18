@@ -18,23 +18,15 @@ import java.util.*;
 
 @Data
 public class BatchDto {
+    private List<EmptyContainerDto> containers = new ArrayList<>();
+    private Map<String, Object> calculated = new HashMap<>();
+    private List<Record> records = new ArrayList<>();
     @NotNull(message = "PlantMaterial is compulsory")
     private PlantMaterial material;
-    private List<EmptyContainerDto> containers = new ArrayList<>();
-    private List<Record> records = new ArrayList<>();
     private Timestamp started;
 
     public BatchDto() {
         //
-    }
-
-    public BatchDto(Batch c, boolean showOnlyData) {
-        material = c.getMaterial();
-        for (EmptyContainer container : c.getContainers()) {
-            containers.add(container.toDto(showOnlyData));
-        }
-        records = c.getRecords();
-        started = c.getStarted();
     }
 
     public Batch toEntity() {
@@ -43,7 +35,9 @@ public class BatchDto {
         batch.setRecords(records);
         batch.setStarted(started);
         for (EmptyContainerDto container : containers) {
-            batch.getContainers().add(container.toEntity());
+            EmptyContainer entityContainer = container.toEntity();
+            entityContainer.recalculateCounts();
+            batch.getContainers().add(entityContainer);
         }
         return batch;
     }
@@ -56,19 +50,21 @@ public class BatchDto {
             @JsonSubTypes.Type(value = SeedsContainerDto.class, name = "SeedsContainerDto") }
     )
     public static class EmptyContainerDto {
-        protected String tag;
-        protected String description;
+        protected List<EmptyContainer.ScheduleItem> schedule;
         protected List<Record> records = new ArrayList<>();
         protected Set<String> media = new HashSet<>();
         protected SizeChart plantSize = SizeChart.NA;
+        protected String description;
+        protected String tag;
 
         public EmptyContainer toEntity() {
             EmptyContainer ec = new EmptyContainer();
             ec.setDescription(description);
+            ec.setPlantSize(plantSize);
+            ec.setSchedule(schedule);
+            ec.setRecords(records);
             ec.setMedia(media);
             ec.setTag(tag);
-            ec.setPlantSize(plantSize);
-            ec.setRecords(records);
             return ec;
         }
     }
@@ -82,13 +78,14 @@ public class BatchDto {
         @Override
         public EmptyContainer toEntity() {
             SeedsContainer ec = new SeedsContainer();
-            ec.setDescription(description);
-            ec.setMedia(media);
-            ec.setTag(tag);
-            ec.setPlantSize(plantSize);
-            ec.setRecords(records);
             ec.setPretreatment(pretreatment);
+            ec.setDescription(description);
+            ec.setPlantSize(plantSize);
+            ec.setSchedule(schedule);
+            ec.setRecords(records);
+            ec.setMedia(media);
             ec.setSown(sown);
+            ec.setTag(tag);
             for (SeedlingsPopulationLogDto populationLog : populationLogs) {
                 ec.getPopulationLogs().add(populationLog.toEntity());
             }
@@ -103,19 +100,18 @@ public class BatchDto {
 
     @Data
     public static class PlantsContainerDto extends EmptyContainerDto {
-        private Map<String, Object> calculated = new HashMap<>();
         private List<PopulationLogDto> populationLogs = new ArrayList<>();
-        protected int initialPopulation = 0;
+        private Map<String, Object> calculated = new HashMap<>();
 
         @Override
         public EmptyContainer toEntity() {
             PlantsContainer ec = new PlantsContainer();
             ec.setDescription(description);
+            ec.setPlantSize(plantSize);
+            ec.setSchedule(schedule);
+            ec.setRecords(records);
             ec.setMedia(media);
             ec.setTag(tag);
-            ec.setPlantSize(plantSize);
-            ec.setRecords(records);
-            ec.setInitialPopulation(initialPopulation);
             for (PopulationLogDto populationLog : populationLogs) {
                 ec.getPopulationLogs().add(populationLog.toEntity());
             }
@@ -125,15 +121,17 @@ public class BatchDto {
 
     @Data
     public static class PopulationLogDto {
-        protected int died = 0;
+        protected Date date = new Date();
         protected int removed = 0;
-        protected Date timestamp = new Date();
+        protected int added = 0;
+        protected int died = 0;
 
         public EmptyContainer.PopulationLog toEntity() {
             EmptyContainer.PopulationLog log = new EmptyContainer.PopulationLog();
-            log.setDate(timestamp);
-            log.setDied(died);
             log.setRemoved(removed);
+            log.setAdded(added);
+            log.setDate(date);
+            log.setDied(died);
             return log;
         }
     }
@@ -141,16 +139,25 @@ public class BatchDto {
     @Data
     public static class SeedlingsPopulationLogDto extends PopulationLogDto {
         private int germinated = 0;
+        private int sown = 0;
 
         @Override
         public SeedsContainer.SeedlingsPopulationLog toEntity() {
             SeedsContainer.SeedlingsPopulationLog log = new SeedsContainer.SeedlingsPopulationLog();
-            log.setDate(timestamp);
-            log.setDied(died);
-            log.setRemoved(removed);
             log.setGerminated(germinated);
+            log.setRemoved(removed);
+            log.setAdded(added);
+            log.setDate(date);
+            log.setSown(sown);
+            log.setDied(died);
             return log;
         }
     }
 
+    @Data
+    public static class ScheduleItemDto {
+        protected EmptyContainer.ScheduleItem.Priority priority;
+        protected Date date = new Date();
+        protected String task;
+    }
 }

@@ -11,225 +11,286 @@
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "A1",
-      "description": "Ok",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        },
-        {
-          "timestamp": "22 May, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        },
-        {
-          "timestamp": "7 Aug, 2017 12:12:12",
-          "type": "Repotting",
-          "series": "default",
-          "message": "Added more soil to the bottom of the container. Roots did not penetrate much due to big husk."
-        }
-      ],
+      "tag": "ALB-001",
       "media": [
         "Sphagnum", "Coconut husk"
       ],
+      "labels": [
+        "FOR SALE"
+      ],
       "plantSize": "S",
-      "initialPopulation": 6,
       "populationLogs": [
         {
-          "timestamp": "7 Aug, 2017 12:12:12",
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 6
+        },
+        {
+          "date": "7 Aug, 2017 12:12:12",
           "removed": 1
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 2
         }
       ]
     },
     {
       "@type": "PlantsContainerDto",
-      "tag": "A2",
-      "description": "TO DO",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        }
-      ],
+      "tag": "ALB-002",
       "media": [
         "Sphagnum"
       ],
       "plantSize": "S",
-      "initialPopulation": 7,
       "populationLogs": [
         {
-          "timestamp": "9 Apr, 2017 12:12:12",
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 7
+        },
+        {
+          "date": "9 Apr, 2017 12:12:12",
           "died": 1
         },
         {
-          "timestamp": "1 May, 2017 12:12:12",
+          "date": "1 May, 2017 12:12:12",
           "died": 1
-        }
-      ]
-    },
-    {
-      "@type": "PlantsContainerDto",
-      "tag": "A3",
-      "description": "TO DO",
-      "records": [
+        },
         {
-          "timestamp": "30 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 200 tds"
-        }
-      ],
-      "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "S",
-      "initialPopulation": 9
-    },
-    {
-      "@type": "PlantsContainerDto",
-      "tag": "A4",
-      "description": "TO DO",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        }
-      ],
-      "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "S",
-      "initialPopulation": 7
-    },
-    {
-      "@type": "PlantsContainerDto",
-      "tag": "A5",
-      "description": "TO DO",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        }
-      ],
-      "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "XS",
-      "initialPopulation": 8,
-      "populationLogs": [
-        {
-          "timestamp": "11 Jul, 2017 12:12:12",
-          "died": 1
-        }
-      ]
-    },
-    {
-      "@type": "PlantsContainerDto",
-      "tag": "A6",
-      "description": "TO DO",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        }
-      ],
-      "media": [
-        "Sphagnum"
-      ],
-      "populationLogs": [
-        {
-          "timestamp": "1 May, 2017 12:12:12",
+          "date": "15 Aug, 2017 12:12:12",
           "removed": 1
         }
+      ],
+      "labels": [
+        "FOR SALE"
       ]
-      "plantSize": "XS",
-      "initialPopulation": 7
     },
     {
       "@type": "PlantsContainerDto",
-      "tag": "A7",
-      "description": "TODO",
-      "records": [
+      "tag": "ALB-003",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "populationLogs": [
         {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 9
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "removed": 5
         }
       ],
+      "labels": [
+        "FOR SALE"
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-004",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "S",
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 7
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "removed": 3
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-005",
+      "media": [
+        "Sphagnum"
+      ],
+      "plantSize": "XS",
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 8
+        },
+        {
+          "date": "11 Jul, 2017 12:12:12",
+          "died": 1
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "removed": 1
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-006",
+      "media": [
+        "Sphagnum"
+      ],
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 7
+        },
+        {
+          "date": "1 May, 2017 12:12:12",
+          "removed": 1
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "removed": 2
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ],
+      "plantSize": "XS"
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-007",
       "media": [
         "Sphagnum"
       ],
       "plantSize": "M",
-      "initialPopulation": 3
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 3
+        },
+        {
+          "date": "1 May, 2017 12:12:12",
+          "removed": 1
+        },
+        {
+          "date": "7 Aug, 2017 12:12:12",
+          "removed": 2
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 1
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
     },
     {
       "@type": "PlantsContainerDto",
-      "tag": "A8",
-      "description": "TO DO ALB12",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 150 tds"
-        },
-        {
-          "timestamp": "11 May, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Foliar, 1-1-1 Orchid fertilizer, 180tds"
-        }
-      ],
+      "tag": "ALB-008",
       "media": [
         "Sphagnum"
       ],
       "plantSize": "XS",
-      "initialPopulation": 8
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 8
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 1
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
     },
     {
       "@type": "PlantsContainerDto",
-      "tag": "A9",
-      "description": "OK A5-C goo roots",
-      "records": [
-        {
-          "timestamp": "29 Apr, 2017 12:12:12",
-          "type": "Fertilizer",
-          "series": "default",
-          "message": "Coffee, 100 tds"
-        }
-      ],
+      "tag": "ALB-009",
       "media": [
         "Sphagnum", "Bark", "Coconut husk"
       ],
       "plantSize": "M",
-      "initialPopulation": 2
+      "populationLogs": [
+        {
+          "date": "30 Sep, 2016 12:12:12",
+          "added": 2
+        },
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 2
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-010",
+      "media": [
+        "Sphagnum", "Bark", "Coconut husk"
+      ],
+      "plantSize": "M",
+      "populationLogs": [
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 4
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "ALB-011",
+      "media": [
+        "Sphagnum", "Bark", "Coconut husk"
+      ],
+      "plantSize": "M",
+      "populationLogs": [
+        {
+          "date": "15 Aug, 2017 12:12:12",
+          "added": 6
+        }
+      ],
+      "labels": [
+        "FOR SALE"
+      ]
     }
   ],
   "records": [
     {
-      "timestamp": "26 Mar, 2017 12:12:12",
+      "date": "26 Mar, 2017 12:12:12",
       "type": "Fertilizer",
       "series": "default",
       "message": "Coffee, 100 tds"
     },
     {
-      "timestamp": "22 May, 2017 12:12:12",
+      "date": "29 Apr, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Coffee, 150 tds"
+    },
+    {
+      "date": "11 May, 2017 12:12:12",
+      "type": "Fertilizer",
+      "series": "default",
+      "message": "Foliar, 1-1-1 Orchid fertilizer, 180tds"
+    },
+    {
+      "date": "22 May, 2017 12:12:12",
       "type": "Fertilizer",
       "series": "default",
       "message": "Coffee, 100 tds"
+    },
+    {
+      "date": "7 Aug, 2017 12:12:12",
+      "type": "Repotting",
+      "series": "default",
+      "message": "Reshuffling based on size"
     }
   ],
   "started": "30 Sep, 2016 12:12:12"

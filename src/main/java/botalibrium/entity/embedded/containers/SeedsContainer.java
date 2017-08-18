@@ -18,10 +18,15 @@ public class SeedsContainer extends EmptyContainer {
 
     public static SeedlingsPopulationLog fromDto(BatchDto.PopulationLogDto dto) {
         SeedlingsPopulationLog log = new SeedlingsPopulationLog();
-        log.setDate(dto.getTimestamp());
+        log.setDate(dto.getDate());
         log.setDied(dto.getDied());
         log.setRemoved(dto.getRemoved());
         return log;
+    }
+
+    @Override
+    public int getPopulation() {
+        return getPopulation() + germinated;
     }
 
     public void addCountLog(SeedlingsPopulationLog log) {
@@ -37,27 +42,25 @@ public class SeedsContainer extends EmptyContainer {
     @Data
     public static class SeedlingsPopulationLog extends PopulationLog {
         private int germinated = 0;
+        private int sown = 0;
 
         public BatchDto.PopulationLogDto toDto() {
             BatchDto.SeedlingsPopulationLogDto dto = new BatchDto.SeedlingsPopulationLogDto();
-            dto.setTimestamp(date);
-            dto.setDied(died);
-            dto.setRemoved(removed);
             dto.setGerminated(germinated);
+            dto.setRemoved(removed);
+            dto.setAdded(added);
+            dto.setDate(date);
+            dto.setSown(sown);
+            dto.setDied(died);
             return dto;
         }
     }
 
-    @Override
-    public int getInitialPopulation() {
-        return germinated - died - removed;
-    }
-
     public double getDeathRate() {
-        if (getInitialPopulation() == 0) {
+        if (added == 0) {
             return 0;
         }
-        return died / (getInitialPopulation() / 100.0);
+        return died / (added / 100.0);
     }
 
     public double getGerminationRate() {
@@ -67,12 +70,16 @@ public class SeedsContainer extends EmptyContainer {
         return germinated / (sown / 100.0);
     }
 
-    public void recalculate() {
-        died = 0;
+    @Override
+    public void recalculateCounts() {
+        germinated = 0;
         removed = 0;
+        added = 0;
+        died = 0;
         for (SeedlingsPopulationLog log : populationLogs) {
-            removed += log.removed;
             germinated += log.germinated;
+            removed += log.removed;
+            added += log.added;
             died += log.died;
         }
     }
@@ -94,7 +101,7 @@ public class SeedsContainer extends EmptyContainer {
         dto.getCalculated().put("died", died);
         dto.getCalculated().put("germinationRate", getGerminationRate());
         dto.getCalculated().put("deathRate", getDeathRate());
-        dto.getCalculated().put("initialPopulation", getInitialPopulation());
+        dto.getCalculated().put("population", getPopulation());
         return dto;
     }
 

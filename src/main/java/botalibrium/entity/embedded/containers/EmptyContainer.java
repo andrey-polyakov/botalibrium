@@ -18,24 +18,55 @@ import java.util.*;
 public class EmptyContainer {
     @Indexed(value = IndexDirection.ASC, name = "tag_index", unique = true, dropDups = true)
     protected String tag;
-    protected String description = "";
+    @Embedded
+    protected List<ScheduleItem> schedule = new LinkedList<>();
     @Embedded
     protected List<Record> records = new LinkedList<>();
     @Embedded
     protected Set<String> media = new HashSet<>();
     protected SizeChart plantSize = SizeChart.NA;
+    protected String description = "";
     protected int removed = 0;
+    protected int added = 0;
     protected int died = 0;
 
-    public int getInitialPopulation() {
-        return 0;
+    public int getPopulation() {
+        return added - removed - died;
+    }
+
+    public void recalculateCounts() {
+    }
+
+    @Data
+    public static class ScheduleItem implements Comparable<ScheduleItem> {
+        public enum Priority {
+            LOW, NORMAL, URGENT
+        }
+
+        protected Date date = new Date();
+        protected Priority priority;
+        protected String task;
+
+        @Override
+        public int compareTo(ScheduleItem plantsCountLog) {
+            return date.compareTo(plantsCountLog.date);
+        }
+
+        public BatchDto.ScheduleItemDto toDto() {
+            BatchDto.ScheduleItemDto dto = new BatchDto.ScheduleItemDto();
+            dto.setPriority(priority);
+            dto.setDate(date);
+            dto.setTask(task);
+            return dto;
+        }
     }
 
     @Data
     public static class PopulationLog implements Comparable<PopulationLog> {
-        protected int died = 0;
-        protected int removed = 0;
         protected Date date = new Date();
+        protected int removed = 0;
+        protected int added = 0;
+        protected int died = 0;
 
         @Override
         public int compareTo(PopulationLog plantsCountLog) {
@@ -44,9 +75,10 @@ public class EmptyContainer {
 
         public BatchDto.PopulationLogDto toDto() {
             BatchDto.PopulationLogDto dto = new BatchDto.PopulationLogDto();
-            dto.setTimestamp(date);
-            dto.setDied(died);
             dto.setRemoved(removed);
+            dto.setAdded(added);
+            dto.setDate(date);
+            dto.setDied(died);
             return dto;
         }
     }
@@ -68,6 +100,7 @@ public class EmptyContainer {
         dto.setMedia(media);
         dto.setPlantSize(plantSize);
         dto.setRecords(records);
+        dto.setSchedule(schedule);
     }
 
 }

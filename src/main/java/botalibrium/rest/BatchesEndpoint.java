@@ -46,14 +46,14 @@ public class BatchesEndpoint {
     @Path("{id}")
     public Response getContainer(@PathParam("id") ObjectId id, @Context UriInfo uriInfo, @QueryParam("onlyData") boolean showOnlyData) throws ServiceException {
         Batch c = cs.getContainer(id);
-        return Response.ok(new LinksWrapper(new BatchDto(c, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
+        return Response.ok(new LinksWrapper(c.toCompleteDto(c, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
     @PUT
     @Path("{id}")
     public Response replaceContainer(@PathParam("id") ObjectId id, BatchDto batch, @Context UriInfo uriInfo, @QueryParam("onlyData") boolean showOnlyData) throws ServiceException {
         Batch batchUpdated = cs.update(id, batch.toEntity());
-        return Response.ok(new LinksWrapper(new BatchDto(batchUpdated, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
+        return Response.ok(new LinksWrapper(batchUpdated.toCompleteDto(batchUpdated, showOnlyData), uriInfo), MediaType.APPLICATION_JSON).build();
     }
 
     @GET
