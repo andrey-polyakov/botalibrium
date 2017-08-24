@@ -26,7 +26,4 @@ public class LinksWrapper {
         links.put("price", builder.toString());
     }
 
-    public Map<String, String> getLinks() {
-        return links;
-    }
 }

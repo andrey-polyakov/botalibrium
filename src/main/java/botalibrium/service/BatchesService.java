@@ -43,7 +43,7 @@ public class BatchesService {
     private CustomFieldsService customFieldsService;
 
 
-    public Batch update(ObjectId id, Batch batch) throws ServiceException {
+    public Batch updateBatch(ObjectId id, Batch batch) throws ServiceException {
         Query<Batch> updateQuery = batches.getDatastore().createQuery(Batch.class).field("_id").equal(id);
         UpdateOperations<Batch> ops = batches.getDatastore().createUpdateOperations(Batch.class).set("containers", batch.getContainers());
         batches.update(updateQuery, ops);
@@ -59,7 +59,7 @@ public class BatchesService {
 
         ops = batches.getDatastore().createUpdateOperations(Batch.class).set("started", batch.getStarted());
         batches.update(updateQuery, ops);
-        return getContainer(id);
+        return getBatch(id);
     }
 
     public Key<Batch> save(Batch batch) throws ServiceException {
@@ -67,7 +67,7 @@ public class BatchesService {
             customFieldsService.validate(cfg, Batch.class.getSimpleName());
         }
         Set<String> batchTags = new TreeSet<>();
-        for (EmptyContainer container : batch.getContainers()) {
+        for (EmptyContainer container : batch.getContainers().values()) {
             if (!batchTags.add(container.getTag())) {
                 throw new ServiceException("Duplicate tags within batch are not allowed");
             }
@@ -114,11 +114,40 @@ public class BatchesService {
         return new Page(query, list, page, defaultLimit, q.count(), uriInfo);
     }
 
-    public Batch getContainer(ObjectId id) throws ServiceException {
+    public Batch getBatch(ObjectId id) throws ServiceException {
         Batch c = batches.get(id);
         if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
+        return c;
+    }
+
+    public EmptyContainer getContainer(String id) throws ServiceException {
+        Query<Batch> q = batches.createQuery();
+        q.criteria("containers." + id).exists();
+        Batch b = q.get();
+        if (b == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        EmptyContainer c = q.get().getContainers().get(id);
+        if (c == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        c.setId(b.getId());
+        return c;
+    }
+
+
+    public EmptyContainer getContainer(ObjectId id, String tag) throws ServiceException {
+        Batch b = batches.get(id);
+        if (b == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        EmptyContainer c = b.getContainers().get(tag);
+        if (c == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        c.setId(b.getId());
         return c;
     }
 
@@ -128,7 +157,7 @@ public class BatchesService {
             throw new ServiceException("Record not found");
         }
         BatchPriceEstimation result = new BatchPriceEstimation(batch);
-        for (EmptyContainer container : batch.getContainers()) {
+        for (EmptyContainer container : batch.getContainers().values()) {
             long overriddenProfit = netProfit;
             if (netProfit == 0) {
                 overriddenProfit = round(container.getPlantSize().getGenericPrice() * batch.getMaterial().getProductionDifficulty().getCoefficient());
@@ -159,7 +188,7 @@ public class BatchesService {
             if (!batch.getRecords().isEmpty()) {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
-            for (EmptyContainer c : batch.getContainers()) {
+            for (EmptyContainer c : batch.getContainers().values()) {
                 BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
                 if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
@@ -234,10 +263,32 @@ public class BatchesService {
                 c.setDescription(uc.getDescription());
                 c.setMedia(uc.getMedia());
                 c.setTag(uc.getTag().replace("*", String.valueOf(counter++)));
-                newBatch.getContainers().add(c);
+                newBatch.getContainers().put(c.getTag(), c);
             }
         }
         return save(newBatch);
+    }
+
+    public EmptyContainer updateContainer(String originalTag, EmptyContainer container) {
+        Query<Batch> q = batches.createQuery();
+        q.criteria("containers." + originalTag).exists();
+        Batch b = q.get();
+        if (b == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        EmptyContainer c = q.get().getContainers().get(originalTag);
+        if (c == null) {
+            throw new WebApplicationException(Response.Status.NOT_FOUND);
+        }
+        String tag = container.getTag();
+        if (!tag.equals(originalTag)) {// Retagging happens here
+            q.get().getContainers().remove(originalTag);
+        }
+        q.get().getContainers().put(tag, container);
+        batches.save(b);
+        c = q.get().getContainers().get(tag);
+        c.setId(b.getId());
+        return c;
     }
 
     static class PayPalFeeCalculator {

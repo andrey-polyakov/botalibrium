@@ -5,9 +5,11 @@ import botalibrium.dta.output.BatchDto;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.references.SizeChart;
 import lombok.Data;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Indexed;
+import org.mongodb.morphia.annotations.Transient;
 import org.mongodb.morphia.utils.IndexDirection;
 
 import java.util.*;
@@ -15,7 +17,7 @@ import java.util.*;
 @Data
 @Entity
 @Embedded
-public class EmptyContainer {
+public class EmptyContainer implements Comparable<EmptyContainer> {
     @Indexed(value = IndexDirection.ASC, name = "tag_index", unique = true, dropDups = true)
     protected String tag;
     @Embedded
@@ -31,6 +33,9 @@ public class EmptyContainer {
     protected int removed = 0;
     protected int added = 0;
     protected int died = 0;
+    @Transient
+    private ObjectId id;
+
 
     public int getPopulation() {
         return added - removed - died;
@@ -44,6 +49,11 @@ public class EmptyContainer {
             return 0.0;
         }
         return (double) died / getPopulation();
+    }
+
+    @Override
+    public int compareTo(EmptyContainer o) {
+        return tag.compareTo(o.tag);
     }
 
     @Data

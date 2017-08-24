@@ -15,16 +15,13 @@ import org.mongodb.morphia.annotations.*;
 
 import botalibrium.entity.base.BaseEntity;
 
-/**
- * Created by apolyakov on 3/24/2017.
- */
 @Data
 @Entity
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 public class Batch extends BaseEntity {
     private Timestamp started = new Timestamp(new Date().getTime());
     @Embedded
-    private List<EmptyContainer> containers = new ArrayList<>();
+    private Map<String, EmptyContainer> containers = new HashMap<>();
     @Embedded
     private List<Record> records = new ArrayList<>();
     @Embedded
@@ -36,18 +33,18 @@ public class Batch extends BaseEntity {
         //
     }
 
-    public BatchDto toDto(Batch c, boolean showOnlyData) {
+    public BatchDto toDto(boolean showOnlyData) {
         BatchDto dto = new BatchDto();
-        dto.setMaterial(c.getMaterial());
+        dto.setMaterial(material);
         long totalPopulation = 0;
         double totalDeath = 0;
-        for (EmptyContainer container : c.getContainers()) {
+        for (EmptyContainer container : containers.values()) {
             totalPopulation += container.getPopulation();
             totalDeath += container.getDied();
             dto.getContainers().add(container.toDto(showOnlyData));
         }
-        dto.setStarted(started = c.getStarted());
-        dto.setRecords(c.getRecords());
+        dto.setStarted(started);
+        dto.setRecords(records);
         dto.setLabels(labels);
         dto.getCalculated().put("population", totalPopulation);
         dto.getCalculated().put("deathRate", totalDeath / totalPopulation);
@@ -84,7 +81,7 @@ public class Batch extends BaseEntity {
 
     public Integer getCount() {
         int count = 0;
-        for (EmptyContainer container : containers) {
+        for (EmptyContainer container : containers.values()) {
             count += container.getPopulation();
         }
         return count;

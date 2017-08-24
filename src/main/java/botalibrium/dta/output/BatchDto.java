@@ -11,6 +11,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
+import org.bson.types.ObjectId;
 
 import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
@@ -39,7 +40,7 @@ public class BatchDto {
         for (EmptyContainerDto container : containers) {
             EmptyContainer entityContainer = container.toEntity();
             entityContainer.recalculateCounts();
-            batch.getContainers().add(entityContainer);
+            batch.getContainers().put(entityContainer.getTag(), entityContainer);
         }
         return batch;
     }
@@ -59,6 +60,7 @@ public class BatchDto {
         protected SizeChart plantSize = SizeChart.NA;
         protected String description;
         protected String tag;
+        private ObjectId id;
 
         public EmptyContainer toEntity() {
             EmptyContainer ec = new EmptyContainer();
