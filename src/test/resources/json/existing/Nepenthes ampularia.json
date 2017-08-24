@@ -1,0 +1,78 @@
+{
+  "material": {
+    "taxon": "Nepenthes ampularia",
+    "supplier": "eBay/natta-chang",
+    "materialType": "Seeds",
+    "originalQuantity": 25,
+    "productionDifficulty": "EASY",
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "description": "First set",
+      "tag": "AMP1",
+      "media": [
+        "1/3MS28"
+      ],
+      "sown": 4
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "First set",
+      "tag": "AMP2",
+      "media": [
+        "1/3MS28"
+      ],
+      "sown": 6
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "Second set",
+      "tag": "AMP3",
+      "media": [
+        "1/3MS28"
+      ],
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "Second set",
+      "tag": "AMP4",
+      "media": [
+        "1/3MS28"
+      ],
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "Second set",
+      "tag": "AMP5",
+      "media": [
+        "1/3MS28"
+      ],
+      "sown": 5
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "18 Aug, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "Soaked in 5% table sugar for 24 hours"
+    },
+    {
+      "timestamp": "19 Aug, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "Dried"
+    },
+    {
+      "timestamp": "19 Aug, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "5 min in H2O2, 10 min 10% bleach + 1 drp Tween 20 per 100ml"
+    }
+
+  ],
+  "started": "21 Aug, 2017 12:12:12"
+}
