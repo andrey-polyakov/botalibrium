@@ -4,7 +4,6 @@
     "supplier": "eBay/albermarlesounds",
     "materialType": "Seeds",
     "originalQuantity": 100,
-    "collected": null,
     "productionDifficulty": "HARD",
     "buyPrice": 1151
   },
@@ -20,8 +19,13 @@
       "populationLogs": [
         {
           "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
+          "germinated": 1
+        },
+        {
+          "timestamp": "18 Jun, 2017 12:12:12"
+        },
+        {
+          "timestamp": "18 Jul, 2017 12:12:12",
           "germinated": 1
         }
       ]
@@ -29,11 +33,16 @@
   ],
   "records": [
     {
-      "timestamp": "07-25-2017 12:12:12",
+      "timestamp": "Jul 25, 2017 12:12:12",
       "type": "Fertilizer",
       "series": "default",
-      "message": "Coffee, 130 tds",
-      "customFields": []
+      "message": "Coffee, 130 tds"
+    },
+    {
+      "timestamp": "24 Aug, 2017 12:12:12",
+      "type": "Repotting",
+      "series": "default",
+      "message": ""
     }
   ],
   "started": "9 Mar, 2017 12:12:12"

@@ -11,21 +11,124 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "VAR*",
+      "tag": "VAM-1",
+      "description": "First set",
       "media": [
-        "Sphagnum"
+        "1/2MS30CS"
       ],
       "plantSize": "N/A",
-      "sown": 0
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-2",
+      "description": "First set",
+      "media": [
+        "1/2MS30CS"
+      ],
+      "plantSize": "N/A",
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-3",
+      "description": "First set",
+      "media": [
+        "1/2MS30"
+      ],
+      "plantSize": "N/A",
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-4",
+      "description": "First set",
+      "media": [
+        "1/2MS30"
+      ],
+      "plantSize": "N/A",
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-5",
+      "description": "Second set next day",
+      "media": [
+        "1/2MS30"
+      ],
+      "plantSize": "N/A",
+      "sown": 12
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-6",
+      "description": "Second set next day",
+      "media": [
+        "1/2MS30"
+      ],
+      "plantSize": "N/A",
+      "sown": 12
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-7",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "sown": 32
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-7",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "sown": 32
+    },
+
+
+
+
+
+
+
+
+
+
+
+
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-16",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "sown": 32
     }
   ],
   "records": [
     {
-      "timestamp": "xx Xxx, 2017 12:12:12",
+      "timestamp": "18 Aug, 2017 12:12:12",
       "type": "Seeds sterilization",
       "series": "default",
-      "message": ""
+      "message": "Soaked in 9% table sugar for 24 hours"
+    },
+    {
+      "timestamp": "19 Aug, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "Dried"
+    },
+    {
+      "timestamp": "22 Aug, 2017 21:00:00",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "Alcohol dip, 5 min in H2O2, 10 min 10% bleach + 1 drp Tween 20 per 100ml"
     }
+
   ],
-  "started": null
+  "started": "22 Aug, 2017 12:12:12"
 }
