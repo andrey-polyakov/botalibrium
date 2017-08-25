@@ -11,7 +11,7 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "JAM1",
+      "tag": "JAM-001",
       "media": [
         "Sphagnum"
       ],

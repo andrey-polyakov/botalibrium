@@ -1,17 +1,17 @@
 {
   "material": {
-    "taxon": "Nepenthes dubia",
+    "taxon": "Nepenthes unknown sp.2",
     "supplier": "eBay/albermarlesounds",
     "materialType": "Seeds",
     "originalQuantity": 100,
     "collected": null,
     "productionDifficulty": "HARD",
-    "buyPrice": 1151
+    "buyPrice": 1581
   },
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "DUB-001",
+      "tag": "UNK-001",
       "media": [
         "Sphagnum"
       ],
@@ -19,10 +19,20 @@
       "sown": 100,
       "populationLogs": [
         {
-          "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
+          "timestamp": "25 Apr, 2017 12:12:12",
           "germinated": 1
+        },
+        {
+          "timestamp": "21 May, 2017 12:12:12",
+          "germinated": 12
+        },
+        {
+          "timestamp": "22 July, 2017 12:12:12",
+          "died": 2
+        },
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "died": 10
         }
       ]
     }
@@ -33,8 +43,7 @@
       "type": "Fertilizer",
       "series": "default",
       "message": "Coffee, 130 tds",
-      "customFields": []
     }
   ],
-  "started": "9 Mar, 2017 12:12:12"
+  "started": "1 Feb, 2017 12:12:12"
 }

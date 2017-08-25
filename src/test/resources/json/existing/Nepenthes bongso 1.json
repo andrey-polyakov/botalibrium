@@ -1,0 +1,56 @@
+{
+  "material": {
+    "taxon": "Nepenthes bongso black",
+    "supplier": "eBay/albermarlesounds",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "productionDifficulty": "HARD",
+    "buyPrice": 1202
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "BNG-001",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 20,
+      "labels": ["DISCARDED"],
+      "populationLogs": [
+        {
+          "timestamp": "22 Apr, 2017 12:12:12",
+          "germinated": 0
+        },
+        {
+          "timestamp": "22 Mar, 2017 12:12:12",
+          "germinated": 0
+        },
+        {
+          "timestamp": "22 May, 2017 12:12:12",
+          "germinated": 0
+        },
+        {
+          "timestamp": "22 Jun, 2017 12:12:12",
+          "germinated": 0
+        },
+        {
+          "timestamp": "22 Jul, 2017 12:12:12",
+          "germinated": 0
+        },
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "germinated": 0
+        }
+      ],
+      "records": [
+        {
+          "timestamp": "07-25-2017 12:12:12",
+          "type": "Disposal",
+          "series": "default",
+          "message": "Discarded"
+        }
+      ]
+    }
+  ],
+  "started": "1 Feb, 2017 12:12:12"
+}

@@ -1,0 +1,62 @@
+{
+  "material": {
+    "taxon": "Nepenthes veitchii 'Pa 'Umor, Borneo'",
+    "supplier": "eBay/bonfield85",
+    "materialType": "Seeds",
+    "originalQuantity": 50,
+    "collected": "14 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 2500
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "UMO-001",
+      "description": "Soaked in 5g/l Sugar, accidentally mixed with VUN2",
+      "media": [
+        "Sphagnum", "Peat"
+      ],
+      "plantSize": "S",
+      "sown": 25,
+      "populationLogs": [
+        {
+          "timestamp": "6 Jun, 2017 12:12:12",
+          "germinated": 1
+        },
+        {
+          "timestamp": "22 Jun, 2017 12:12:12",
+          "germinated": 4
+        },
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "UMO-002",
+      "description": "Soaked in water, accidentally mixed with VUN2",
+      "media": [
+        "Sphagnum", "Peat"
+      ],
+      "plantSize": "S",
+      "sown": 25,
+      "populationLogs": [
+        {
+          "timestamp": "6 Jun, 2017 12:12:12",
+          "germinated": 6
+        },
+        {
+          "timestamp": "22 Jun, 2017 12:12:12",
+          "germinated": 11
+        },
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "germinated": 7
+        }
+      ]
+    }
+  ],
+  "started": "09 Apr, 2017 12:12:12"
+}

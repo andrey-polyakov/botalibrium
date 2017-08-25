@@ -10,10 +10,10 @@
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "DIA1",
+      "tag": "DIA-001",
       "initialPopulation": 1,
       "media": [
-        "Gel"
+        "Unknown TC media"
       ],
       "plantSize": "S",
       "calendar": [

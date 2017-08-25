@@ -10,7 +10,7 @@
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "DIA1",
+      "tag": "MIN-001",
       "initialPopulation": 1,
       "media": [
         "Gel"

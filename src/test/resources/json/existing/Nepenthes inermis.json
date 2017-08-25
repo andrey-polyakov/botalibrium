@@ -1,17 +1,17 @@
 {
   "material": {
-    "taxon": "Nepenthes Inermis",
+    "taxon": "Nepenthes inermis",
     "supplier": "eBay/edw.industries",
     "materialType": "Seeds",
-    "originalQuantity": 70,
+    "originalQuantity": 60,
     "productionDifficulty": "HARD",
-    "collected": "10-08-2016 12:12:12",
+    "collected": "10 Aug, 2016 12:12:12",
     "buyPrice": 1002
   },
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "NAG1",
+      "tag": "NAG-001",
       "description": "",
       "records": [
         {
