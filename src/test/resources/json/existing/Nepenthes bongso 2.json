@@ -10,12 +10,46 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
+      "tag": "BNG-001",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 10
+    },
+    {
+      "@type": "SeedsContainerDto",
       "tag": "BNG-002",
       "media": [
         "Sphagnum"
       ],
-      "sown": 20,
+      "sown": 10
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "BNG-003",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 4
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "BNG-004",
+      "description": "4 sections on the side",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 20
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "BNG-004",
+      "description": "4 sections on the side",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 20
     }
   ],
-  "started": null
+  "started": "15 Jul, 2017"
 }

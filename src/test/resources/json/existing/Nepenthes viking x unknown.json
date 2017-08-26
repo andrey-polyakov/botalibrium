@@ -10,22 +10,37 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "VXX*",
-      "pretreatment": "",
+      "tag": "AAA-001",
+      "description": "Rescued from failed TC",
       "media": [
         "Sphagnum"
       ],
-      "plantSize": "N/A",
-      "sown": 0
+      "sown": 2
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "AAA-002",
+      "description": "Rescued from failed TC",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 10
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VICUN-011",
+      "media": [
+        "1/3MS28"
+      ]
     }
   ],
   "records": [
     {
-      "timestamp": "xx Xxx, 2017 12:12:12",
+      "timestamp": "20 Aug, 2017 12:12:12",
       "type": "Seeds sterilization",
       "series": "default",
-      "message": ""
+      "message": "Soaked in 10% TS, bleach 9-10 min, HP ~3min"
     }
   ],
-  "started": null
+  "started": "28 July, 2017"
 }

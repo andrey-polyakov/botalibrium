@@ -1,0 +1,54 @@
+{
+  "material": {
+    "taxon": "Nepenthes [(thorelii x rafflesiana) x bicalcarata] x northiana",
+    "supplier": "eBay/xir007",
+    "materialType": "Seeds",
+    "originalQuantity": 1,
+    "collected": "10 Jul, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 1011
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "TRB-001",
+      "media": [
+        "1/2MS30"
+      ],
+      "sown": 10
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "TRB-002",
+      "media": [
+        "1/3MS30"
+      ],
+      "sown": 10
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "TRB-003",
+      "media": [
+        "1/2MS30"
+      ],
+      "sown": 3
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "TRB-004",
+      "media": [
+        "Sphagnum"
+      ],
+      "sown": 1
+    }
+  ],
+  "records": [
+    {
+      "timestamp": "20 Aug, 2017 12:12:12",
+      "type": "Seeds sterilization",
+      "series": "default",
+      "message": "48h soak in 10% TS, alcohol dip, 5 min in H2O2, 10 min 10% bleach + 1 drp Tween 20 per 100ml"
+    }
+  ],
+  "started": "25 Aug, 2017"
+}
