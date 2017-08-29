@@ -10,12 +10,24 @@
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "THO1",
-      "initialPopulation": 1,
-      "media": [
-        "Gel"
-      ],
-      "plantSize": "S"
+      "tag": "IZU-001",
+      "records": [
+        {
+          "date": "30 Jul, 2016 12:12:12",
+          "type": "Started",
+          "plantSize": "S",
+          "added": 1,
+          "media": ["Unknown TC media"]
+
+        },
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Reflasking",
+          "media": ["1/4MS30"],
+          "series": "default",
+          "message": "Re-plated due to mold."
+        }
+      ]
     }
   ],
   "started": "30 Jul, 2016 12:12:12"

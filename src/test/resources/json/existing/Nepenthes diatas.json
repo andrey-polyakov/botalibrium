@@ -11,13 +11,87 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "DIA-001",
-      "initialPopulation": 1,
-      "media": [
-        "Unknown TC media"
-      ],
-      "plantSize": "S",
-      "calendar": [
-
+      "records":[
+        {
+          "date": "30 Jul, 2016 12:12:12",
+          "type": "Started",
+          "media": ["Unknown TC media"],
+          "series": "default",
+          "plantSize": "S",
+          "added": 1
+        },
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Reflasking",
+          "media": ["1/4MS30"],
+          "series": "default",
+          "plantSize": "XS",
+          "message": "Re-plated due to mold."
+        }
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "DIA-002",
+      "media": ["1/4MS30"],
+      "records":[
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Started",
+          "media": ["1/4MS30"],
+          "series": "default",
+          "plantSize": "XS",
+          "message": "Separated from DIA-001",
+          "added": 1
+        }
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "DIA-003",
+      "media": ["1/4MS30"],
+      "records":[
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Started",
+          "media": ["1/4MS30"],
+          "series": "default",
+          "plantSize": "XS",
+          "message": "Separated from DIA-001",
+          "added": 1
+        }
+      ]
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "DIA-004",
+      "records":[
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Started",
+          "media": ["1/4MS30"],
+          "series": "default",
+          "plantSize": "XS",
+          "message": "Separated from DIA-001",
+          "added": 1
+        }
+      ]
+    },
+    ,
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "DIA-005",
+      "plantSize": "XS",
+      "records":[
+        {
+          "date": "27 Aug, 2017 12:12:12",
+          "type": "Started",
+          "media": ["1/2MS30"],
+          "series": "default",
+          "plantSize": "XS",
+          "added": 2,
+          "message": "Separated from DIA-001"
+        }
       ]
     }
   ],

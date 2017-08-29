@@ -1,6 +1,6 @@
 {
   "material": {
-    "taxon": "Nepenthes Giant Rafflesiana",
+    "taxon": "Nepenthes giant rafflesiana",
     "supplier": "eBay/edw.industries",
     "materialType": "Seeds",
     "originalQuantity": 1,
@@ -11,21 +11,105 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "GRA",
-      "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "N/A",
-      "sown": 0
-    }
+      "tag": "GRE-001",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-002",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-003",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-004",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-005",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 2
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-006",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-007",
+      "description": "Second set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 4
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-008",
+      "description": "Second set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 2
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-009",
+      "description": "First set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 1
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-010",
+      "description": "Second set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 3
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-011",
+      "description": "Second set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 6
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-012",
+      "description": "Second set",
+      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
+      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
+      "sown": 2
   ],
   "records": [
     {
-      "timestamp": "xx Xxx, 2017 12:12:12",
-      "type": "Seeds sterilization",
+      "timestamp": "29 Aug, 2017",
       "series": "default",
-      "message": ""
+      "message": "48h soak in 10% TS, dried, soak in water, alcohol dip, 10 min 10% bleach + 1 drp Tween 20 per 100ml, 6 min in H2O2"
     }
   ],
-  "started": null
+  "started": "29 Aug, 2017"
 }

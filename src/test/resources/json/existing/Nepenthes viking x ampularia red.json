@@ -31,13 +31,23 @@
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "VAM-3",
+      "tag": "VAM-003",
       "description": "First set",
-      "media": [
-        "1/2MS30"
-      ],
-      "plantSize": "N/A",
-      "sown": 5
+      "records": [
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "type": "SStarted",
+          "sown": 5,
+          "media": ["1/2MS30"],
+        },
+        {
+          "timestamp": "26 Aug, 2017 12:12:12",
+          "type": "Contaminated",
+          "message": "Sterilization failure",
+          "died": 1,
+          "removed": 1
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -53,11 +63,21 @@
       "@type": "SeedsContainerDto",
       "tag": "VAM-5",
       "description": "Second set next day",
-      "media": [
-        "1/2MS30"
-      ],
-      "plantSize": "N/A",
-      "sown": 12
+      "records": [
+        {
+          "timestamp": "22 Aug, 2017 12:12:12",
+          "type": "Started",
+          "sown": 12,
+          "media": ["1/2MS30"],
+        },
+        {
+          "timestamp": "26 Aug, 2017 12:12:12",
+          "type": "Contaminated",
+          "message": "Total disaster, sterilization failed.",
+          "died": 12,
+          "labels": "DISPOSED"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -113,22 +133,18 @@
     {
       "timestamp": "18 Aug, 2017 12:12:12",
       "type": "Seeds sterilization",
-      "series": "default",
       "message": "Soaked in 9% table sugar for 24 hours"
     },
     {
       "timestamp": "19 Aug, 2017 12:12:12",
       "type": "Seeds sterilization",
-      "series": "default",
       "message": "Dried"
     },
     {
       "timestamp": "22 Aug, 2017 21:00:00",
       "type": "Seeds sterilization",
-      "series": "default",
       "message": "Alcohol dip, 5 min in H2O2, 10 min 10% bleach + 1 drp Tween 20 per 100ml"
     }
-
   ],
   "started": "22 Aug, 2017 12:12:12"
 }

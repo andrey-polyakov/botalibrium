@@ -1,0 +1,32 @@
+{
+  "material": {
+    "taxon": "Nepenthes veitchii green x pink",
+    "supplier": "eBay/xir007",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "productionDifficulty": "MEDIUM",
+    "buyPrice": 1896
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VGP-001",
+      "records": [
+        {
+          "date": "29 Apr, 2017 12:12:12",
+          "media": ["Sphagnum"]
+        },
+        {
+          "date": "15 Jul, 2017 12:12:12",
+          "germinated": 1,
+          "plantSize": "XS"
+        },
+        {
+          "date": "1 Jul, 2017 12:12:12",
+          "germinated": 2
+        }
+      ]
+    }
+  ],
+  "started": "29 Apr, 2017 12:12:12"
+}
