@@ -1,12 +1,12 @@
 package botalibrium.rest;
 
-import botalibrium.dta.input.bulk.InsertRecordsInBulk;
-import botalibrium.dta.input.bulk.UnpopulatedBatch;
-import botalibrium.dta.output.BatchDto;
-import botalibrium.dta.output.ContainerWrapper;
-import botalibrium.dta.output.Page;
-import botalibrium.dta.output.bulk.BulkOperationPreview;
-import botalibrium.dta.output.pricing.BatchPriceEstimation;
+import botalibrium.dto.input.bulk.InsertRecordsInBulk;
+import botalibrium.dto.input.bulk.UnpopulatedBatch;
+import botalibrium.dto.output.BatchDto;
+import botalibrium.dto.output.ContainerWrapper;
+import botalibrium.dto.output.Page;
+import botalibrium.dto.output.bulk.BulkOperationPreview;
+import botalibrium.dto.output.pricing.BatchPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.service.BatchesService;
@@ -70,7 +70,12 @@ public class ContainersEndpoint {
     @GET
     public Response getPageByTagOrTaxon(@QueryParam("text") String text,
                                         @QueryParam("page") int page,
+                                        @QueryParam("media") String media,
                                         @QueryParam("limit") int limit, @Context UriInfo uriInfo) throws ValidationException {
+        if (media != null) {
+            Page contents = cs.mediaSearch(media, null, null, page, limit,uriInfo);
+            return Response.ok(contents, MediaType.APPLICATION_JSON).build();
+        }
         Page contents = cs.basicSearch(text, page, limit,uriInfo);
         return Response.ok(contents, MediaType.APPLICATION_JSON).build();
     }

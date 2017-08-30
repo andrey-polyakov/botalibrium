@@ -1,4 +1,4 @@
-package botalibrium.dta.output;
+package botalibrium.dto.output;
 
 import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.rest.BatchesEndpoint;

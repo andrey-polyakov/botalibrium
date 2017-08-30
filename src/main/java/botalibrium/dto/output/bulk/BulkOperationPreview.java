@@ -1,7 +1,9 @@
-package botalibrium.dta.output.bulk;
+package botalibrium.dto.output.bulk;
 
-import botalibrium.dta.output.BatchDto;
+import botalibrium.dto.output.BatchDto;
+import botalibrium.entity.embedded.containers.TemporalTuple;
 import botalibrium.entity.embedded.records.Record;
+import lombok.Data;
 
 import java.util.*;
 
@@ -9,13 +11,14 @@ import java.util.*;
  * Created by apolyakov on 6/16/2017.
  */
 public class BulkOperationPreview {
+    @Data
     public static class PreviewItem {
         private String tag;
         private String taxon;
         private Record latestRecord;
         private BatchDto.PopulationLogDto latestCountLog;
 
-        private Set<String> media = new HashSet<>();
+        private List<TemporalTuple<String>> media = new ArrayList<>();
 
         private List<String> links = new LinkedList<>();
 
@@ -53,14 +56,6 @@ public class BulkOperationPreview {
 
         public void setLatestCountLog(BatchDto.PopulationLogDto latestCountLog) {
             this.latestCountLog = latestCountLog;
-        }
-
-        public Set<String> getMedia() {
-            return media;
-        }
-
-        public void setMedia(Set<String> media) {
-            this.media = media;
         }
 
         public void setLinks(List<String> links) {

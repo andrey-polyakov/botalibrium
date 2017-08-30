@@ -1,22 +1,26 @@
 package botalibrium.service;
 
-import botalibrium.dta.input.bulk.InsertRecordsInBulk;
-import botalibrium.dta.input.bulk.UnpopulatedBatch;
-import botalibrium.dta.input.bulk.UnpopulatedContainer;
-import botalibrium.dta.output.BatchDto;
-import botalibrium.dta.output.Page;
-import botalibrium.dta.output.bulk.BulkOperationPreview;
-import botalibrium.dta.output.pricing.BatchPriceEstimation;
-import botalibrium.dta.output.pricing.SellPriceEstimation;
+import botalibrium.dto.input.bulk.InsertRecordsInBulk;
+import botalibrium.dto.input.bulk.UnpopulatedBatch;
+import botalibrium.dto.input.bulk.UnpopulatedContainer;
+import botalibrium.dto.output.BatchDto;
+import botalibrium.dto.output.Page;
+import botalibrium.dto.output.bulk.BulkOperationPreview;
+import botalibrium.dto.output.pricing.BatchPriceEstimation;
+import botalibrium.dto.output.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.embedded.containers.EmptyContainer;
+import botalibrium.entity.embedded.containers.TemporalTuple;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsContainer;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
+import botalibrium.service.temporal.TemporalVariableHelper;
+import com.mongodb.DuplicateKeyException;
 import org.bson.types.ObjectId;
+import org.joda.time.DateTime;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.FindOptions;
@@ -67,29 +71,23 @@ public class BatchesService {
             customFieldsService.validate(cfg, Batch.class.getSimpleName());
         }
         Set<String> batchTags = new TreeSet<>();
-        for (EmptyContainer container : batch.getContainers().values()) {
+        for (EmptyContainer container : batch.getContainers()) {
             if (!batchTags.add(container.getTag())) {
-                throw new ServiceException("Duplicate tags within batch are not allowed");
+                throw new ServiceException("Duplicate tags within batch not allowed");
             }
-/*            for (CustomFieldGroup cfg : container.getCustomFields()) {
-                customFieldsService.validate(cfg, Batch.class.getSimpleName());
-            }*/
-            for (Record r : container.getRecords()) {
-                for (CustomFieldGroup cfg : r.getCustomFields()) {
-                    customFieldsService.validate(cfg, Batch.class.getSimpleName());
-                }
-            }
+            TemporalVariableHelper.align(container.getMedia());
         }
-        return batches.save(batch);
+        try {
+            return batches.save(batch);
+        } catch (DuplicateKeyException e) {
+            throw new ServiceException(e.getMessage(), Response.Status.CONFLICT);
+        }
     }
 
     public void addRecord(ObjectId id, Record r) throws ServiceException {
         Batch c = batches.get(id);
         if (c == null) {
             throw new ServiceException("Record not found");
-        }
-        for (CustomFieldGroup field : r.getCustomFields()) {
-            customFieldsService.validate(field, Record.class.getSimpleName());
         }
         c.getRecords().add(r);
     }
@@ -114,6 +112,19 @@ public class BatchesService {
         return new Page(query, list, page, defaultLimit, q.count(), uriInfo);
     }
 
+    public Page mediaSearch(String media, Date from, Date to, long page, long limit, UriInfo uriInfo) {
+        long defaultLimit = 25;
+        if (limit > 0) {
+            defaultLimit = limit;
+        }
+        Query<Batch> q = batches.createQuery();
+        if (media != null && !media.isEmpty()) {
+            q.criteria("containers.media.value").containsIgnoreCase(media);
+        }
+        List<Batch> list = q.order().asList(new FindOptions().skip((int) (page * defaultLimit)).limit((int) defaultLimit));
+        return new Page(media, list, page, defaultLimit, q.count(), uriInfo);
+    }
+
     public Batch getBatch(ObjectId id) throws ServiceException {
         Batch c = batches.get(id);
         if (c == null) {
@@ -129,7 +140,13 @@ public class BatchesService {
         if (b == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        EmptyContainer c = q.get().getContainers().get(id);
+        EmptyContainer c = null;
+        for (EmptyContainer container : q.get().getContainers()) {
+            if (container.getTag().equals(id)) {
+                c = container;
+                break;
+            }
+        }
         if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -143,7 +160,13 @@ public class BatchesService {
         if (b == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        EmptyContainer c = b.getContainers().get(tag);
+        EmptyContainer c = null;
+        for (EmptyContainer container : b.getContainers()) {
+            if (container.getTag().equals(id)) {
+                c = container;
+                break;
+            }
+        }
         if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
@@ -157,7 +180,7 @@ public class BatchesService {
             throw new ServiceException("Record not found");
         }
         BatchPriceEstimation result = new BatchPriceEstimation(batch);
-        for (EmptyContainer container : batch.getContainers().values()) {
+        for (EmptyContainer container : batch.getContainers()) {
             long overriddenProfit = netProfit;
             if (netProfit == 0) {
                 overriddenProfit = round(container.getPlantSize().getGenericPrice() * batch.getMaterial().getProductionDifficulty().getCoefficient());
@@ -188,7 +211,7 @@ public class BatchesService {
             if (!batch.getRecords().isEmpty()) {
                 batchLastRecord = batch.getRecords().get(batch.getRecords().size() - 1);
             }
-            for (EmptyContainer c : batch.getContainers().values()) {
+            for (EmptyContainer c : batch.getContainers()) {
                 BulkOperationPreview.PreviewItem pi = new BulkOperationPreview.PreviewItem();
                 if (!operation.getTagsToCountLog().containsKey(c.getTag())) {
                     continue;
@@ -263,7 +286,7 @@ public class BatchesService {
                 c.setDescription(uc.getDescription());
                 c.setMedia(uc.getMedia());
                 c.setTag(uc.getTag().replace("*", String.valueOf(counter++)));
-                newBatch.getContainers().put(c.getTag(), c);
+                newBatch.getContainers().add(c);
             }
         }
         return save(newBatch);
@@ -276,17 +299,27 @@ public class BatchesService {
         if (b == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        EmptyContainer c = q.get().getContainers().get(originalTag);
-        if (c == null) {
+        EmptyContainer c = null;
+        for (EmptyContainer emptyContainer : q.get().getContainers()) {
+            if (emptyContainer.getTag().equals(originalTag)) {
+                c = emptyContainer;
+                break;
+            }
+        }        if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         String tag = container.getTag();
         if (!tag.equals(originalTag)) {// Retagging happens here
             q.get().getContainers().remove(originalTag);
         }
-        q.get().getContainers().put(tag, container);
+        q.get().getContainers().add(container);
         batches.save(b);
-        c = q.get().getContainers().get(tag);
+        for (EmptyContainer emptyContainer : q.get().getContainers()) {
+            if (emptyContainer.getTag().equals(originalTag)) {
+                c = emptyContainer;
+                break;
+            }
+        }
         c.setId(b.getId());
         return c;
     }

@@ -7,6 +7,7 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.Map;
 
 /**
@@ -17,16 +18,20 @@ import java.util.Map;
 @Embedded
 public class PlantMaterial {
     private String taxon;
+    private Date collected;
     private String supplier;
     private String materialType;
     private Long originalQuantity;
-    private Timestamp collected;
     private Long buyPrice;
     private ProductionDifficulty productionDifficulty = ProductionDifficulty.NORMAL;
     private Map<ProductionDifficulty, Double> adjustedCoefficient;
 
     public PlantMaterial() {
         //
+    }
+
+    public PlantMaterial(String taxon) {
+        this.taxon = taxon;
     }
 
     public PlantMaterial(String supplier, String materialType, Long originalQuantity) {
@@ -93,7 +98,7 @@ public class PlantMaterial {
         this.adjustedCoefficient = adjustedCoefficient;
     }
 
-    public Timestamp getCollected() {
+    public Date getCollected() {
         return collected;
     }
 

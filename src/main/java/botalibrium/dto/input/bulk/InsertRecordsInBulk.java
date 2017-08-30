@@ -1,6 +1,6 @@
-package botalibrium.dta.input.bulk;
+package botalibrium.dto.input.bulk;
 
-import botalibrium.dta.output.BatchDto;
+import botalibrium.dto.output.BatchDto;
 import botalibrium.entity.embedded.records.Record;
 import lombok.Data;
 

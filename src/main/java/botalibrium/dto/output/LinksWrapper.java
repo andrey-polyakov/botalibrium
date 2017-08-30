@@ -1,11 +1,10 @@
-package botalibrium.dta.output;
+package botalibrium.dto.output;
 
 import lombok.Data;
 
 import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.UriInfo;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

@@ -1,11 +1,10 @@
-package botalibrium.dta.output.pricing;
+package botalibrium.dto.output.pricing;
 
 import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.catalog.ProductionDifficulty;
 import botalibrium.references.SizeChart;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**

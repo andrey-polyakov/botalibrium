@@ -1,4 +1,4 @@
-package botalibrium.dta.output.pricing;
+package botalibrium.dto.output.pricing;
 
 import java.util.Map;
 import java.util.TreeMap;

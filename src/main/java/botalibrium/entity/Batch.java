@@ -5,7 +5,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.*;
 
-import botalibrium.dta.output.BatchDto;
+import botalibrium.dto.output.BatchDto;
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.records.Record;
@@ -21,7 +21,7 @@ import botalibrium.entity.base.BaseEntity;
 public class Batch extends BaseEntity {
     private Timestamp started = new Timestamp(new Date().getTime());
     @Embedded
-    private Map<String, EmptyContainer> containers = new HashMap<>();
+    private List<EmptyContainer> containers = new ArrayList<>();
     @Embedded
     private List<Record> records = new ArrayList<>();
     @Embedded
@@ -38,7 +38,7 @@ public class Batch extends BaseEntity {
         dto.setMaterial(material);
         long totalPopulation = 0;
         double totalDeath = 0;
-        for (EmptyContainer container : containers.values()) {
+        for (EmptyContainer container : containers) {
             totalPopulation += container.getPopulation();
             totalDeath += container.getDied();
             dto.getContainers().add(container.toDto(showOnlyData));
@@ -81,7 +81,7 @@ public class Batch extends BaseEntity {
 
     public Integer getCount() {
         int count = 0;
-        for (EmptyContainer container : containers.values()) {
+        for (EmptyContainer container : containers) {
             count += container.getPopulation();
         }
         return count;
