@@ -1,4 +1,4 @@
-package botalibrium.dta.output;
+package botalibrium.dto.output;
 
 import lombok.Data;
 

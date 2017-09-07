@@ -1,13 +1,13 @@
-package botalibrium.dta.output;
+package botalibrium.dto.output;
 
 import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
+import botalibrium.entity.embedded.containers.TemporalTuple;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsContainer;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.references.SizeChart;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import lombok.Data;
@@ -40,13 +40,12 @@ public class BatchDto {
         for (EmptyContainerDto container : containers) {
             EmptyContainer entityContainer = container.toEntity();
             entityContainer.recalculateCounts();
-            batch.getContainers().put(entityContainer.getTag(), entityContainer);
+            batch.getContainers().add(entityContainer);
         }
         return batch;
     }
 
     @Data
-    @JsonIgnoreProperties(ignoreUnknown = true)
     @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY)
     @JsonSubTypes({
             @JsonSubTypes.Type(value = PlantsContainerDto.class, name = "PlantsContainerDto"),
@@ -54,9 +53,9 @@ public class BatchDto {
     )
     public static class EmptyContainerDto {
         protected List<EmptyContainer.ScheduleItem> schedule;
+        protected List<TemporalTuple<String>> media = new ArrayList<>();
         protected List<Record> records = new ArrayList<>();
         protected Set<String> labels = new HashSet<>();
-        protected Set<String> media = new HashSet<>();
         protected SizeChart plantSize = SizeChart.NA;
         protected String description;
         protected String tag;

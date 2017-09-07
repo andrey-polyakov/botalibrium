@@ -2,8 +2,11 @@ package botalibrium;
 
 import java.io.IOException;
 
+import botalibrium.entity.Batch;
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.dao.BasicDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -68,4 +71,5 @@ public class JUnitConfig {
 		datastore.ensureIndexes();
 		return datastore;
 	}
+
 }

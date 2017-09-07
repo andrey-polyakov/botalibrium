@@ -1,7 +1,7 @@
 package botalibrium.entity.embedded.containers;
 
 
-import botalibrium.dta.output.BatchDto;
+import botalibrium.dto.output.BatchDto;
 import lombok.Data;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;

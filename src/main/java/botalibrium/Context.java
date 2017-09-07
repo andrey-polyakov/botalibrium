@@ -40,13 +40,4 @@ public class Context {
         return new BasicDAO<>(PlantMaterial.class, datastore);
     }
 
-
-    @Bean
-    public CommandLineRunner init(YamlImportUtility importUtility, BatchesService rs) {
-        return (args) -> {
-            if (args.length == 1) {
-                importUtility.importFromDirectory(args[0]);
-            }
-        };
-    }
 }

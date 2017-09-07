@@ -1,7 +1,7 @@
 package botalibrium.entity.embedded.containers;
 
 
-import botalibrium.dta.output.BatchDto;
+import botalibrium.dto.output.BatchDto;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.references.SizeChart;
 import lombok.Data;
@@ -21,13 +21,13 @@ public class EmptyContainer implements Comparable<EmptyContainer> {
     @Indexed(value = IndexDirection.ASC, name = "tag_index", unique = true, dropDups = true)
     protected String tag;
     @Embedded
-    protected List<ScheduleItem> schedule = new LinkedList<>();
+    protected List<ScheduleItem> schedule = new ArrayList<>();
     @Embedded
-    protected List<Record> records = new LinkedList<>();
+    protected List<Record> records = new ArrayList<>();
     @Embedded
     protected Set<String> labels = new HashSet<>();
     @Embedded
-    protected Set<String> media = new HashSet<>();
+    protected List<TemporalTuple<String>> media = new ArrayList<>();
     protected SizeChart plantSize = SizeChart.NA;
     protected String description = "";
     protected int removed = 0;
@@ -35,7 +35,6 @@ public class EmptyContainer implements Comparable<EmptyContainer> {
     protected int died = 0;
     @Transient
     private ObjectId id;
-
 
     public int getPopulation() {
         return added - removed - died;

@@ -1,9 +1,10 @@
-package botalibrium.dta.input.bulk;
+package botalibrium.dto.input.bulk;
 
+import botalibrium.entity.embedded.containers.TemporalTuple;
 import lombok.Data;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Pattern used to populate batch.
@@ -13,7 +14,7 @@ public class UnpopulatedContainer {
     private String tag = "";
     private String type = "";
     private String description = "";
-    private Set<String> media = new HashSet<>();
+    private List<TemporalTuple<String>> media = new ArrayList<>();
     private int containersCount = 1;
 
 }

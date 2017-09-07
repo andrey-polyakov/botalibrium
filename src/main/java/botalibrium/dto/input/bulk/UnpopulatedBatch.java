@@ -1,4 +1,4 @@
-package botalibrium.dta.input.bulk;
+package botalibrium.dto.input.bulk;
 
 import botalibrium.entity.embedded.PlantMaterial;
 import lombok.Data;
