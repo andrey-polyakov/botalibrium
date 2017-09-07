@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Base class that carries custom fields and id.
+ * Base class that carries custom fields and batchId.
  */
 @Entity
 public class BaseEntity {

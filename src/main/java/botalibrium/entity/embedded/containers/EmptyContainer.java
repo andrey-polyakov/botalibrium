@@ -27,14 +27,15 @@ public class EmptyContainer implements Comparable<EmptyContainer> {
     @Embedded
     protected Set<String> labels = new HashSet<>();
     @Embedded
-    protected List<TemporalTuple<String>> media = new ArrayList<>();
+    protected List<TemporalStringTuple> media = new ArrayList<>();
     protected SizeChart plantSize = SizeChart.NA;
     protected String description = "";
     protected int removed = 0;
     protected int added = 0;
     protected int died = 0;
     @Transient
-    private ObjectId id;
+    private ObjectId batchId;
+
 
     public int getPopulation() {
         return added - removed - died;

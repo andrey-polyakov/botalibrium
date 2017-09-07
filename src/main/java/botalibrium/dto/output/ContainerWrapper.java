@@ -23,7 +23,7 @@ public class ContainerWrapper {
         this.container = container.toDto(showOnlyData);
         UriBuilder builder = new JerseyUriBuilder();
         builder.path(BatchesEndpoint.BASE_URI);
-        builder.path(container.getId().toString());
+        builder.path(container.getBatchId().toString());
         links.put("batch", builder.toString());
         builder.path("containers");
         builder.path(container.getTag());

@@ -26,6 +26,9 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.sql.Timestamp;
+
+import static botalibrium.service.temporal.TemporalVariableHelper.END_OF_TIME;
 
 @Produces(MediaType.APPLICATION_JSON)
 @Validated
@@ -71,9 +74,21 @@ public class ContainersEndpoint {
     public Response getPageByTagOrTaxon(@QueryParam("text") String text,
                                         @QueryParam("page") int page,
                                         @QueryParam("media") String media,
+                                        @QueryParam("effectiveFrom") String effectiveFrom,
+                                        @QueryParam("effectiveTo") String effectiveTo,
                                         @QueryParam("limit") int limit, @Context UriInfo uriInfo) throws ValidationException {
+        Timestamp start = null;
+        if (effectiveFrom != null) {
+            start = JsonDateDeserializer.parse(effectiveFrom);
+        }
+        Timestamp end;
+        if (effectiveTo != null) {
+            end = JsonDateDeserializer.parse(effectiveTo);
+        } else {
+            end = END_OF_TIME;
+        }
         if (media != null) {
-            Page contents = cs.mediaSearch(media, null, null, page, limit,uriInfo);
+            Page contents = cs.mediaSearch(media, start, end, page, limit,uriInfo);
             return Response.ok(contents, MediaType.APPLICATION_JSON).build();
         }
         Page contents = cs.basicSearch(text, page, limit,uriInfo);

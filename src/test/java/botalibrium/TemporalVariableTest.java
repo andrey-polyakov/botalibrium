@@ -1,6 +1,6 @@
 package botalibrium;
 
-import botalibrium.entity.embedded.containers.TemporalTuple;
+import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import botalibrium.service.temporal.TemporalVariableHelper;
 import org.joda.time.DateTime;
 import org.junit.Test;
@@ -19,18 +19,18 @@ public class TemporalVariableTest {
 
     @Test
     public void multipleRecordsHistoryTest() {
-        List<TemporalTuple<String>> media = new ArrayList<>();
-        media.add(new TemporalTuple(
-                new DateTime(2017,1, 1,1,1).toDate(),
+        List<TemporalStringTuple> media = new ArrayList<>();
+        media.add(new TemporalStringTuple(
+                new DateTime(2017,1, 1,1,1).getMillis(),
                 MAGIC_MUSHROOMS_MEDIA));
-        media.add(new TemporalTuple(
-                new DateTime(2018,1, 1,1,1).toDate(),
+        media.add(new TemporalStringTuple(
+                new DateTime(2018,1, 1,1,1).getMillis(),
                 FAIRY_FUNGI_MEDIA));
-        media.add(new TemporalTuple(
-                new DateTime(2017,4, 1,1,1).toDate(),
+        media.add(new TemporalStringTuple(
+                new DateTime(2017,4, 1,1,1).getMillis(),
                 ELVES_MEDIA));
-        media.add(new TemporalTuple(
-                new DateTime(2017,1, 2,1,1).toDate(),
+        media.add(new TemporalStringTuple(
+                new DateTime(2017,1, 2,1,1).getMillis(),
                 REDWOOD_SAWDUST));
         TemporalVariableHelper.align(media);
         assertEquals(MAGIC_MUSHROOMS_MEDIA, media.get(0).getValue());
@@ -41,9 +41,9 @@ public class TemporalVariableTest {
 
     @Test
     public void singleRecordHistoryTest() {
-        List<TemporalTuple<String>> media = new ArrayList<>();
-        media.add(new TemporalTuple(
-                new DateTime(2017,1, 1,1,1).toDate(),
+        List<TemporalStringTuple> media = new ArrayList<>();
+        media.add(new TemporalStringTuple(
+                new DateTime(2017,1, 1,1,1).getMillis(),
                 MAGIC_MUSHROOMS_MEDIA));
         TemporalVariableHelper.align(media);
         assertEquals(MAGIC_MUSHROOMS_MEDIA, media.get(0).getValue());

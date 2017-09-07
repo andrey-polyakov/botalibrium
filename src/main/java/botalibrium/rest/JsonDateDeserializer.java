@@ -12,9 +12,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class JsonDateDeserializer  extends JsonDeserializer<Timestamp> {
-    List<SimpleDateFormat> knownPatterns = new LinkedList<>();
+    static List<SimpleDateFormat> knownPatterns = new LinkedList<>();
 
-    public JsonDateDeserializer() {
+    static {
         knownPatterns.add(new SimpleDateFormat("dd MMM, yyyy HH:mm:ss"));
         knownPatterns.add(new SimpleDateFormat("dd MMM, yyyy"));
         knownPatterns.add(new SimpleDateFormat("dd-MMM-yyyy"));
@@ -23,6 +23,12 @@ public class JsonDateDeserializer  extends JsonDeserializer<Timestamp> {
     @Override
     public Timestamp deserialize(JsonParser parser, DeserializationContext deserializationContext) throws IOException {
         String source = parser.getText();
+        Timestamp d = parse(source);
+        if (d != null) return d;
+        throw new IOException("Unknown date format " + source);
+    }
+
+    public static Timestamp parse(String source) {
         for (SimpleDateFormat pattern : knownPatterns) {
             try {
                 // Take a try
@@ -32,6 +38,6 @@ public class JsonDateDeserializer  extends JsonDeserializer<Timestamp> {
                 // Loop on
             }
         }
-        throw new IOException("Unknown date format " + source);
+        return null;
     }
 }

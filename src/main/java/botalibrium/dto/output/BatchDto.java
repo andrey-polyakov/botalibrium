@@ -3,7 +3,7 @@ package botalibrium.dto.output;
 import botalibrium.entity.Batch;
 import botalibrium.entity.embedded.PlantMaterial;
 import botalibrium.entity.embedded.containers.EmptyContainer;
-import botalibrium.entity.embedded.containers.TemporalTuple;
+import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsContainer;
 import botalibrium.entity.embedded.records.Record;
@@ -53,7 +53,7 @@ public class BatchDto {
     )
     public static class EmptyContainerDto {
         protected List<EmptyContainer.ScheduleItem> schedule;
-        protected List<TemporalTuple<String>> media = new ArrayList<>();
+        protected List<TemporalStringTuple> media = new ArrayList<>();
         protected List<Record> records = new ArrayList<>();
         protected Set<String> labels = new HashSet<>();
         protected SizeChart plantSize = SizeChart.NA;

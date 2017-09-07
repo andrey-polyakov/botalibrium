@@ -1,7 +1,7 @@
 package botalibrium.dto.output.bulk;
 
 import botalibrium.dto.output.BatchDto;
-import botalibrium.entity.embedded.containers.TemporalTuple;
+import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import botalibrium.entity.embedded.records.Record;
 import lombok.Data;
 
@@ -18,7 +18,7 @@ public class BulkOperationPreview {
         private Record latestRecord;
         private BatchDto.PopulationLogDto latestCountLog;
 
-        private List<TemporalTuple<String>> media = new ArrayList<>();
+        private List<TemporalStringTuple> media = new ArrayList<>();
 
         private List<String> links = new LinkedList<>();
 

@@ -1,6 +1,6 @@
 package botalibrium.dto.input.bulk;
 
-import botalibrium.entity.embedded.containers.TemporalTuple;
+import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import lombok.Data;
 
 import java.util.ArrayList;
@@ -14,7 +14,7 @@ public class UnpopulatedContainer {
     private String tag = "";
     private String type = "";
     private String description = "";
-    private List<TemporalTuple<String>> media = new ArrayList<>();
+    private List<TemporalStringTuple> media = new ArrayList<>();
     private int containersCount = 1;
 
 }

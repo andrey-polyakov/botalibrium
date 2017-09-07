@@ -11,17 +11,20 @@ import botalibrium.dto.output.pricing.SellPriceEstimation;
 import botalibrium.entity.Batch;
 import botalibrium.entity.base.CustomFieldGroup;
 import botalibrium.entity.embedded.containers.EmptyContainer;
-import botalibrium.entity.embedded.containers.TemporalTuple;
 import botalibrium.entity.embedded.containers.PlantsContainer;
 import botalibrium.entity.embedded.containers.SeedsContainer;
+import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import botalibrium.entity.embedded.records.Record;
 import botalibrium.rest.BatchesEndpoint;
 import botalibrium.service.exception.ServiceException;
+import botalibrium.service.exception.ValidationException;
 import botalibrium.service.temporal.TemporalVariableHelper;
-import com.mongodb.DuplicateKeyException;
+import com.mongodb.*;
+import lombok.extern.log4j.Log4j;
 import org.bson.types.ObjectId;
-import org.joda.time.DateTime;
+import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.dao.BasicDAO;
 import org.mongodb.morphia.query.FindOptions;
 import org.mongodb.morphia.query.Query;
@@ -38,13 +41,15 @@ import java.util.*;
 
 import static java.lang.Math.round;
 
-
+@Log4j
 @Component
 public class BatchesService {
     @Autowired
     private BasicDAO<Batch, ObjectId> batches;
     @Autowired
     private CustomFieldsService customFieldsService;
+    @Autowired
+    Datastore ds;
 
 
     public Batch updateBatch(ObjectId id, Batch batch) throws ServiceException {
@@ -73,7 +78,7 @@ public class BatchesService {
         Set<String> batchTags = new TreeSet<>();
         for (EmptyContainer container : batch.getContainers()) {
             if (!batchTags.add(container.getTag())) {
-                throw new ServiceException("Duplicate tags within batch not allowed");
+                throw new ValidationException("Duplicate tags within batch not allowed");
             }
             TemporalVariableHelper.align(container.getMedia());
         }
@@ -111,18 +116,70 @@ public class BatchesService {
         List<Batch> list = q.order().asList(new FindOptions().skip((int) (page * defaultLimit)).limit((int) defaultLimit));
         return new Page(query, list, page, defaultLimit, q.count(), uriInfo);
     }
+    public Page mediaSearch(String media, Date from, Date to, long page, long limit) {
+        if (to.before(from)) {
+            throw new ValidationException("Invalid arguments: effectiveTo is before effectiveFrom");
+        }
+        return mediaSearch(media, from, to, page, limit, null);
+    }
+
+    public Page all(long page, long limit) {
+        long defaultLimit = 25;
+        if (limit > 0) {
+            defaultLimit = limit;
+        }
+        return new Page("", batches.find().asList(), page, defaultLimit,  batches.find().count(), null);
+    }
+
+    public void truncate() {
+        ds.getDB().getCollection("Batch").drop();
+    }
 
     public Page mediaSearch(String media, Date from, Date to, long page, long limit, UriInfo uriInfo) {
         long defaultLimit = 25;
         if (limit > 0) {
             defaultLimit = limit;
         }
-        Query<Batch> q = batches.createQuery();
-        if (media != null && !media.isEmpty()) {
-            q.criteria("containers.media.value").containsIgnoreCase(media);
+        DBCollection collection = ds.getDB().getCollection("Batch");
+        BasicDBObject effectiveFrom;
+        effectiveFrom = new BasicDBObject("containers.media.effectiveFrom", new BasicDBObject("$lte", from));
+        BasicDBObject effectiveTo;
+        effectiveTo = new BasicDBObject("containers.media.effectiveTo", new BasicDBObject("$gte", to));
+        BasicDBObject value = new BasicDBObject("containers.media.value", new BasicDBObject("$eq", media));
+
+        BasicDBList and = new BasicDBList();
+        and.add(effectiveFrom);
+        and.add(effectiveTo);
+        and.add(value);
+        DBObject query = new BasicDBObject("$and", and);
+        Morphia m = new Morphia();
+        m.map(Batch.class);
+        try (DBCursor output = collection.find(query)) {
+            List<EmptyContainer> c = new ArrayList<>();
+            while (output.hasNext()) {
+                Collection<EmptyContainer> containers = extract(m.fromDBObject(ds, Batch.class, output.next()));
+                for (EmptyContainer container : containers) {
+                    for (TemporalStringTuple tuple : container.getMedia()) {
+                        if (tuple.getEffectiveFrom().compareTo(from) <= 0 && tuple.getEffectiveTo().compareTo(to) >= 0) {
+                            c.add(container);
+                        }
+                    }
+                }
+            }
+            return new Page(media, c, page, defaultLimit, c.size(), uriInfo);
+        } catch (MongoException me) {
+            log.error("Search failed", me);
+            throw new ServiceException(me.toString());
         }
-        List<Batch> list = q.order().asList(new FindOptions().skip((int) (page * defaultLimit)).limit((int) defaultLimit));
-        return new Page(media, list, page, defaultLimit, q.count(), uriInfo);
+    }
+
+    private Collection<EmptyContainer> extract(Batch batch) {
+        List<EmptyContainer> containers = new ArrayList<>();
+        for (EmptyContainer ec : batch.getContainers()) {
+            ec.setBatchId(batch.getId());
+            containers.add(ec);
+        }
+        return containers;
     }
 
     public Batch getBatch(ObjectId id) throws ServiceException {
@@ -131,6 +188,10 @@ public class BatchesService {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
         return c;
+    }
+
+    public void removeBatch(ObjectId id) throws ServiceException {
+        batches.deleteById(id);
     }
 
     public EmptyContainer getContainer(String id) throws ServiceException {
@@ -150,7 +211,7 @@ public class BatchesService {
         if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        c.setId(b.getId());
+        c.setBatchId(b.getId());
         return c;
     }
 
@@ -170,7 +231,7 @@ public class BatchesService {
         if (c == null) {
             throw new WebApplicationException(Response.Status.NOT_FOUND);
         }
-        c.setId(b.getId());
+        c.setBatchId(b.getId());
         return c;
     }
 
@@ -281,7 +342,7 @@ public class BatchesService {
                 } else if (uc.getType().equals("PlantsContainer")) {
                     c = new PlantsContainer();
                 } else {
-                    throw new ServiceException("Unknown Container type");
+                    throw new ValidationException("Unknown Container type").set("TYPE", uc.getType());
                 }
                 c.setDescription(uc.getDescription());
                 c.setMedia(uc.getMedia());
@@ -320,7 +381,7 @@ public class BatchesService {
                 break;
             }
         }
-        c.setId(b.getId());
+        c.setBatchId(b.getId());
         return c;
     }
 

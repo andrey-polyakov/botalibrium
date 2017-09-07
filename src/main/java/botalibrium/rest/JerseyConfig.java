@@ -40,12 +40,14 @@ public class JerseyConfig extends ResourceConfig {
 	public ObjectMapper objectMapper() {
 		ObjectMapper mapper = new ObjectMapper();
 		mapper.setVisibility(mapper.getVisibilityChecker().withFieldVisibility(JsonAutoDetect.Visibility.ANY));
-		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, true);
+		mapper.configure(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS, false);
 
         JsonDateDeserializer deserializer = new JsonDateDeserializer();
+        JsonDateSerializer serializer = new JsonDateSerializer();
         SimpleModule module = new SimpleModule("LongDeserializerModule", new Version(1, 0, 0, null, "", ""));
         module.addDeserializer(Date.class, deserializer);
         module.addDeserializer(Timestamp.class, deserializer);
+        module.addSerializer(Timestamp.class, serializer);
         mapper.registerModule(module);
 		mapper.configure(SerializationFeature.INDENT_OUTPUT, true);
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, true);

@@ -21,16 +21,16 @@ public class Page {
     private List<String> navigation = new LinkedList<>();
 
 
-    public Page(String query, List<?> list, long page, long limit, long count, UriInfo uriInfo) {
+    public Page(String query, List<?> list, long page, long pageSize, long count, UriInfo uriInfo) {
         pageNumber = page;
-        totalPages = (int) (count / limit + count % limit);
-        int stopAtPage = 10;
+        totalPages = (int) Math.ceil(count / pageSize);
+        long stopAtPage = page + 10;
         if (stopAtPage > totalPages) {
             stopAtPage = totalPages;
         }
         for (int counter = 0; counter < stopAtPage; counter++) {
             if (counter != page) {
-                generateLink(query, counter, limit, uriInfo);
+                generateLink(query, counter, pageSize, uriInfo);
             }
         }
         items = list;
@@ -38,6 +38,9 @@ public class Page {
     }
 
     private void generateLink(String query, long page, long limit, UriInfo uriInfo) {
+        if (uriInfo == null) {
+            return;
+        }
         UriBuilder builder = uriInfo.getAbsolutePathBuilder();
         if (!query.isEmpty()) {
             builder = builder.queryParam("text", query);
