@@ -15,7 +15,14 @@
       "description": "First set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 1
+      "sown": 1,
+      "records": [
+        {
+          "timestamp": "1 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -23,7 +30,14 @@
       "description": "First set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 1
+      "sown": 1,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -32,13 +46,21 @@
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
       "sown": 1
-    },    {
+    },
+    {
       "@type": "SeedsContainerDto",
       "tag": "GRE-004",
       "description": "First set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 1
+      "sown": 1,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -46,7 +68,14 @@
       "description": "First set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 2
+      "sown": 2,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+        ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -62,7 +91,19 @@
       "description": "Second set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 4
+      "sown": 4,
+      "records": [
+        {
+          "timestamp": "1 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated, scooped"
+        },
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -70,7 +111,15 @@
       "description": "Second set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 2
+      "sown": 2,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
+
     },
     {
       "@type": "SeedsContainerDto",
@@ -94,16 +143,47 @@
       "description": "Second set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 6
+      "sown": 6,
+      "records": [
+        {
+          "timestamp": "1 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
       "tag": "GRE-012",
       "description": "Second set",
-      "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
-      "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 2
-  ],
+      "media": [
+        {
+          "date": "29 Aug, 2017",
+          "value": "1/4MS30"
+        }
+      ],
+      "sown": 2,
+      "records": [
+        {
+          "timestamp": "1 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "GRE-013",
+      "description": "Third set",
+      "media": [
+        {
+          "date": "30 Aug, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "sown": 100
+    }
+    ],
   "records": [
     {
       "timestamp": "29 Aug, 2017",

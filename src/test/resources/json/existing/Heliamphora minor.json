@@ -11,33 +11,29 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "MIN-001",
-      "calendar": [
-
+      "media": [
+        {
+          "date": "30 Jul, 2017",
+          "value": "Unknown TC media"
+        },
+        {
+          "date": "1 Apr, 2017",
+          "value": "Sphagnum"
+        },
+        {
+          "date": "20 Aug, 2017",
+          "value": "Sphagnum"
+        }
       ],
       "records": [
         {
-          "date": "1 Apr, 2017 12:12:12",
-          "type": "Started",
-          "plantSize": "S",
-          "media": ["Unknown TC media"],
-          "series": "default"
-        },
-        {
           "date": "20 Jun, 2017 12:12:12",
           "type": "Acclimating",
-          "media": [
-            "Sphagnum"
-          ],
-          "series": "default",
           "message": "In a bag."
         },
         {
           "date": "20 Aug, 2017 12:12:12",
           "type": "Repotting",
-          "media": [
-            "Sphagnum"
-          ],
-          "series": "default",
           "message": "Caught mold. Planted two separate shoots."
         }
       ]

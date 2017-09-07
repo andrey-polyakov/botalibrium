@@ -11,22 +11,37 @@
     {
       "@type": "SeedsContainerDto",
       "tag": "VGP-001",
-      "records": [
+      "media": [
         {
-          "date": "29 Apr, 2017 12:12:12",
-          "media": ["Sphagnum"]
+          "date": "29 Apr, 2017",
+          "value": "1/2MS30"
         },
         {
+          "date": "15 May, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "populationLogs": [
+        {
           "date": "15 Jul, 2017 12:12:12",
-          "germinated": 1,
-          "plantSize": "XS"
+          "germinated": 1
         },
         {
           "date": "1 Jul, 2017 12:12:12",
-          "germinated": 2
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VGP-002",
+      "media": [
+        {
+          "date": "28 Apr, 2017",
+          "value": "1/2MS30"
         }
       ]
     }
   ],
-  "started": "29 Apr, 2017 12:12:12"
+  "started": "26 Apr, 2017 12:12:12"
 }

@@ -11,54 +11,50 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "NWR-1",
-      "description": "Rescued from failed TC",
+      "tag": "KUC-001",
+      "description": "Four sections",
+      "sown": 59,
       "media": [
-        "Sphagnum"
+        {
+          "date": "4 Sep, 2017",
+          "value": "Sphagnum"
+        }
       ],
-      "plantSize": "N/A",
-      "sown": 5
+      "plantSize": [
+        {
+          "date": "4 Sep, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 200
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "NWR-2",
-      "description": "Rescued from failed TC",
+      "tag": "KUC-002",
+      "description": "All sections, soil sterilized with boiled water and UV.",
+      "sown": ,
       "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "N/A",
-      "sown": 5,
-      "populationLogs": [
         {
-          "timestamp": "20 Aug, 2017 12:12:12",
-          "germinated": 1
+          "date": "4 Sep, 2017",
+          "value": "Bark, Cocoa husks, Peat, Sand, Sphagnum"
         }
-      ]
-    },
-    {
-      "@type": "SeedsContainerDto",
-      "tag": "NWR-3",
-      "description": "Rescued from failed TC",
-      "media": [
-        "Sphagnum"
       ],
-      "plantSize": "N/A",
-      "sown": 5,
-      "populationLogs": [
+      "plantSize": [
         {
-          "timestamp": "20 Aug, 2017 12:12:12",
-          "germinated": 2
+          "date": "4 Sep, 2017",
+          "value": "N/A"
         }
-      ]
+      ],
+      "sown": 200
     }
   ],
   "records": [
     {
-      "timestamp": "xx Xxx, 2017 12:12:12",
+      "timestamp": "1 Sep, 2017 12:12:12",
       "type": "Seeds sterilization",
       "series": "default",
-      "message": "Soaked in 10% TS, ???"
+      "message": "Soaked in 10% TS, 48h, dried, 5min bleach, 4min HP"
     }
   ],
-  "started": null
+  "started": "4 Sep, 2017"
 }

@@ -43,11 +43,17 @@
         {
           "timestamp": "26 Aug, 2017 12:12:12",
           "type": "Contaminated",
-          "message": "Sterilization failure",
+          "message": "Contaminated and scooped",
           "died": 1,
           "removed": 1
+        },
+        {
+          "timestamp": "1 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated and discarded"
         }
       ]
+
     },
     {
       "@type": "SeedsContainerDto",

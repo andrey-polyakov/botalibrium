@@ -10,7 +10,7 @@
     {
       "@type": "SeedsContainerDto",
       "description": "First set",
-      "tag": "AMP1",
+      "tag": "AMP-001",
       "media": [
         "1/3MS28"
       ],
@@ -19,11 +19,18 @@
     {
       "@type": "SeedsContainerDto",
       "description": "First set",
-      "tag": "AMP2",
+      "tag": "AMP-002",
       "media": [
         "1/3MS28"
       ],
-      "sown": 6
+      "sown": 6,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated, attempted rescue"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",

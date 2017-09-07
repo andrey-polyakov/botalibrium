@@ -1,6 +1,6 @@
 {
   "material": {
-    "taxon": "Nepenthes (MirabilisWing x Raff white) x (Viking x Ampularia Black miracle)",
+    "taxon": "Nepenthes (mirabilis wing x raff. white) x (viking x ampularia black miracle)",
     "supplier": "eBay/natta-chang",
     "materialType": "Seeds",
     "originalQuantity": 100,
@@ -12,79 +12,198 @@
     {
       "@type": "SeedsContainerDto",
       "tag": "MIRRAF-VIKAMP-01",
+      "description": "Soaked in 10% sugar for 48h",
       "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "S",
-      "sown": 100,
-      "populationLogs": [
         {
-          "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
-          "germinated": 1
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
         }
-      ]
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 20
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "MIRRAF-VIKAMP-02",
+      "tag": "MIRRAF-VIKAMP-08",
+      "description": "Soaked in 10% sugar for 48h",
       "media": [
-        "Sphagnum"
-      ],
-      "plantSize": "S",
-      "sown": 100,
-      "populationLogs": [
         {
-          "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
-          "germinated": 1
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
         }
-      ]
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 20
     },
     {
       "@type": "SeedsContainerDto",
       "tag": "MIRRAF-VIKAMP-03",
       "media": [
-        "Sphagnum"
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        }
       ],
-      "plantSize": "S",
-      "sown": 100,
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 20
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "Soaked in water",
+      "tag": "MIRRAF-VIKAMP-04",
+      "media": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        }
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 20,
+      "records": [
+        {
+          "timestamp": "4 Sep, 2017",
+          "series": "default",
+          "message": "Contaminated, disposed"
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "description": "Soaked in water",
+      "tag": "MIRRAF-VIKAMP-02",
+      "media": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        }
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 20,
+      "records": [
+        {
+          "timestamp": "23 Jul, 2017",
+          "message": "Contaminated, disposed"
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "NWR-1",
+      "description": "Rescued from failed TC",
+      "media": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        },
+        {
+          "date": "23 Jul, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        }
+      ],
+      "sown": 5
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "NWR-2",
+      "description": "Rescued from failed TC",
+      "media": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        },
+        {
+          "date": "23 Jul, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        },
+        {
+          "date": "20 Aug, 2017",
+          "value": "XS"
+        }
+      ]
+      "sown": 5,
       "populationLogs": [
         {
-          "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
+          "timestamp": "20 Aug, 2017 12:12:12",
           "germinated": 1
         }
       ]
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "MIRRAF-VIKAMP-04",
+      "tag": "NWR-3",
+      "description": "Rescued from failed TC",
       "media": [
-        "Sphagnum"
+        {
+          "date": "15 Jul, 2017",
+          "value": "1/2MS30CS"
+        },
+        {
+          "date": "23 Jul, 2017",
+          "value": "Sphagnum"
+        }
       ],
-      "plantSize": "S",
-      "sown": 100,
+      "sown": 5,
       "populationLogs": [
         {
-          "timestamp": "18 May, 2017 12:12:12",
-          "died": 0,
-          "removed": 0,
-          "germinated": 1
+          "timestamp": "20 Aug, 2017 12:12:12",
+          "germinated": 2
+        }
+      ],
+      "plantSize": [
+        {
+          "date": "15 Jul, 2017",
+          "value": "N/A"
+        },
+        {
+          "date": "20 Aug, 2017",
+          "value": "XS"
         }
       ]
     }
   ],
   "records": [
     {
-      "timestamp": "xx Xxx, 2017 12:12:12",
+      "timestamp": "14 Jul, 2017",
       "type": "Seeds sterilization",
-      "series": "default",
-      "message": "Soaked in 20% sugar"
+      "message": "Soaked in 10% table sugar"
     }
   ],
-  "started": "3 Sep, 2017 12:12:12"
+  "started": "15 Jul, 2017"
 }
