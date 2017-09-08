@@ -1,6 +1,6 @@
 {
   "material": {
-    "taxon": "Nepenthes Bellii",
+    "taxon": "Nepenthes bellii",
     "supplier": "eBay/weirdplantsshop",
     "materialType": "Tissue culture",
     "originalQuantity": 5,
@@ -14,6 +14,16 @@
       "initialPopulation": 1,
       "media": [
         "Sphagnum", "Orchid Bark", "Perlite"
+      ],
+      "populationLogs": [
+        {
+          "timestamp": "30 Jul, 2016",
+          "added": 5
+        },
+        {
+          "timestamp": "7 Sep, 2017",
+          "removed": 2
+        }
       ],
       "plantSize": "S",
       "records": [

@@ -133,6 +133,7 @@ public class BatchesService {
 
     public void truncate() {
         ds.getDB().getCollection("Batch").drop();
+        batches.ensureIndexes();
     }
 
     public Page mediaSearch(String media, Date from, Date to, long page, long limit, UriInfo uriInfo) {

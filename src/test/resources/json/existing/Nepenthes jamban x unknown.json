@@ -22,9 +22,13 @@
       "sown": 100,
       "populationLogs": [
         {
-          "date": "30 Apr, 2017",
+          "timestamp": "30 Apr, 2017",
           "germinated": 15,
           "died": 2
+        },
+        {
+          "timestamp": "7 Sep, 2017",
+          "removed": 1
         }
       ]
     }

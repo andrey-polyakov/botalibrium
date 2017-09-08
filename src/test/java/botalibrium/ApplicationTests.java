@@ -7,6 +7,7 @@ import botalibrium.entity.embedded.containers.EmptyContainer;
 import botalibrium.entity.embedded.containers.TemporalStringTuple;
 import botalibrium.service.BatchesService;
 import botalibrium.service.exception.ServiceException;
+import botalibrium.service.exception.ValidationException;
 import org.joda.time.DateTime;
 import org.junit.Before;
 import org.junit.Test;
@@ -57,7 +58,7 @@ public class ApplicationTests {
         bs.save(b);
     }
 
-    //@Before
+    @Before
     public void startFromScratch() {
         bs.truncate();
     }
@@ -104,7 +105,11 @@ public class ApplicationTests {
                 new TemporalStringTuple(jun2017, ELVES_MEDIA));
         Page p1 = bs.mediaSearch(ELVES_MEDIA, jun2017, feb2017, 1, 25);
         assertEquals(2, p1.getItems().size());
+    }
 
+    @Test(expected = ValidationException.class)
+    public void filterErrorTest() {
+        bs.mediaSearch(ELVES_MEDIA, jun2017, feb2017, 1, 25);
     }
 
     public void createDifferentMediaContainer(String tag, List<TemporalStringTuple> media) {

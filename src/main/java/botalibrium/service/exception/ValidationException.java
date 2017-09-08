@@ -12,7 +12,7 @@ public class ValidationException extends ServiceException {
 
     @Override
     public String getMessage() {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder sb = new StringBuilder(super.getMessage());
         sb.append("\nAdditional data:");
         for (Map.Entry<String, Object> stringObjectEntry : relevantData.entrySet()) {
             sb.append("\n\t");

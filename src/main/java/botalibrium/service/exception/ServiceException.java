@@ -10,6 +10,7 @@ import java.util.Map;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 import static javax.ws.rs.core.MediaType.TEXT_PLAIN;
+import static javax.ws.rs.core.Response.*;
 import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 
@@ -19,15 +20,17 @@ import static javax.ws.rs.core.Response.Status.UNAUTHORIZED;
 @Data
 public class ServiceException extends WebApplicationException {
 
+    private String detailMessage;
     protected Map<String, Object> relevantData = new HashMap<>();
     private int status;
 
     public ServiceException(String message) {
-        super(Response.status(INTERNAL_SERVER_ERROR).entity(new Dto(message)).type(APPLICATION_JSON).build());
+        super(status(INTERNAL_SERVER_ERROR).entity(new Dto(message)).type(APPLICATION_JSON).build());
+        detailMessage = message;
     }
 
-    public ServiceException(String message, Response.Status status) {
-        super(Response.status(status).entity(new Dto(message)).type(APPLICATION_JSON).build());
+    public ServiceException(String message, Status status) {
+        super(message, status(status).entity(new Dto(message)).type(APPLICATION_JSON).build());
     }
 
     public ServiceException set(String name, Object value) {
@@ -44,4 +47,11 @@ public class ServiceException extends WebApplicationException {
         }
     }
 
+
+    @Override
+    public String toString() {
+        return "ServiceException{message='" + detailMessage +
+                "', relevantData=" + relevantData +
+                '}';
+    }
 }
