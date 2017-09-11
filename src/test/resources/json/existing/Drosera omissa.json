@@ -3,7 +3,7 @@
     "taxon": "Drosera omissa",
     "supplier": "eBay/moghtada",
     "materialType": "Seeds",
-    "originalQuantity": 20,
+    "originalQuantity": 25,
     "collected": null,
     "productionDifficulty": "NORMAL",
     "buyPrice": 1269
@@ -11,21 +11,52 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "OMI",
+      "tag": "OMI-001",
+      "pretreatment": "10% PPM, 180ppm GA3 - 4h",
       "media": [
-        "Sphagnum"
+        {
+          "effectiveFrom": "10 Sep, 2017",
+          "value": "Sphagnum"
+        }
       ],
-      "plantSize": "N/A",
+      "sown": 0
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "OMI-002",
+      "pretreatment": "10% PPM, 180ppm GA3 - 4h",
+      "media": [
+        {
+          "effectiveFrom": "10 Sep, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "sown": 0
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "OMI-003",
+      "pretreatment": "10% PPM, 180ppm GA3 - 4h",
+      "media": [
+        {
+          "effectiveFrom": "10 Sep, 2017",
+          "value": "1/3MS30"
+        }
+      ],
+      "sown": 0
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "OMI-004",
+      "pretreatment": "10% PPM - 4h",
+      "media": [
+        {
+          "effectiveFrom": "10 Sep, 2017",
+          "value": "1/3MS30"
+        }
+      ],
       "sown": 0
     }
   ],
-  "records": [
-    {
-      "timestamp": "xx Xxx, 2017 12:12:12",
-      "type": "Seeds sterilization",
-      "series": "default",
-      "message": ""
-    }
-  ],
-  "started": null
+  "started": "10 Sep, 2017"
 }
