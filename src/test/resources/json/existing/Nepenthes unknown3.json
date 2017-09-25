@@ -1,0 +1,41 @@
+{
+  "material": {
+    "taxon": "Nepenthes unknown sp.3",
+    "supplier": "eBay/edw.industries",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "productionDifficulty": "HARD",
+    "buyPrice": 1583,
+    "location": "Aceh, Indonesia",
+    "description": "New species or natural hybrid. No other Nepenthes in the area."
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "UNK-301",
+      "description": "2:4 food container",
+      "media": [
+        {
+          "date": "17 Sep, 2017",
+          "value": "NM+PPM 1ml"
+        }
+      ],
+      "sown": 100,
+      "pretreatment": "Nep. media 24h, water, GA3 180pmm overnight, 10% PPM 4h"
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "UNK-302",
+      "description": "2:4 food container",
+      "media": [
+        {
+          "date": "20 Sep, 2017",
+          "value": "Sphagnum"
+        }
+      ],
+      "sown": 100,
+      "pretreatment": "Nep. media 24h, water, GA3 180pmm overnight, 10% PPM 4h"
+    }
+  ],
+  "started": "17 Sep, 2017"
+}

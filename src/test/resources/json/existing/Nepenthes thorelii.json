@@ -10,10 +10,12 @@
   "containers": [
     {
       "@type": "PlantsContainerDto",
-      "tag": "THO1",
-      "initialPopulation": 1,
+      "tag": "THO-001",
       "media": [
-        "Gel"
+        {
+          "effectiveFrom": "15 Jul, 2016",
+          "value": "Sphagnum"
+        }
       ],
       "plantSize": "S"
     }

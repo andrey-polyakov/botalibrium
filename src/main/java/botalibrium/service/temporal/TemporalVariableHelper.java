@@ -32,7 +32,10 @@ public class TemporalVariableHelper {
         return t;
     }
 
-    public static List<TemporalStringTuple> getValueFor(Date asOfDate, List<TemporalStringTuple> t) {
+    public static String getValueFor(Date asOfDate, List<TemporalStringTuple> t) {
+        if (t == null || t.isEmpty()) {
+            return "N/A";
+        }
         return null;
     }
 

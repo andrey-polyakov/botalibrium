@@ -28,7 +28,7 @@ public class EmptyContainer implements Comparable<EmptyContainer> {
     protected Set<String> labels = new HashSet<>();
     @Embedded
     protected List<TemporalStringTuple> media = new ArrayList<>();
-    protected SizeChart plantSize = SizeChart.NA;
+    protected List<TemporalStringTuple> plantSize = new ArrayList<>();
     protected String description = "";
     protected int removed = 0;
     protected int added = 0;

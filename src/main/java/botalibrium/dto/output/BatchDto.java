@@ -56,7 +56,7 @@ public class BatchDto {
         protected List<TemporalStringTuple> media = new ArrayList<>();
         protected List<Record> records = new ArrayList<>();
         protected Set<String> labels = new HashSet<>();
-        protected SizeChart plantSize = SizeChart.NA;
+        protected List<TemporalStringTuple> plantSize;
         protected String description;
         protected String tag;
         private ObjectId id;

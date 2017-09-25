@@ -36,12 +36,8 @@ public class ApplicationTests {
     @Inject
     private BatchesService bs;
     Timestamp dec1966 = new Timestamp(new DateTime(1966,12, 1,0,0).getMillis());
-
     Timestamp jan2017 = new Timestamp(new DateTime(2017,1, 1,0,0).getMillis());
     Timestamp feb2017 = new Timestamp(new DateTime(2017,2, 1,0,0).getMillis());
-    Timestamp mar2017 = new Timestamp(new DateTime(2017,3, 1,0,0).getMillis());
-
-    Timestamp may2017 = new Timestamp(new DateTime(2017,5, 1,0,0).getMillis());
     Timestamp jun2017 = new Timestamp(new DateTime(2017,6, 1,0,0).getMillis());
     Timestamp jul2017 = new Timestamp(new DateTime(2017,7, 1,0,0).getMillis());
 
@@ -101,10 +97,10 @@ public class ApplicationTests {
         createBatch("filterTestA-01",
                 new TemporalStringTuple(dec1966, ELVES_MEDIA),
                 new TemporalStringTuple(feb2017, FAIRY_FUNGI_MEDIA));
-        createBatch("filterTestA-02",
-                new TemporalStringTuple(jun2017, ELVES_MEDIA));
-        Page p1 = bs.mediaSearch(ELVES_MEDIA, jun2017, feb2017, 1, 25);
-        assertEquals(2, p1.getItems().size());
+        Page p1 = bs.mediaSearch(FAIRY_FUNGI_MEDIA, feb2017, feb2017, 1, 25);
+        assertEquals(1, p1.getItems().size());
+        EmptyContainer container2 = (EmptyContainer) p1.getItems().get(0);
+        assertEquals("filterTestA-01", container2.getTag());
     }
 
     @Test(expected = ValidationException.class)
