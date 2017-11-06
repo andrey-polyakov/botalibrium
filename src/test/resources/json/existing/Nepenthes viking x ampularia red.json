@@ -36,9 +36,9 @@
       "records": [
         {
           "timestamp": "22 Aug, 2017 12:12:12",
-          "type": "SStarted",
+          "type": "Started",
           "sown": 5,
-          "media": ["1/2MS30"],
+          "media": ["1/2MS30"]
         },
         {
           "timestamp": "26 Aug, 2017 12:12:12",
@@ -74,7 +74,7 @@
           "timestamp": "22 Aug, 2017 12:12:12",
           "type": "Started",
           "sown": 12,
-          "media": ["1/2MS30"],
+          "media": ["1/2MS30"]
         },
         {
           "timestamp": "26 Aug, 2017 12:12:12",
@@ -93,7 +93,14 @@
         "1/2MS30"
       ],
       "plantSize": "N/A",
-      "sown": 12
+      "sown": 12,
+      "records": [
+        {
+          "timestamp": "21 Oct, 2017 12:12:12",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",
@@ -113,18 +120,101 @@
       ],
       "sown": 32
     },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-008",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-009",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 3
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-010",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 1
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-012",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "sown": "12"
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-013",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 2
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-014",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 3
+        }
+      ],
 
-
-
-
-
-
-
-
-
-
-
-
+      "sown": 32
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VAM-015",
+      "description": "Third set 2 day after",
+      "media": [
+        "Sphagnum peeled"
+      ],
+      "populationLogs": [
+        {
+          "date": "1 Oct, 2017 12:12:12",
+          "germinated": 1
+        }
+      ]
+    },
     {
       "@type": "SeedsContainerDto",
       "tag": "VAM-16",

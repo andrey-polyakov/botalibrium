@@ -32,6 +32,34 @@
       "media": [
         "1/3MS28"
       ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VICUN-003",
+      "media": [
+        "1/3MS28"
+      ],
+      "records": [
+        {
+          "timestamp": "21 Oct, 2017 12:12:12",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
+    },
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "VICUN-006",
+      "media": [
+        "1/3MS28"
+      ],
+      "records": [
+        {
+          "timestamp": "21 Oct, 2017 12:12:12",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
     }
   ],
   "records": [

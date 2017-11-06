@@ -39,17 +39,14 @@
       "media": [
         "Sphagnum"
       ],
-      "sown": 20
-    },
-    {
-      "@type": "SeedsContainerDto",
-      "tag": "BNG-004",
-      "description": "4 sections on the side",
-      "media": [
-        "Sphagnum"
-      ],
-      "sown": 20
+      "sown": 20,
+      "populationLogs": [
+        {
+          "date": "15 Oct, 2017 12:12:12",
+          "germinated": 1
+        }
+      ]
     }
   ],
-  "started": "15 Jul, 2017"
+  "started": "16 Jul, 2017"
 }

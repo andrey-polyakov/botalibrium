@@ -31,6 +31,12 @@
           "value": "Sphagnum"
         }
       ],
+      "populationLogs": [
+        {
+          "date": "10 Oct, 2017 12:12:12",
+          "germinated": 1
+        }
+      ],
       "sown": 0
     },
     {
@@ -43,7 +49,7 @@
           "value": "1/3MS30"
         }
       ],
-      "sown": 0
+      "sown": 3
     },
     {
       "@type": "SeedsContainerDto",
@@ -55,7 +61,13 @@
           "value": "1/3MS30"
         }
       ],
-      "sown": 0
+      "sown": 25,
+      "populationLogs": [
+        {
+          "date": "10 Oct, 2017 12:12:12",
+          "germinated": 5
+        }
+      ]
     }
   ],
   "started": "10 Sep, 2017"

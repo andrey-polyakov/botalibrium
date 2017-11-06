@@ -26,7 +26,13 @@
           "value": "N/A"
         }
       ],
-      "sown": 200
+      "sown": 200,
+      "populationLogs": [
+        {
+          "date": "15 Oct, 2017 12:12:12",
+          "germinated": 15
+        }
+      ]
     },
     {
       "@type": "SeedsContainerDto",

@@ -135,7 +135,7 @@
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "NWR-2",
+      "tag": "NWR-002",
       "description": "Rescued from failed TC",
       "media": [
         {
@@ -167,7 +167,7 @@
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "NWR-3",
+      "tag": "NWR-003",
       "description": "Rescued from failed TC",
       "media": [
         {

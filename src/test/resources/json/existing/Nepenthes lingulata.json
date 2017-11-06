@@ -1,27 +1,27 @@
 {
   "material": {
-    "taxon": "Nepenthes ampularia",
+    "taxon": "Nepenthes lingulata",
     "supplier": "eBay/natta-chang",
     "materialType": "Seeds",
-    "originalQuantity": 33,
+    "originalQuantity": 50,
     "productionDifficulty": "EASY"
   },
   "containers": [
     {
       "@type": "SeedsContainerDto",
       "description": "First set",
-      "tag": "AMP-001",
+      "tag": "LIN-001",
       "media": [
-        "1/3MS28"
+        "NM"
       ],
       "sown": 4
     },
     {
       "@type": "SeedsContainerDto",
       "description": "First set",
-      "tag": "AMP-002",
+      "tag": "LIN-002",
       "media": [
-        "1/3MS28"
+        "NM"
       ],
       "sown": 6,
       "records": [
@@ -40,51 +40,44 @@
     {
       "@type": "SeedsContainerDto",
       "description": "Second set",
-      "tag": "AMP3",
+      "tag": "LIM-006",
       "media": [
-        "1/3MS28"
+        "NM"
       ],
       "sown": 5
     },
     {
       "@type": "SeedsContainerDto",
       "description": "Second set",
-      "tag": "AMP4",
+      "tag": "LIN-007",
       "media": [
-        "1/3MS28"
+        "NM"
       ],
       "sown": 5
     },
     {
       "@type": "SeedsContainerDto",
       "description": "Second set",
-      "tag": "AMP5",
+      "tag": "LIM-008",
       "media": [
-        "1/3MS28"
+        "NM"
       ],
       "sown": 5
     }
   ],
   "records": [
     {
-      "timestamp": "18 Aug, 2017 12:12:12",
+      "timestamp": "20 Nov, 2017 12:12:12",
       "type": "Seeds sterilization",
       "series": "default",
-      "message": "Soaked in 5% table sugar for 24 hours"
+      "message": "Soaked in 10% PPM for 4 hours"
     },
     {
-      "timestamp": "19 Aug, 2017 12:12:12",
+      "timestamp": "20 NOV, 2017 12:12:13",
       "type": "Seeds sterilization",
       "series": "default",
-      "message": "Dried"
-    },
-    {
-      "timestamp": "21 Aug, 2017 12:12:12",
-      "type": "Seeds sterilization",
-      "series": "default",
-      "message": "Alcohol dip, 5 min in H2O2, 10 min 10% bleach + 1 drp Tween 20 per 100ml"
+      "message": "Dried, soaked in liquid media MS + PPM"
     }
-
   ],
-  "started": "21 Aug, 2017 12:12:12"
+  "started": "23 Nov, 2017 12:12:12"
 }

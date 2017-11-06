@@ -127,7 +127,15 @@
       "description": "Second set",
       "media": [{"date": "29 Aug, 2017", "value":"1/4MS30"}],
       "plantSize": [{"date": "29 Aug, 2017", "value": "N/A"}],
-      "sown": 3
+      "sown": 3,
+      "records": [
+        {
+          "timestamp": "21 Oct, 2017 12:12:12",
+          "series": "default",
+          "message": "Contaminated and disposed"
+        }
+      ]
+
     },
     {
       "@type": "SeedsContainerDto",
