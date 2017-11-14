@@ -1,0 +1,28 @@
+{
+  "material": {
+    "taxon": "Nepenthes giant rafflesiana",
+    "supplier": "eBay/albermarlesounds",
+    "materialType": "Seeds",
+    "originalQuantity": 100,
+    "collected": "15 Feb, 2017",
+    "productionDifficulty": "NORMAL",
+    "buyPrice": 4650
+  },
+  "containers": [
+    {
+      "@type": "SeedsContainerDto",
+      "tag": "RAF-002",
+      "description": "",
+      "media": [{"effectiveFrom": "2 Apr, 2017", "value":"Sphagnum"}],
+      "plantSize": [{"effectiveFrom": "2 Apr, 2017", "value": "N/A"},
+                  {"effectiveFrom": "22 Oct, 2017", "value": "XS"}],
+      "sown": 100,
+      "populationLogs": [
+        {
+          "date": "22 Oct, 2017 12:12:12",
+          "germinated": 4
+        }
+      ]
+  ],
+  "started": "2 Apr, 2017"
+}

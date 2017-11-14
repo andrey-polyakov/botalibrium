@@ -19,11 +19,12 @@
     {
       "@type": "SeedsContainerDto",
       "description": "First set",
-      "tag": "AMP2",
+      "tag": "VUN2",
       "media": [
-        "1/3MS28"
+        "media": [{"effectiveFrom": "2 Apr, 2017", "value":"Sphagnum"}],
       ],
-      "sown": 6
+      "sown": 6,
+      "description": "soaked in diluted maple syrup"
     },
     {
       "@type": "SeedsContainerDto",

@@ -11,7 +11,7 @@
   "containers": [
     {
       "@type": "SeedsContainerDto",
-      "tag": "VAM-1",
+      "tag": "VAM-001",
       "description": "First set",
       "media": [
         "1/2MS30CS"
@@ -21,7 +21,7 @@
     },
     {
       "@type": "SeedsContainerDto",
-      "tag": "VAM-2",
+      "tag": "VAM-002",
       "description": "First set",
       "media": [
         "1/2MS30CS"
@@ -43,10 +43,17 @@
         {
           "timestamp": "26 Aug, 2017 12:12:12",
           "type": "Contaminated",
-          "message": "Contaminated and scooped",
+          "message": "Contaminated, scooped",
           "died": 1,
           "removed": 1
         },
+        {
+          "timestamp": "13 Nov, 2017 12:12:12",
+          "type": "Contaminated",
+          "message": "Contaminated, discarded",
+          "died": 1,
+          "removed": 1
+        }
         {
           "timestamp": "1 Sep, 2017",
           "series": "default",
