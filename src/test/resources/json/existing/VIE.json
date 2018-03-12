@@ -1,0 +1,49 @@
+{
+  "material": {
+    "taxon": "Nepenthes vieillardii",
+    "supplier": "eBay/tapir.cabrakovy",
+    "materialType": "Tissue culture",
+    "originalQuantity": 1,
+    "productionDifficulty": "EASY",
+    "buyPrice": 3720
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "VIE-001",
+      "media": [
+        {
+          "effectiveFrom": "15 Jul, 2017",
+          "value": "NM, 1ml PPM",
+          "reason": "Dividing"
+        },
+        {
+          "effectiveFrom": "6 Jan, 2017",
+          "value": "Sphagnum",
+          "reason": "Contaminated"
+        }
+      ],
+      "plantSize": "S"
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "VIE-002",
+      "media": [
+        {
+          "effectiveFrom": "15 Jul, 2017",
+          "value": "NM, 1ml PPM",
+          "reason": "Dividing"
+        },
+      ],
+      "plantSize": "S",
+      "records": [
+        {
+          "timestamp": "6 Jan, 2018 12:12:12",
+          "message": "Has many off shoots but does not grow much "
+        }
+      ]
+    }
+
+  ],
+  "started": "15 Jul, 2017 12:12:12"
+}

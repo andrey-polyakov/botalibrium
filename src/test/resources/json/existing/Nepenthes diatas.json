@@ -28,7 +28,8 @@
           "plantSize": "XS",
           "message": "Re-plated due to mold."
         }
-      ]
+      ],
+      "tags": ["dead", "TC"]
     },
     {
       "@type": "PlantsContainerDto",
@@ -65,15 +66,23 @@
     {
       "@type": "PlantsContainerDto",
       "tag": "DIA-004",
+      "media": [
+        {
+          "effectiveFrom": "27 Aug, 2017 12:12:12",
+          "value": "Sphagnum",
+          "reason": "Dividing"
+        }
+      ],
       "records":[
         {
           "date": "27 Aug, 2017 12:12:12",
           "type": "Started",
-          "media": ["1/4MS30"],
-          "series": "default",
-          "plantSize": "XS",
           "message": "Separated from DIA-001",
-          "added": 1
+        },
+        {
+          "date": "7 Jan, 2018 12:12:12",
+          "type": "Started",
+          "message": "Small shoot survived",
         }
       ]
     },

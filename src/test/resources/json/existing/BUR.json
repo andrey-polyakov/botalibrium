@@ -1,0 +1,55 @@
+{
+  "material": {
+    "taxon": "Nepenthes burkei",
+    "supplier": "eBay/tapir.cabrakovy",
+    "materialType": "Tissue culture",
+    "originalQuantity": 1,
+    "productionDifficulty": "EASY",
+    "buyPrice": 4600
+  },
+  "containers": [
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "BUR-001",
+      "media": [
+        {
+          "effectiveFrom": "15 Nov, 2017",
+          "value": "NM, 1ml PPM",
+          "reason": "Dividing"
+        },
+        {
+          "effectiveFrom": "6 Jan, 2017",
+          "value": "Sphagnum",
+          "reason": "Contaminated"
+        }
+      ],
+      "records": [
+        {
+          "timestamp": "6 Jan, 2018 12:12:12",
+          "message": "Doing well"
+        }
+      ],
+      "plantSize": "S"
+    },
+    {
+      "@type": "PlantsContainerDto",
+      "tag": "BUR-003",
+      "media": [
+        {
+          "effectiveFrom": "15 Nov, 2017",
+          "value": "NM, 1ml PPM",
+          "reason": "Dividing"
+        },
+      ],
+      "plantSize": "S",
+      "records": [
+        {
+          "timestamp": "6 Jan, 2018 12:12:12",
+          "message": "Contaminated by algae though doing well"
+        }
+      ]
+    }
+
+  ],
+  "started": "15 Nov, 2017 12:12:12"
+}
